@@ -1,0 +1,3 @@
+#php_value session.save_path /home/corthou/public_html/sessions
+#AddHandler application/x-httpd-php5 html
+AddHandler application/x-httpd-php5 .html

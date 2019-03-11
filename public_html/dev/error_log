@@ -1,0 +1,13 @@
+[19-Apr-2016 00:21:52 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/DB.php on line 470
+[19-Apr-2016 00:21:52 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/DB.php on line 547
+[19-Apr-2016 00:21:52 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/DB.php on line 1202
+[19-Apr-2016 00:21:52 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/PEAR.php on line 569
+[19-Apr-2016 00:21:52 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/PEAR.php on line 572
+[19-Apr-2016 00:22:21 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/DB.php on line 470
+[19-Apr-2016 00:22:21 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/DB.php on line 547
+[19-Apr-2016 00:22:21 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/DB.php on line 1202
+[19-Apr-2016 00:22:21 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/PEAR.php on line 569
+[19-Apr-2016 00:22:21 UTC] PHP Deprecated:  Assigning the return value of new by reference is deprecated in /home/corthou/public_html/dev/includes/PEAR.php on line 572
+[19-Apr-2016 00:22:31 UTC] PHP Notice:  Undefined variable: file in /home/corthou/public_html/dev/showfile.html on line 2
+[19-Apr-2016 00:22:42 UTC] PHP Notice:  Undefined variable: file in /home/corthou/public_html/dev/showfile.html on line 2
+[10-Sep-2016 18:03:47 UTC] PHP Notice:  Undefined variable: file in /home/corthou/public_html/dev/showfile.html on line 2

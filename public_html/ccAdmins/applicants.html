@@ -1,0 +1,57 @@
+<?php
+session_start();
+
+require_once('../includes/myUtils.php');
+require_once('../includes/login.php');
+
+$params = array(
+				'title' => 'CornerStone Properties, The Suites, Student Housing, Cortland, NY',
+				'description' => 'Quality student housing located in Cortland, NY. Just a short walk to Cortland State College.',
+				'keywords' => 'student housing, student, housing, apartments, rentals,'
+				);
+if( $verified ){
+	$params['page'] = '';
+}
+printHeaders($params);
+logHits("home-page");
+?>
+<div id="mainbody">
+
+<h3>Applicants for Rentals</h3>
+
+ 
+<?php
+// did user login?
+if( !isset( $_SESSION['verified'] ) ){
+	 _showLoginScreen();
+}
+if ( $verified ){
+  # get all applicants from the db
+  $sql = "select * from applicants order by entry_date asc";
+  $results = $globalMySqlConnect->query($sql);
+  ?>
+   <table class="darkblue">
+   <tr>
+      <th>Full Name</th><th>Application Date</th>
+   </tr>
+  <?php
+  while ( $app=$results->fetchRow(DB_FETCHMODE_ASSOC) ){
+	print "<tr>";
+    print "<td>
+     <a href=\"applicant-details.html?entry_id=$app[entry_id]\">$app[first_name] $app[last_name]</a>"; # full name
+     if( $app['entry_date'] ){
+		list($y,$m,$d) = explode('-',$app['entry_date']);
+        $entry_date = "$m/$d/$y";
+    }
+    print "<td>$entry_date</td>"; 
+	print "</tr>";
+  }  // end while
+
+}  // end if
+?>
+</table>
+
+<p>&nbsp;</p>
+
+</div>
+

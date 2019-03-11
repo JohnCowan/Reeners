@@ -1,0 +1,21 @@
+<?php
+   # phpinfo();
+
+  $emails_to = array('max' => 'maxapi@comcast.net', 'john' => 'john@johndcowan.com');
+  foreach($emails_to as $key => $val){
+	  $to = $val;
+	  $from = 'CortlandCollegeHousing.com';
+	  $subject = 'test email';
+	  $message = "hello $key
+	              This email is sent from CortlandCollegeHousing.com on a Raptor Server on StormWire.com as a test to see if Max can get emails from the raptor server.";
+	  $headers .= "From: 'john cowan' <$from>\r\n";
+	  $headers .= "Reply-To: 'John Cowan' <$from>\r\n";
+	  $headers .= "Return-Path: $from\r\n";
+		if( mail($to, $subject, $message, $headers) ){
+			print "<p>Mail was sent to $key at $val</p>";
+		}else{
+			print "<p>Ruh Roh!  Mail not sent to $key at $val.</p.";
+		}
+  }
+  
+?>

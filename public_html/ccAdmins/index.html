@@ -1,0 +1,50 @@
+<?php
+session_start();
+
+require_once('../includes/myUtils.php');
+require_once('../includes/login.php');
+
+$params = array(
+				'title' => 'CornerStone Properties, The Suites, Student Housing, Cortland, NY',
+				'description' => 'Quality student housing located in Cortland, NY. Just a short walk to Cortland State College.',
+				'keywords' => 'student housing, student, housing, apartments, rentals,'
+				);
+printHeaders($params);
+
+?>
+<style type="text/css">
+th { text-align: left; }
+</style>
+
+<div class="row">
+	<div class="medium-12 columns">
+     <h3>CornerStone Properties Admins</h3>
+  </div>
+</div>
+
+<?php
+// did user login?
+if( !isset( $_SESSION['verified'] ) ){
+	 _showLoginScreen();
+}
+if ( isset($_SESSION['verified']) ){
+  # get all applicants from the db
+  $sql = "select * from applicants order by entry_date asc";
+  $results = $globalMySqlConnect->query($sql);
+?>
+
+<div class="row">
+	<div class="medium-12 columns">
+     <p>Here are the admins that are available to you to help you with your business information.</p>
+		 <ul>
+				<li><a href="applicants.html">Applicants who have requested an Application</a></li>
+				<li><a href="news-admin.html">Add, Modify, Delete News Items</a></li>
+		 </ul>
+  </div>
+</div>
+
+<?php
+ } // end if
+?>
+
+

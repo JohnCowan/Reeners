@@ -1,0 +1,35 @@
+<?php
+require_once('includes/myUtils.php');
+
+$image = !empty($_REQUEST['image'])?$_REQUEST['image']:'';
+$alt = !empty($_REQUEST['alt'])?$_REQUEST['alt']:'';
+$sentBy = !empty($_REQUEST['sentBy'])?$_REQUEST['sentBy']:'';
+
+if( !empty($image) ){
+$params = array('title' => $image,
+                'description'=>$alt,
+                'keywords' => 'image,student housing');
+printHeaders($params);
+
+?>
+<div class="mainbody">
+	<p>
+	<a href="<?php print $sentBy ?>">Go Back to Previous Page</a>
+	</p>
+	<p>
+	<img src="<?php print $image ?>" alt="<?php print $alt ?>" align="center">
+	<br clear="left">
+	<?php print $alt ?>
+	</p>
+</div>
+
+
+<?php
+	  }else{
+	print '<p class="red">Sorry, this picture could not be displayed.</p>';
+	  }
+?>
+
+<p>
+<?php printFooter(); ?>
+</p>

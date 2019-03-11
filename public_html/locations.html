@@ -1,0 +1,60 @@
+<?php
+require_once('includes/myUtils.php');
+$params = array('title' => 'Locations of Suites for Cortland College Housing',
+                'description' => 'Locations of the Suites and Apartments. 112 Groton Ave, 50 and 52 Tompkins Str Cortland, NY',
+                'keywords' => 'locations, address, addresses, Cortland NY, Lincoln Ave, Groton Ave, Tompkins Str, Woodruff Str');
+
+printHeaders($params);
+
+?>
+
+<div class="row">
+  <div class="medium-12 text-center columns"><h3>Our Locations</h3></div>
+</div>
+        
+        
+<div class="row">
+  <div class="medium-12 columns text-center">
+           <p>The Suites: Cornerstone Properties' off-campus student housing apartments.  We have 5 locations in Cortland NY.</p>
+        </div>
+</div>
+
+<div class="row">
+        
+    <div class="medium-4 columns">
+       <h3>112 Groton Ave<br />7 Woodruff Str<br />91 Lincoln Ave</h3>
+       <ul>
+          <li>Mini-market: across the street.</li>
+          <li>Pizzeria/restaurant: across the street.</li>
+          <li>Bar/restaurant: 2 blocks.</li>
+          <li>ATM: across the street.</li>
+          <li>Municipal Park with ball fields, basketball courts, pavilions, and seasonal swimming pool: 2 blocks.</li>
+          <li>Cortland State College: just a few minutes walk.  Closer to class rooms than the nearest Free parking.</li>
+       </ul>
+    </div>
+
+    <div class="medium-4 columns">
+       <?php
+       $image = "graphics/apartment_locations_image.gif";
+       $alt = "The Suites Locations in Cortland, NY. 13045";
+       $sentBy = "locations.html";
+       ?>
+       <a href="largeimage.html?<?php print "image=$image&alt=$alt&sentBy=$sentBy"; ?>"><img src="graphics/apartment_locations_image_sm.gif" border="0"></a>
+    </div>
+                
+    <div class="medium-4 columns">
+       <h3>50 & 52 Tompkins Str.</h3>
+       <ul>
+         <li>One block from Downtown Cortland (Main Street)</li>
+         <li>Restaurants</li>
+         <li>Stores</li>
+         <li>Bars</li>
+         <li>Banks &amp; ATMs</li>
+         <li>Cortland State College: just a few minutes walk.</li>
+       </ul>
+</div>
+</div>
+
+<p>
+<?php printFooter(); ?>
+</p>

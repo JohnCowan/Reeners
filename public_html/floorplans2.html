@@ -1,0 +1,132 @@
+<?php
+require_once('includes/myUtils.php');
+$params = array(
+				'title' => 'Floor Plans of The Suites, Student Housing, Cortland, NY',
+				'description' => 'Images of the Suites, Floor Plan Layouts for student housing apartments.',
+				'keywords' => 'student housing, student, housing, apartments, rentals, lease, rentals'
+				);
+
+printHeaders($params);
+?>
+<style type="text/css">
+ td {
+	width: 200px;
+	border-right: 1px solid #369;
+	border-left: 1px solid #369;
+}
+</style>
+<div class="mainbody">
+<br />
+<?php printHeader("Floor Plans"); ?>
+
+<div style="text-align:left; margin-left: 5px; margin-right: 5px;">
+<p>Select a suite from one of the drop-down lists below.  The floor-plan of the suite you select will appear below the drop-down lists. Select another suite and the image will change to that suite's floor-plan.</p>
+
+<p>NOTE: The entrance to each three-bedroom suite is from a common area shared by two or more suites.  Each common area contains a laundry area for the tenant's use. 
+</p> 
+</div>
+
+<center>
+<table summary="image-links">
+	<tr>
+		<td valign="top" style="text-align:center;">
+			 112 Groton Ave
+			<form>
+			<select class="myimages" id="groton">
+				<option value=""></option>
+				<option value="112groton1">Suite 1  </option>
+				<option value="112groton2">Suite 2  </option>
+				<option value="112groton3">Suite 3  </option>
+				<option value="112groton4">Suite 4  </option>
+				<option value="112groton5">Suite 5  </option>
+				<option value="112groton6">Suite 6  </option>
+				<option value="112groton7">Suite 7  </option>
+				<option value="112groton8">Suite 8  </option>
+				<option value="112groton9">Suite 9  </option>
+				<option value="112groton10">Suite 10</option> 	
+			</select>
+			</form>
+  </td>
+  <td valign="top" style="text-align:center;">
+	  50 Tompkins Ave
+	  <form>
+		  <select class="myimages" id="tompkins50">
+			 <option value=""></option>
+			 <option value="50tomp1and4">Suite 1</option>
+			 <option value="50tomp2">Suite 2</option>
+			 <option value="50tomp3">Suite 3</option>
+			 <option value="50tomp1and4">Suite 4</option>
+			 <option value="50tomp5">Suite 5</option>
+			 <option value="50tomp6">Suite 6</option>
+			 <option value="50tomp7">Suite 7</option>
+			 <option value="50tomp8and10">Suite 8</option>
+			 <option value="50tomp9and11">Suite 9</option>
+			 <option value="50tomp8and10">Suite 10</option>
+			 <option value="50tomp9and11">Suite 11</option>
+			</select>
+		</form>
+  </td>
+  <td valign="top" style="text-align:center;">
+	  52 Tompkins Ave
+		<form>
+		  <select class="myimages" id="tompkins52">
+			 <option value=""></option>
+			 <option value="52tomp1and4">Suite 1</option>
+			 <option value="52tomp2and5">Suite 2</option>
+			 <option value="52tomp3and6">Suite 3</option>
+			 <option value="52tomp1and4">Suite 4</option>
+			 <option value="52tomp2and5">Suite 5</option>
+			 <option value="52tomp3and6">Suite 6</option>
+			</select>
+		</form>
+	</td>
+</tr>
+</table>
+</center>
+
+<div id="floor_plan_links">
+	                                                                        
+</div>
+<p></p><p></p><p></p><p></p><p></p>
+<div id="the-image">
+	<a id="show-image">
+<img id="fp-img" src="graphics/floorplans/112groton1.jpg" alt="112groton1" />
+</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#fp-img').hide();
+		// blank out the option selected upon refresh of the page.
+		$('#tompkins50').val('');
+		$('#tompkins52').val('');
+		$('#groton').val('');
+		
+		$('.myimages').change(function(){
+			changeImage($(this));
+		});
+	});
+	// this function changes the image showing to the one selected.
+	function changeImage(obj){
+		$('#fp-img').attr("src", "graphics/floorplans/"+obj.val()+".jpg");
+		$('#fp-img').show();
+		if( obj.val().match('groton') ){
+			$('#tompkins50').val('');
+			$('#tompkins52').val('');
+		}
+		if( obj.val().match('50tomp')){
+			$('#groton').val('');
+			$('#tompkins52').val('');
+		}
+		if( obj.val().match('52tomp')){
+			$('#tompkins50').val('');
+			$('#groton').val('');
+		}
+	}
+</script>
+
+<?php getNews('floor.html'); ?>
+
+<?php printFooter(); ?>
+

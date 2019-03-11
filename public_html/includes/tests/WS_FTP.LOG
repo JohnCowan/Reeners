@@ -1,0 +1,131 @@
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_error.phpt <-- johndcowan /public_html/includes/DB-1.7.8/tests db_error.phpt
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_error2.phpt <-- johndcowan /public_html/includes/DB-1.7.8/tests db_error2.phpt
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_factory.phpt <-- johndcowan /public_html/includes/DB-1.7.8/tests db_factory.phpt
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_ismanip.phpt <-- johndcowan /public_html/includes/DB-1.7.8/tests db_ismanip.phpt
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_parsedsn.phpt <-- johndcowan /public_html/includes/DB-1.7.8/tests db_parsedsn.phpt
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\errors.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests errors.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\fetchmode_object.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests fetchmode_object.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\fetchmodes.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests fetchmodes.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\include.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests include.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\limit.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests limit.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\numcols.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests numcols.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\numrows.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests numrows.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\prepexe.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests prepexe.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\run.cvs <-- johndcowan /public_html/includes/DB-1.7.8/tests run.cvs
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\sequences.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests sequences.inc
+2007.02.02 14:32 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\simplequery.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests simplequery.inc
+2007.02.02 14:33 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\skipif.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests skipif.inc
+2007.02.02 14:33 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\transactions.inc <-- johndcowan /public_html/includes/DB-1.7.8/tests transactions.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_error.phpt --> ftp.johndcowan.com /public_html/includes/tests db_error.phpt
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_error2.phpt --> ftp.johndcowan.com /public_html/includes/tests db_error2.phpt
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_factory.phpt --> ftp.johndcowan.com /public_html/includes/tests db_factory.phpt
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_ismanip.phpt --> ftp.johndcowan.com /public_html/includes/tests db_ismanip.phpt
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\db_parsedsn.phpt --> ftp.johndcowan.com /public_html/includes/tests db_parsedsn.phpt
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\errors.inc --> ftp.johndcowan.com /public_html/includes/tests errors.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\fetchmode_object.inc --> ftp.johndcowan.com /public_html/includes/tests fetchmode_object.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\fetchmodes.inc --> ftp.johndcowan.com /public_html/includes/tests fetchmodes.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\include.inc --> ftp.johndcowan.com /public_html/includes/tests include.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\limit.inc --> ftp.johndcowan.com /public_html/includes/tests limit.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\numcols.inc --> ftp.johndcowan.com /public_html/includes/tests numcols.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\numrows.inc --> ftp.johndcowan.com /public_html/includes/tests numrows.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\prepexe.inc --> ftp.johndcowan.com /public_html/includes/tests prepexe.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\run.cvs --> ftp.johndcowan.com /public_html/includes/tests run.cvs
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\sequences.inc --> ftp.johndcowan.com /public_html/includes/tests sequences.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\simplequery.inc --> ftp.johndcowan.com /public_html/includes/tests simplequery.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\skipif.inc --> ftp.johndcowan.com /public_html/includes/tests skipif.inc
+2007.02.02 14:39 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\DB-1.7.8\tests\transactions.inc --> ftp.johndcowan.com /public_html/includes/tests transactions.inc
+2007.02.05 07:50 B c:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\WS_FTP.LOG <-- johndcowan /public_html/includes/tests WS_FTP.LOG
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_error.phpt --> ftp.0-to-sixty.com /public_html/includes/tests db_error.phpt
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_error2.phpt --> ftp.0-to-sixty.com /public_html/includes/tests db_error2.phpt
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_factory.phpt --> ftp.0-to-sixty.com /public_html/includes/tests db_factory.phpt
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_ismanip.phpt --> ftp.0-to-sixty.com /public_html/includes/tests db_ismanip.phpt
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_parsedsn.phpt --> ftp.0-to-sixty.com /public_html/includes/tests db_parsedsn.phpt
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\errors.inc --> ftp.0-to-sixty.com /public_html/includes/tests errors.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\fetchmode_object.inc --> ftp.0-to-sixty.com /public_html/includes/tests fetchmode_object.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\fetchmodes.inc --> ftp.0-to-sixty.com /public_html/includes/tests fetchmodes.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\include.inc --> ftp.0-to-sixty.com /public_html/includes/tests include.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\limit.inc --> ftp.0-to-sixty.com /public_html/includes/tests limit.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\numcols.inc --> ftp.0-to-sixty.com /public_html/includes/tests numcols.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\numrows.inc --> ftp.0-to-sixty.com /public_html/includes/tests numrows.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\prepexe.inc --> ftp.0-to-sixty.com /public_html/includes/tests prepexe.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\run.cvs --> ftp.0-to-sixty.com /public_html/includes/tests run.cvs
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\sequences.inc --> ftp.0-to-sixty.com /public_html/includes/tests sequences.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\simplequery.inc --> ftp.0-to-sixty.com /public_html/includes/tests simplequery.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\skipif.inc --> ftp.0-to-sixty.com /public_html/includes/tests skipif.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\transactions.inc --> ftp.0-to-sixty.com /public_html/includes/tests transactions.inc
+2007.03.23 08:16 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\WS_FTP.LOG --> ftp.0-to-sixty.com /public_html/includes/tests WS_FTP.LOG
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_error.phpt --> www.paulbassociates.com /public_html/includes/tests db_error.phpt
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_error2.phpt --> www.paulbassociates.com /public_html/includes/tests db_error2.phpt
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_factory.phpt --> www.paulbassociates.com /public_html/includes/tests db_factory.phpt
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_ismanip.phpt --> www.paulbassociates.com /public_html/includes/tests db_ismanip.phpt
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\db_parsedsn.phpt --> www.paulbassociates.com /public_html/includes/tests db_parsedsn.phpt
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\errors.inc --> www.paulbassociates.com /public_html/includes/tests errors.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\fetchmode_object.inc --> www.paulbassociates.com /public_html/includes/tests fetchmode_object.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\fetchmodes.inc --> www.paulbassociates.com /public_html/includes/tests fetchmodes.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\include.inc --> www.paulbassociates.com /public_html/includes/tests include.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\limit.inc --> www.paulbassociates.com /public_html/includes/tests limit.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\numcols.inc --> www.paulbassociates.com /public_html/includes/tests numcols.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\numrows.inc --> www.paulbassociates.com /public_html/includes/tests numrows.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\prepexe.inc --> www.paulbassociates.com /public_html/includes/tests prepexe.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\run.cvs --> www.paulbassociates.com /public_html/includes/tests run.cvs
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\sequences.inc --> www.paulbassociates.com /public_html/includes/tests sequences.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\simplequery.inc --> www.paulbassociates.com /public_html/includes/tests simplequery.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\skipif.inc --> www.paulbassociates.com /public_html/includes/tests skipif.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\transactions.inc --> www.paulbassociates.com /public_html/includes/tests transactions.inc
+2007.06.05 12:22 B C:\Documents and Settings\jdc44\My Documents\myWebSites\johndcowan\includes\tests\WS_FTP.LOG --> www.paulbassociates.com /public_html/includes/tests WS_FTP.LOG
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\db_error.phpt --> 216.180.228.2 /public_html/includes/tests db_error.phpt
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\db_error2.phpt --> 216.180.228.2 /public_html/includes/tests db_error2.phpt
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\db_factory.phpt --> 216.180.228.2 /public_html/includes/tests db_factory.phpt
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\db_ismanip.phpt --> 216.180.228.2 /public_html/includes/tests db_ismanip.phpt
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\db_parsedsn.phpt --> 216.180.228.2 /public_html/includes/tests db_parsedsn.phpt
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\errors.inc --> 216.180.228.2 /public_html/includes/tests errors.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\fetchmode_object.inc --> 216.180.228.2 /public_html/includes/tests fetchmode_object.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\fetchmodes.inc --> 216.180.228.2 /public_html/includes/tests fetchmodes.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\include.inc --> 216.180.228.2 /public_html/includes/tests include.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\limit.inc --> 216.180.228.2 /public_html/includes/tests limit.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\numcols.inc --> 216.180.228.2 /public_html/includes/tests numcols.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\numrows.inc --> 216.180.228.2 /public_html/includes/tests numrows.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\prepexe.inc --> 216.180.228.2 /public_html/includes/tests prepexe.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\run.cvs --> 216.180.228.2 /public_html/includes/tests run.cvs
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\sequences.inc --> 216.180.228.2 /public_html/includes/tests sequences.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\simplequery.inc --> 216.180.228.2 /public_html/includes/tests simplequery.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\skipif.inc --> 216.180.228.2 /public_html/includes/tests skipif.inc
+2007.09.15 20:56 B C:\Documents and Settings\jdc44\My Personal Stuff\My Websites\johndcowan\includes\tests\transactions.inc --> 216.180.228.2 /public_html/includes/tests transactions.inc
+2007.11.25 16:23 B C:\Documents and Settings\cowan\My Documents\My Websites\0-to-sixty\includes\tests\WS_FTP.LOG <-- zero-to-sixty /public_html/includes/tests WS_FTP.LOG
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_error.phpt --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests db_error.phpt
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_error2.phpt --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests db_error2.phpt
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_factory.phpt --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests db_factory.phpt
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_ismanip.phpt --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests db_ismanip.phpt
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_parsedsn.phpt --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests db_parsedsn.phpt
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\errors.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests errors.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\fetchmode_object.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests fetchmode_object.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\fetchmodes.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests fetchmodes.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\include.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests include.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\limit.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests limit.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\numcols.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests numcols.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\numrows.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests numrows.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\prepexe.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests prepexe.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\run.cvs --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests run.cvs
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\sequences.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests sequences.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\simplequery.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests simplequery.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\skipif.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests skipif.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\transactions.inc --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests transactions.inc
+2007.11.28 19:21 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\WS_FTP.LOG --> ftp.johndcowan.com /public_html/hcsassociates/includes/tests WS_FTP.LOG
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_error.phpt --> 216.180.228.2  /public_html/includes/tests db_error.phpt
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_error2.phpt --> 216.180.228.2  /public_html/includes/tests db_error2.phpt
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_factory.phpt --> 216.180.228.2  /public_html/includes/tests db_factory.phpt
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_ismanip.phpt --> 216.180.228.2  /public_html/includes/tests db_ismanip.phpt
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\db_parsedsn.phpt --> 216.180.228.2  /public_html/includes/tests db_parsedsn.phpt
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\errors.inc --> 216.180.228.2  /public_html/includes/tests errors.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\fetchmode_object.inc --> 216.180.228.2  /public_html/includes/tests fetchmode_object.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\fetchmodes.inc --> 216.180.228.2  /public_html/includes/tests fetchmodes.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\include.inc --> 216.180.228.2  /public_html/includes/tests include.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\limit.inc --> 216.180.228.2  /public_html/includes/tests limit.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\numcols.inc --> 216.180.228.2  /public_html/includes/tests numcols.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\numrows.inc --> 216.180.228.2  /public_html/includes/tests numrows.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\prepexe.inc --> 216.180.228.2  /public_html/includes/tests prepexe.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\run.cvs --> 216.180.228.2  /public_html/includes/tests run.cvs
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\sequences.inc --> 216.180.228.2  /public_html/includes/tests sequences.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\simplequery.inc --> 216.180.228.2  /public_html/includes/tests simplequery.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\skipif.inc --> 216.180.228.2  /public_html/includes/tests skipif.inc
+2007.11.29 21:07 B C:\Documents and Settings\cowan\My Documents\My Websites\JohnDCowan\hscAssociates\includes\tests\transactions.inc --> 216.180.228.2  /public_html/includes/tests transactions.inc

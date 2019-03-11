@@ -1,0 +1,153 @@
+<?php
+session_start();
+require_once('includes/myUtils.php');
+$params = array(
+				'title' => 'Contact Us Form Cortland College Housing for information about our student housing apartments.  For questions about our student housing apartments rentals',
+				'description' => 'Contact page for Cortland College Housing, Cortland NY. This page contains a form for sending an email to paradigm properties for information regarding our off-campus student housing apartments.',
+				'keywords' => 'apartments, rentals, off-campus, student housing, Cortland, SUNY Cortland, college'
+				);
+printHeaders($params);
+?>
+
+<?php
+$name = !empty($_REQUEST['name'])?$_REQUEST['name']:'';
+$email = !empty($_REQUEST['email'])?$_REQUEST['email']:'';
+$message = !empty($_REQUEST['message'])?$_REQUEST['message']:'';
+$security_code = !empty($_REQUEST['security_code'])?$_REQUEST['security_code']:'';
+$submit = !empty($_REQUEST['submit'])?$_REQUEST['submit']:'';
+
+
+
+$okay_to_process = false;
+if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_code']) && ($_SESSION['security_code'] == $_REQUEST['security_code'])  ) {
+	if( !empty($name) && !empty($email) && !empty($message) ){
+		if( !preg_match("/^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/", $email) ){
+			print "<p class='red'>Your email address is not in a valid format.</p>";
+		}else{
+			## send email to Reeners
+			$to = "info@cortlandcollegehousing.com";
+			# $to = "john@johndcowan.com";
+			$headers = "From: $email";
+			$subject = "Online Contact Us Form";
+			$body = "
+			A user completed the contact us form on the website.
+			User Name: $name
+			Email Address: $email
+			Message: $message";
+			if( mail($to, $subject, $body, $headers) ){
+				print "<p class='red'>Thank you!  Your message has been sent to our office and someone will reply as soon as possible.</p>";
+				
+			}else{
+				print "<p class='red'>Well, this is embarrassing. Your email was not sent.  Please check the form and try again.</p>";
+				$name = '';
+				$email = '';
+				$message = '';
+			} 
+	  }
+	}else{
+		print "<p class='red'>Sorry, all fields in the form are required.";
+	}	
+	unset($_SESSION['security_code']);
+} else if($submit && empty($_SESSION['security_code']) || (!empty($_REQUEST['security_code']) && ($_SESSION['security_code'] != $_REQUEST['security_code']) )  ) {
+  print "<p class='red'>Sorry, but the Security Code you entered did not match the image.  Try Again!</p>";
+}
+?>
+<div class="row">
+  <div class="medium-12 text-center columns">
+    <h3>Contact Us</h3>
+  </div>
+</div>
+
+<div class="row">
+	<div class="medium-12 callout alert text-center columns">
+    <p class="red"><strong>See important apartment news near the bottom of this page.</strong></p>
+	</div>	
+</div>
+ 
+<div class="row">
+	<div class="medium-12 columns">
+     <p>Your business is important to us and we are here to serve you.  Please feel free to contact us with any questions you may have regarding our off-campus student housing apartments or properties.  We welcome your feedback and are happy to answer any questions. We encourage you to let us know how we can better serve you.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="medium-12 medium-centered columns">
+    <h3>Send us a message</h3>
+  </div>
+</div>
+
+<div class="row">
+	<div class="medium-12 columns">
+		<p><strong>Postal Mail:</strong><br />
+		  Cornerstone Properties<br />
+			14 Hickory Lane.<br />
+			Cortland, NY. 13045</p>
+		</p>
+  </div>
+</div>
+
+<p>&nbsp;</p>
+
+<hr />
+<div class="row">
+	<div class="medium-12 columns"><label><b>Electronic Message</b></label></div>
+</div>
+
+<hr />
+
+
+<!---- form starts here  ---->
+
+<form name="form1" id="form1" action="contact-us.html" method="post">
+<div class="row">
+	<div class="medium-3 columns right"><label><b>Your Name:</b></label></div>
+	<div class="medium-3 columns">
+		<input type="text" name="name" id="name" value="<?php print $name ?>" size="40" />
+	</div>
+	<div class="medium-6 columns">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="medium-3 columns"><label><b>Email Address:</b></label></div>
+  <div class="medium-3 columns">
+	  <input type="text" name="email" id="email" value="<?php print $email ?>" size="40" />
+	</div>
+	<div class="medium-6 columns">&nbsp;</div>
+</div>
+
+<div class="row">
+	<div class="medium-3 columns"><label><b>Message-Question:</b></label></div>
+	  <div class="medium-3 columns">
+		  <textarea name="message" id="message" cols="30" rows="7"><?php print $message ?></textarea>
+		</div>
+		<div class="medium-6 columns">&nbsp;</div>
+</div>
+
+<div class="row">
+	<div class="medium-12 columns"><label>Please enter the code seen in the image below into the Security Code text box.</label></div>
+</div>
+<div class="row">
+  <div class="medium-3 columns">&nbsp;</div>
+	<div class="medium-3 columns"><img src="includes/CaptchaSecurityImages.php?width=100&height=40&characters=5" /></div>
+	<div class="medium-6 columns">&nbsp;</div>
+</div>
+
+<div class="row">
+	<div class="medium-3 columns"><label for="security_code"><b>Security Code:</b></label></div>
+  <div class="medium-3 columns"><input id="security_code" name="security_code" type="text" /></div>
+  <div class="medium-6 columns">&nbsp;</div>
+</div>
+
+<div class="row">
+	<div class="medium-12 columns left"><input type="submit" class="button" name="submit" value="Submit Question"></div>
+</div>
+
+</form>
+
+
+<?php 
+getNews('index.html');
+?>
+
+<?php
+printFooter();
+?>

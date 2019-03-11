@@ -1,0 +1,121 @@
+<?php
+session_start();
+
+require_once('../includes/myUtils.php');
+require_once('../includes/login.php');
+
+$params = array(
+				'title' => 'CornerStone Properties, The Suites, Student Housing, Cortland, NY',
+				'description' => 'Quality student housing located in Cortland, NY. Just a short walk to Cortland State College.',
+				'keywords' => 'student housing, student, housing, apartments, rentals,'
+				);
+if( $verified ){
+	$params['page'] = '';
+}
+printHeaders($params);
+?>
+<style type="text/css">
+th { text-align: left; }
+</style>
+
+<div class="mainbody">
+<h3>
+Applicants Admin
+</h3>
+<p>Applicants for Rentals</p>
+ 
+<?php
+// did user login?
+if( !isset( $_SESSION['verified'] ) ){
+	 _showLoginScreen();
+}
+if ( $verified ){
+  # get all applicants from the db
+  $sql = "select * from applicants order by entry_date asc";
+  $results = $globalMySqlConnect->query($sql);
+
+  # get all applicants from the db
+  $sql = "select * from applicants where entry_id = ?";
+  $results = $globalMySqlConnect->query($sql, array($_REQUEST['entry_id']));
+  ?>
+   <table class="darkblue">
+  <?php
+  if ( $app=$results->fetchRow(DB_FETCHMODE_ASSOC) ){
+	print "<tr>";
+	print "<th>Fullname</th>";
+	print "<td>$app[first_name] $app[mid_name] $app[last_name]"; # full name
+        print "</tr>";
+
+        print "<tr><th>Address</th>
+                   <td>$app[addr1]<br />
+                       $app[addr2]</td>
+               </tr>";
+        
+	print "<tr><th>City</th>
+                   <td>$app[city]</td>
+               </tr>";
+
+	print "<tr><th>State</th>
+                   <td>$app[state]</td>
+               </tr>";
+
+	print "<tr><th>Zip</th>
+                   <td>$app[zip]</td>
+               </tr>";
+
+	print "<tr><th>Country</th>
+                   <td>$app[country]</td>
+               </tr>";
+    if( $app['dob'] ){
+		list($y,$m,$d) = explode('-',$app['dob']);
+        $dob = "$m/$d/$y";
+    }
+	print "<tr><th>Date of Birth</th>
+                   <td>$dob</td>
+               </tr>";
+
+	print "<tr><th>Home Phone</th>
+                   <td>$app[home_phone]</td>
+               </tr>";
+
+	print "<tr><th>Cell Phone</th>
+                   <td>$app[cell_phone]</td>
+               </tr>";
+
+	print "<tr><th>Email</th>
+                   <td>$app[email]</td>
+               </tr>";
+        
+	print "<tr><th>When Needed</th>
+                   <td>$app[semyear]</td>
+               </tr>";
+
+    print "<tr><th>Tennant 2 Name</th>
+               <td>$app[tennant2]</td>
+           </tr>";
+    print "<tr><th>Tennant 2 Email</th>
+               <td>$app[tennant2_email]</td>
+           </tr>";
+
+    print "<tr><th>Tennant 3 Name</th>
+               <td>$app[tennant3]</td>
+           </tr>";
+    print "<tr><th>Tennant 3 Email</th>
+               <td>$app[tennant3_email]</td>
+           </tr>";
+        
+	print "<tr><th>User Comments</th>
+                   <td>$app[comments]</td>
+               </tr>";
+        
+  
+  }
+?>
+</table>
+
+<p>&nbsp;</p>
+<?php
+ } // end if
+?>
+
+</div>

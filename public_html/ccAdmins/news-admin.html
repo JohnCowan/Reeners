@@ -1,0 +1,231 @@
+<?php
+session_start();
+
+require_once('../includes/myUtils.php');
+require_once('../includes/login.php');
+
+$params = array(
+				'title' => 'News Admin for CornerStone Properties, The Suites, Student Housing, Cortland, NY',
+				'description' => 'News Admin for Cortland College Housing',
+				'keywords' => 'student housing, student, housing, apartments, rentals,'
+				);
+$verified = isset($_SESSION['verified']) ? $_SESSION['verified'] : '';
+if( $verified ){
+	$params['page'] = '';
+}
+printHeaders($params);
+?>
+<style type="text/css">
+th { text-align: left; }
+</style>
+
+<div class="row">
+	<div class="medium-12 columns text-center">
+     <h3>CornerStone Properties Admins</h3>
+  </div>
+</div>
+<?php
+// did user login?
+if( !isset( $_SESSION['verified'] ) ){
+	 _showLoginScreen();
+}
+if ( !empty($verified) && $verified == 1 ){
+	$today = date('Y-m-d',time());
+   ?>
+ 
+   <div class="row">
+	    <div class="medium-12 columns">
+         <p>Add Modify and Remove News Items!</p>
+					<ul>
+					<li><a href="news-admin.html?action=add">Add</a></li>
+					<li><a href="news-admin.html?action=mod">Modify / Remove</a></li>
+					</ul>
+      </div>
+   </div>
+  
+   <?php
+		foreach( array('action','content','home_page','description_page','images_page',
+                       'floorplans_page','location_page','request_page','documents_page',
+                       'submit','news_id', 'contact_page') as $v ){
+			$$v = !empty($_REQUEST[$v])?$_REQUEST[$v]:'';
+		}
+
+	  $formErrors = false;  // assume all is good - to start
+
+   # add a news item
+   if( !empty($submit) && $submit=='Add' ){
+      # content has to be present
+	   if(!empty($content)){
+            # insert a record
+            $sql = "insert into news
+                      (content, home_page,description_page,images_page,floorplans_page,
+                       location_page,request_page,documents_page,update_date,contact_page)
+                    values
+                      (?,?,?,?,?,?,?,?,?,?)";
+            $params = array($content, $home_page,$description_page,$images_page,$floorplans_page,
+							$location_page,$request_page,$documents_page,$today,$contact_page);
+            $results=$globalMySqlConnect->query($sql, $params);
+            if( DB::isError($results)){
+                die("Cannot insert news item: ".$results->toString());
+            }
+            if($globalMySqlConnect->affectedRows() == 1){
+                print "<p>You have just added a news item to the database.</p>";
+            }
+	   }else{
+		   print "<p>You must enter some news before you can add it to the website.</p>";
+           $formErrors = true;
+       }
+   }
+
+   if( !empty($submit) && $submit=='Modify' ){
+       if( !empty($content) ){
+          $sql = "update news set 
+					 										content = ?, 
+															 home_page = ?,
+															 description_page = ?,
+															 images_page = ?,
+															 floorplans_page = ?,
+															 location_page = ?,
+															 request_page = ?,
+															 documents_page = ?,
+															 update_date = ?,
+															 contact_page = ?
+                  where news_id = ?";   
+           $params = array($content, $home_page,$description_page,$images_page,$floorplans_page,
+							$location_page,$request_page,$documents_page,$today,$contact_page, $news_id);
+		  $result = $globalMySqlConnect->query($sql, $params);
+          if( DB::isError($result)){
+			  die("Error trying update on news table: ".$result->toString());
+          }
+          if( $globalMySqlConnect->affectedRows() == 1 ){
+              print "<p>Your news item update was successful.</p>";
+          }
+       }else{
+		   print "<p>You must enter some content in order to submit a news article.</p>";
+       }
+   }
+
+   if(!empty($action) && $action=='add'){
+			$showform = true;
+   }
+   if(!empty($action) && $action=='mod'){
+         # search for news item to modify
+         $sql = "select * from news";
+         $results=$globalMySqlConnect->query($sql);
+         ?>
+          <p>&nbsp;</p>
+          <form action="news-admin.html" method="post">
+           Select a news item to modify or delete:<br />
+           <select name="news_id">
+               <option value="">&nbsp;</option>
+               <?php
+               while($data=$results->fetchRow(DB_FETCHMODE_ASSOC)){
+                  $str = substr($data['content'],0,40);
+                  print "<option vaue=\"$data[news_id]\">$data[news_id] -  $str</option>";
+               }           
+               ?>
+            </select><br />
+
+            <input type="submit" name="submit" value="Search" />
+          </form>
+         <?php
+   }
+
+   if( !empty($submit) && $submit=='Search' ){
+      $sql="select * from news where news_id = ?";
+      $results = $globalMySqlConnect->query($sql, array($news_id));
+      if(DB::isError($results)){
+         die("Error selecting from news. ".$results->toString());
+      }
+      if($data=$results->fetchRow(DB_FETCHMODE_ASSOC)){
+ 
+         $news_id = $data['news_id'];
+         $content = $data['content'];
+         $home_page = $data['home_page'];
+	 			 $description_page = $data['description_page'];
+				 $images_page = $data['images_page'];
+				 $floorplans_page = $data['floorplans_page'];
+				 $location_page = $data['location_page'];
+				 $request_page = $data['request_page'];
+				 $documents_page = $data['documents_page'];
+				 $showform=true;
+      }
+   }
+
+   if( !empty($submit) && $submit=='Delete'){
+	   $result=$globalMySqlConnect->query("delete from news where news_id = ?",array($news_id));
+       if(DB::isError($results)){
+         die("Error selecting from news. ".$results->toString());
+       }
+       if($globalMySqlConnect->affectedRows() == 1){
+           print '<p style="color: #b31b1b;">You have just removed a news item fromt the database.</p>';
+       }
+   }
+
+   if( $formErrors == true ){ $showform = true; }
+
+   # show form
+	 if(isset($showform) ){
+		$showform==true;
+   ?>
+    <div style="padding-left: 10px; width:600px;">
+      <form action="news-admin.html" method="post">
+       <?php
+         if( !empty($news_id) ){
+           print "<input type='hidden' name='news_id' value=\"$news_id\" />";
+         }
+       ?>
+        News Item:<br />
+				<textarea id="content" name="content" cols="100" rows="20"><?php print !empty($content)? $content : ''; ?></textarea>
+							<script type="text/javascript">
+								CKEDITOR.replace( 'content' );
+							</script>
+
+    <br /><br />
+    <?php
+
+   $homeChecked = !empty($home_page)?'checked="checked"':'';
+	 $descChecked = !empty($description_page)?'checked="checked"':'';
+	 $floorsChecked = !empty($floorplans_page)?'checked="checked"':'';
+	 $locationChecked = !empty($location_page)?'checked="checked"':'';
+	 $requestChecked = !empty($request_page)?'checked="checked"':'';
+	 $documentsChecked = !empty($documents_page)?'checked="checked"':'';
+	 $contactChecked = !empty($documents_page)?'checked="checked"':'';
+   ?>
+
+
+   Check each page you want this news item to appear on:<br /><br />
+   <input type="checkbox" name="home_page" id="home_page" value="1" <?php print $homeChecked ?> /> Home page<br />
+   <input type="checkbox" name="description_page" id="description_page" value="1" <?php print isset($descChecked) ? $descChecked :''; ?> /> Descriptions page<br />
+   <input type="checkbox" name="floorplans_page" id="floorplans_page" value="1"<?php print isset($floorsChecked) ? $floorsChecked : ''; ?> /> Floorplans page<br />
+   <input type="checkbox" name="location_page" id="location_page" value="1"<?php print $locationChecked ?> /> Locations page<br />
+   <input type="checkbox" name="request_page" id="request_page" value="1"<?php print $requestChecked ?> />Request Aplication page<br />
+   <input type="checkbox" name="documents_page" id="documents_page" value="1"<?php print $documentsChecked ?> />Lease Page<br />
+	 <input type="checkbox" name="contact_page" id="contact_page" value="1"<?php print $contactChecked ?> />Contact Us Page<br />
+
+        <br />
+<?php
+	   if( (!empty($action) && $action == 'add') || (!empty($submit) && $submit=='Add') ){
+       ?>
+           <input type="submit" id="submit" name="submit" value="Add" />
+       <?php
+       }else if(!empty($submit) && $submit=='Search'){
+           ?>
+           <input type="submit" id="submit" name="submit" value="Modify" /> 
+           <input type="submit" id="submit" name="submit" value="Delete" />       
+           <?php
+       }
+       ?>
+      </form>
+    </div>
+   <?php
+	 }
+   ?>
+
+<?php
+ } // end if
+?>
+
+</div>
+
+
