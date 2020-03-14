@@ -125,6 +125,7 @@ function printTopNavs(){
 	$floorplan_active   = preg_match('/floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$application_active = preg_match('/request-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
+	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
   ?>
     <div class="row">
@@ -137,7 +138,7 @@ function printTopNavs(){
              <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>floorplans.html">FloorPlans</a></li>
              <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>locations.html">Locations</a></li>
              <li class="<?php print $application_active ?>"><a href="<?php print $path ?>request-application.html">Application</a></li>
-             <li class="<?php print $lease_active ?>"><a href="<?php print $path ?>lease.html">Our Lease</a></li>
+             <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html">Important Documents</a></li>
              <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html">Contact Us</a></li>
           </ul>
       </div>
