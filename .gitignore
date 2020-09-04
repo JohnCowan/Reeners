@@ -1,1 +1,7 @@
 public_html/documents/*
+*.pdf
+*.txt
+*.doc
+*.docx
+*.xls*
+public_html/documents/cornerstone-lease.pdf
