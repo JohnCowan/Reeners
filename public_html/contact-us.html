@@ -4,7 +4,7 @@ require_once('includes/myUtils.php');
 $params = array(
 				'title' => 'Contact Us Form for Cortland College Housing. For questions and information about our student housing apartments, send us a message using this form.',
 				'description' => 'Contact us page for Cortland College Housing, Cortland NY. This page contains a form for sending an email to paradigm properties for information regarding our off-campus student housing apartments.',
-				'keywords' => 'apartments, rentals, off-campus, student housing, Cortland, SUNY Cortland, college'
+				'keywords' => 'contact, inqueries, questions, Cortland New York, Cortland NY, Cortland, SUNY Cortland, SUNY Cortland off campus housing, off-campus housing, student housing, student apartments, college housing, student rentals, tompkins Str, Groton Ave, Lincoln Ave, Woodruff St, property, properties'
 				);
 printHeaders($params);
 ?>
@@ -29,7 +29,7 @@ if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_
 			$cc = "maddiereeners@hotmail.com";
 			$headers = "From: $email";
 			$headers .= "To: Cortland College Housing Info: <$to>\r\n";
-            $headers .= "CC: Maddie Reeners: <$cc>\r\n";
+      $headers .= "CC: Maddie Reeners: <$cc>\r\n";
 			$subject = "Cortland College Housing";
 			$body = "
 			A user completed the contact us form on the website.

@@ -120,7 +120,7 @@ function printTopNavs(){
 	/*  if foundation 6 gets the active class working, we are ready                 */
 	$home_active     = preg_match('/index/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$about_active    = preg_match('/about/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$locations_active = preg_match('/location/', $_SERVER['PHP_SELF']) ? 'active' : '';
+	$locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$describe_active   = preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$floorplan_active   = preg_match('/floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$application_active = preg_match('/request-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
@@ -136,7 +136,7 @@ function printTopNavs(){
              <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html">About Us</a></li>
              <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>apartment-descriptions.html">Apartment Descriptions</a></li>
              <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>floorplans.html">FloorPlans</a></li>
-             <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>locations.html">Locations</a></li>
+             <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>apartment-locations.html">Locations</a></li>
              <li class="<?php print $application_active ?>"><a href="<?php print $path ?>request-application.html">Application</a></li>
              <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html">Important Documents</a></li>
              <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html">Contact Us</a></li>
@@ -188,7 +188,7 @@ function getNews($page){
           if(!empty($data['floorplans_page']) && $page=='floorplans.html'){
               print $data['content'];
           }
-          if(!empty($data['location_page']) && $page=='locations.html'){
+          if(!empty($data['location_page']) && $page=='apartment-locations.html'){
               print $data['content'];
           }
           if(!empty($data['request_page']) && $page=='request-application.html'){
