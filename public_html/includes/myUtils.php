@@ -158,7 +158,7 @@ function printBanner(){
    <div class="row bg-white border-bottom-red border-top-red">
 	    <div class="medium-1">&nbsp;</div>
       <div class="medium-10 medium-centered columns">
-		    <img src="<?php print $path ?>graphics/50-tompkins-920.jpg" />
+		    <img src="<?php print $path ?>graphics/exterior-front-view-50-tompkins-street.jpg" />
       </div>
       <div class="medium-1">&nbsp;</div>
    </div>
