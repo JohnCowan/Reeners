@@ -5,3 +5,4 @@ public_html/documents/*
 *.docx
 *.xls*
 public_html/documents/cornerstone-lease.pdf
+**/graphics/**

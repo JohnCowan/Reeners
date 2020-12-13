@@ -83,26 +83,22 @@ function printHeaders($params){
 	     <meta name="description" content="<?php print $params['description'] ?>">
 	     <meta name="keywords" content="<?php print $params['keywords'] ?>">
          
-	     <!-- foundation css code -->
-     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/main.css" type="text/css">
-     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/css/foundation.css" type="text/css">
-     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/css/app.css" type="text/css">
-     <!-- end foundation css code -->
+	     <!-- css code -->
+     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/main.css" type="text/css" />
+     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/css/foundation.css" type="text/css" />
+     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/css/app.css" type="text/css" />
+     <!-- slick banner css -->
+     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.css" />
+     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/slick-master/slick/slick-theme.css" />
+     <!-- end slick css -->
+     <!-- end  css code -->
 
      <!-- foundation js code -->
-     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
      <script type="text/javascript" src="http://www.cortlandcollegehousing.com/includes/js/vendor/jquery.js"></script>
      <script type="text/javascript" src="http://www.cortlandcollegehousing.com/includes/ckeditor/ckeditor.js"></script>
- 
-	     <script src="https://malsup.github.com/jquery.cycle.all.js" type="text/javascript" charset="utf-8"></script> 
- 
-       <script type="text/javascript"> 
-         $(document).ready(function() {
-             $('.slideshow').cycle({
-                 fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-             });
-        });
-      </script>
+     <script type="text/javascript" src="http://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.min.js"></script>
+
    </head>
         
         <!--  bgcolor="#F9F582" -->
@@ -158,7 +154,47 @@ function printBanner(){
    <div class="row bg-white border-bottom-red border-top-red">
 	    <div class="medium-1">&nbsp;</div>
       <div class="medium-10 medium-centered columns">
-		    <img src="<?php print $path ?>graphics/exterior-front-view-50-tompkins-street.jpg" />
+        <!-- <img src="<?php print $path ?>graphics/exterior-front-view-50-tompkins-street.jpg" /> -->
+
+        
+        <div class="single-item">
+          <div class="multiple">
+  		      <img src="<?php print $path ?>graphics/banner-images/7-woodruff-street-exterior-front-view-575.jpg" />
+          </div>
+          <div class="multiple">
+            <img src="<?php print $path ?>graphics/banner-images/100-tompkins-street-exterior-front-view-575.jpg" />
+          </div>
+          <div class="multiple">
+            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-front-view-575.jpg"/>
+          </div>
+          <div class="multiple">
+            <img src="<?php print $path ?>graphics/banner-images/112-groton-ave-exterior-front-view-575.jpg"/>
+          </div>
+          <div class="multiple">
+            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-street-view-575.jpg" />
+          </div>
+          <div class="multiple">
+            <img src="<?php print $path ?>graphics/banner-images/52-tompkins-street-exterior-front-view-575.jpg" />
+          </div>
+          <div class="multiple">
+            <img src="<?php print $path ?>graphics/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" />
+          </div>
+          
+          <!--
+          
+          <div>
+            <img src="<?php print $path ?>graphics/banner-images/91-lincoln-ave-exterior-front.jpg" />
+          </div>
+          <div>
+            <img src="<?php print $path ?>graphics/banner-images/100-tompkins-street-exterior-front-view.jpg" />
+          </div>
+          <div>
+            <img src="<?php print $path ?>graphics/banner-images/112-groton-ave-exterior-front-view.jpg" />
+          </div>
+          -->
+
+        </div>
+
       </div>
       <div class="medium-1">&nbsp;</div>
    </div>
@@ -267,8 +303,17 @@ function printFooter(){
     <script src="http://www.cortlandcollegehousing.com/includes/js/vendor/foundation.js"></script>
     <script src="http://www.cortlandcollegehousing.com/includes/js/app.js"></script>
 		<script>
-      $(document).ready(funccortlandcollegehousin
-        $(document).foundation();
+      var $jq = jQuery.noConflict();
+      $jq(document).ready( function(){
+        //$jq(document).foundation();
+        $('.single-item').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          speed: 300,
+          dots: false,
+          autoplay: true,
+          infinite: true
+        });
       })
     </script>
 		
