@@ -78,7 +78,7 @@ printHeaders($params);
             <option value="100-tompkins-street-apartment-2-first-floor-floorplan">Suite 2 (1st Floor)</option>
             <option value="100-tompkins-street-apartment-2-second-floor-floorplan">Suite 2 (2nd Floor)</option>    
           </select>
-        
+      
   </div>
   
 </div> <!-- end row -->
@@ -159,17 +159,26 @@ $(document).ready(function() {
 
   $('.myimages').change(function(){
     changeImage($(this));
+    getFloorPlanImage($(this));
   });
 
 
-  var tompkins100 = {tompkins_street_apartment_1_first_floor_floorplan: "Foo"}
-  // alert("100 tompkins: " + tompkins100.tompkins_street_apartment_1_first_floor_floorplan)
 });
+
+// function to get interior image of the apartment for which the floorplan is showing
+function getFloorPlanImage(obj){
+  var images = [];
+  images['100-tompkins-street-apartment-1-first-floor-floorplan'] = '100-tompkins-street-apartment-1-kitchen-view';
+  
+  $('#suite-img').attr("src", "graphics/"+images[obj.val()]+".jpg");
+  $('#suite-img').show();
+}
 
 // this function changes the image showing to the one selected.
 function changeImage(obj){
   $('#fp-img').attr("src", "graphics/floorplans/"+obj.val()+".jpg");
   $('#fp-img').show();
+
   if( obj.val().match('groton') ){
     $('#tompkins50').val('');
     $('#tompkins52').val('');
