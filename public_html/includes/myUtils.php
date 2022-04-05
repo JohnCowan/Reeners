@@ -72,8 +72,32 @@ function printHeaders($params){
 ?>
  
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html>
+  <html lang="en">
     <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <!--
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-T5SXZ5H6D0"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-T5SXZ5H6D0');
+      </script>
+      -->
+
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <!-- new tag added march 22, 2022                 -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Z3CECKQV0"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0Z3CECKQV0');
+      </script>
+
      	 <meta charset="utf-8" />
 	     <meta http-equiv="x-ua-compatible" content="ie=edge">
 	     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,9 +108,11 @@ function printHeaders($params){
 	     <meta name="keywords" content="<?php print $params['keywords'] ?>">
          
 	     <!-- css code -->
-     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/main.css" type="text/css" />
+     
      <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/css/foundation.css" type="text/css" />
      <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/css/app.css" type="text/css" />
+     <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/main.css" type="text/css" />
+
      <!-- slick banner css -->
      <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.css" />
      <link rel="stylesheet" href="http://www.cortlandcollegehousing.com/includes/slick-master/slick/slick-theme.css" />
@@ -124,6 +150,9 @@ function printTopNavs(){
 	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
   ?>
+
+  <!-- accessibility role for navs -->
+  <div role="navigation" aria-label="Top row navigation" class="row full-width">
     <div class="row">
        <div class="medium-12 columns menu-centered full-width">
     
@@ -139,16 +168,19 @@ function printTopNavs(){
           </ul>
       </div>
     </div>
+  </div> <!-- role=navigation -->
+
   <?php
 }
 
 function printBanner(){
 	global $path;
   ?>
+  <header role="banner"> <!-- aria accessibility -->
 
    <div class="row">
 	    <div class="medium-2">&nbsp;</div>
-      <div class="medium-8 medium-centered text-center columns"><img src="graphics/cornerstone-properties.gif" /></div>
+      <div class="medium-8 medium-centered text-center columns"><img src="graphics/cornerstone-properties.gif" alt="cornerstone properties name and number" title="off campus housing cortland ny" /></div>
       <div class="medium-2">&nbsp;</div>
    </div>
    <div class="row bg-white border-bottom-red border-top-red">
@@ -159,45 +191,41 @@ function printBanner(){
         
         <div class="single-item">
           <div class="multiple">
-  		      <img src="<?php print $path ?>graphics/banner-images/7-woodruff-street-exterior-front-view-575.jpg" />
+  		      <img src="<?php print $path ?>graphics/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
+            alt="apartment 7 woodruff str cortland ny" title="off-campus student housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/100-tompkins-street-exterior-front-view-575.jpg" />
+            <img src="<?php print $path ?>graphics/banner-images/100-tompkins-street-exterior-front-view-575.jpg" 
+            alt="apartment 100 Tompkins str cortland ny" title="off-campus student housing cortland college" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-front-view-575.jpg"/>
+            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
+            alt="apartment 50 Tompkins str cortland ny" title="off-campus housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/112-groton-ave-exterior-front-view-575.jpg"/>
+            <img src="<?php print $path ?>graphics/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
+            alt="apartment 112 Groton Ave cortland ny" title="student housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-street-view-575.jpg" />
+            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-street-view-575.jpg" 
+            alt="apartment 50 Tompkins str cortland ny" title="off-campus student housing rental cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/52-tompkins-street-exterior-front-view-575.jpg" />
+            <img src="<?php print $path ?>graphics/banner-images/52-tompkins-street-exterior-front-view-575.jpg" 
+            alt="apartment 52 Tompkins str cortland ny" title="rentals off-campus student housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" />
+            <img src="<?php print $path ?>graphics/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
+            alt="apartment 91 lincoln cortland ny" title="off-campus student housing cortland />
           </div>
-          
-          <!--
-          
-          <div>
-            <img src="<?php print $path ?>graphics/banner-images/91-lincoln-ave-exterior-front.jpg" />
-          </div>
-          <div>
-            <img src="<?php print $path ?>graphics/banner-images/100-tompkins-street-exterior-front-view.jpg" />
-          </div>
-          <div>
-            <img src="<?php print $path ?>graphics/banner-images/112-groton-ave-exterior-front-view.jpg" />
-          </div>
-          -->
 
         </div>
 
       </div>
       <div class="medium-1">&nbsp;</div>
    </div>
+
+  </header>
    <?php
 }
 
@@ -205,9 +233,9 @@ function printBanner(){
 function getNews($page){
   global $globalMySqlConnect;
   ?>
-  <div class="row">
+  <div class="row" role="alert">
     <div class="medium-12 columns callout alert text-center">
-        <h3>Apartment News!</h3>
+        <h2>Apartment News!</h2>
         <?php
         $sql="select * from news";
         $results = $globalMySqlConnect->query($sql);
@@ -239,6 +267,7 @@ function getNews($page){
         }
         ?>
     </div>
+  </div>
     
     <?php 
 }
@@ -283,16 +312,28 @@ function getHits(){
 
 
 function printFooter(){
-?>   
+?>
+  <!-- accessibility role -->
+  <footer role="contentinfo">
+
+    <div class="row">          
+        <div class="medium-12 columns text-center">
+          <hr style="width: 60%; color: #b31b1b;" />
+        </div>        
+    </div>
+
   	<div class="row">          
 		    <div class="medium-12 columns text-center bg-white"> 
 		        <p>Call us today for more information:<br />
 		        607.756.2921<br />
 		        <a href="contact-us.html">info@CortlandCollegeHousing.com</a><br /><br />
-		        <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/"><img src="graphics/facebook-f.gif" alt="facebook" />Visit our Facebook page for additional apartment photos!</a><br /><br />
-            <a href="https://www.instagram.com/propertiesbycornerstone/">Follow us on Instagram</a></p>               
+		        <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/"><img src="graphics/facebook-f.gif" alt="facebook" />Visit our Facebook page for additional apartment photos!</a><br /><br /  
+
+            <a href="https://www.instagram.com/propertiesbycornerstone/"><img src="graphics/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" />Follow Us On Instagram!</a>           
 		    </div>        
 		  </div> <!-- row -->
+
+    </footer>
 
 		</div><!-- body-container -->
 		

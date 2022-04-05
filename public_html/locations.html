@@ -1,71 +1,83 @@
 <?php
 require_once('includes/myUtils.php');
-$params = array('title' => 'Locations of Suites for Cortland College Housing',
-                'description' => 'Locations of the Suites and Apartments. 112 Groton Ave, 50, 52 and 100 Tompkins Str Cortland, NY',
-                'keywords' => 'locations, address, addresses, Cortland NY, Lincoln Ave, Groton Ave, Tompkins Str, Woodruff Str');
+$params = array('title' => 'Locations of our off-campus student housing apartments in Cortland NY',
+                'description' => 'Our student housing apartments are located in Cortland NY, just a short walk to the SUNY Cortland College campus and downtown Cortland. Locations are: 112 Groton Ave, 50, 52 and 100 Tompkins Str, 7 Woodruff Str, and 91 Lincoln Ave, Cortland, NY',
+                'keywords' => 'locations, address, addresses, Cortland NY, Lincoln Ave, Groton Ave, Tompkins Str, 7 Woodruff Str, and 91 Lincoln Ave');
 
 printHeaders($params);
 
 ?>
 
-<div class="row">
-  <div class="medium-12 text-center columns"><h3>Our Locations</h3></div>
-</div>
-        
-        
-<div class="row">
-  <div class="medium-12 columns text-center">
-           <p>The Suites: Cornerstone Properties' off-campus student housing apartments.  We have 6 locations in Cortland NY.</p>
+<div role="main">
+
+    <p>&nbsp;</p>
+
+    <div class="row">
+        <div class="medium-12 text-center columns">
+          <h1>Apartment Locations</h1>
         </div>
-</div>
+    </div>
 
-<div class="row">
+
+    <div class="row">
+        <div class="medium-12 columns text-center">
+            <p>The Suites: Cornerstone Properties' off-campus student housing apartments.  We have 6 locations in Cortland NY.</p>
+        </div>
+    </div>
+
+    <div class="row">
+            
+        <div class="medium-6 columns">
+           <h2>112 Groton Ave | 7 Woodruff Str | 91 Lincoln Ave</h2>
+           <ul>
+              <li>Mini-market: across the street.</li>
+              <li>Pizzeria/restaurant: across the street.</li>
+              <li>Bar/restaurant: 2 blocks.</li>
+              <li>ATM: across the street.</li>
+              <li>Municipal Park with ball fields, basketball courts, pavilions, and seasonal swimming pool: 2 blocks.</li>
+              <li>Cortland State College: just a few minutes walk.  Closer to class rooms than the nearest Free parking.</li>
+           </ul>
+        </div>
+
         
-    <div class="medium-4 columns">
-       <h3>112 Groton Ave<br />7 Woodruff Str<br />91 Lincoln Ave</h3>
-       <ul>
-          <li>Mini-market: across the street.</li>
-          <li>Pizzeria/restaurant: across the street.</li>
-          <li>Bar/restaurant: 2 blocks.</li>
-          <li>ATM: across the street.</li>
-          <li>Municipal Park with ball fields, basketball courts, pavilions, and seasonal swimming pool: 2 blocks.</li>
-          <li>Cortland State College: just a few minutes walk.  Closer to class rooms than the nearest Free parking.</li>
-       </ul>
+                    
+        <div class="medium-6 columns">
+           <h2>50 & 52 Tompkins Str |  100 Tompkins Str.</h2>
+           <ul>
+             <li>One block from Downtown Cortland (Main Street)</li>
+             <li>Restaurants</li>
+             <li>Stores</li>
+             <li>Bars</li>
+             <li>Banks &amp; ATMs</li>
+             <li>Cortland State College: just a few minutes walk.</li>
+           </ul>
+
+           <h2>100 Tompkins Str.</h2>
+           <ul>
+             <li>Only a few minutes walk to Downtown or to the College Campus</li>
+             <li>Less than half-mile north (towards campus):
+                 <ul>
+                    <li>Two Gas Stations / Mini-Markets</li>
+                    <li>ATM's (in stores)</li>
+                    <li>Dunkin Donuts</li>
+                 </ul>
+             </li>
+           </ul>
+        </div>
     </div>
 
-    <div class="medium-4 columns">
-       <?php
-       $image = "graphics/apartment_locations_image.gif";
-       $alt = "The Suites Locations in Cortland, NY. 13045";
-       $sentBy = "locations.html";
-       ?>
-       <a href="largeimage.html?<?php print "image=$image&alt=$alt&sentBy=$sentBy"; ?>"><img src="graphics/apartment_locations_image_sm.gif" border="0"></a>
-    </div>
-                
-    <div class="medium-4 columns">
-       <h3>50 & 52 Tompkins Str.<br />
-           100 Tompkins Str.</h3>
-       <ul>
-         <li>One block from Downtown Cortland (Main Street)</li>
-         <li>Restaurants</li>
-         <li>Stores</li>
-         <li>Bars</li>
-         <li>Banks &amp; ATMs</li>
-         <li>Cortland State College: just a few minutes walk.</li>
-       </ul>
 
-       <h3>100 Tompkins Str.</h3>
-       <ul>
-         <li>Only a few minutes walk to Downtown or to the College Campus</li>
-         <li>Less than half-mile north (towards campus):
-             <ul>
-                <li>Two Gas Stations / Mini-Markets</li>
-                <li>ATM's (in stores)</li>
-                <li>Dunkin Donuts</li>
-             </ul>
-         </li>
-       </ul>
-</div>
+    <div class="row">
+       <div class="medium-12 columns">
+           <?php
+           $image = "graphics/apartment_locations_image.gif";
+           $alt = "The Suites Locations in Cortland, NY. 13045";
+           $sentBy = "locations.html";
+           ?>
+           <img src="graphics/apartment_locations_image.gif" border="0" alt="map with locations of cortland college housing apartments", title="student housing apartment locations, off-campus apartment locations" /></a>
+        </div>
+    </div>
+
 </div>
 
 <p>

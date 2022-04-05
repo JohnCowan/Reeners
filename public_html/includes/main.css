@@ -2,27 +2,39 @@
 /* light yellow */
 /* background colors */
 body {
-  background-color: #b31b1b;
-}
+  background-color: #b31b1b; }
 
 #body-container {
   width: 90%;
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #eeeeee;
+  background-color: #fff;
   border-bottom: none;
   overflow: auto;
-  color: #000;
-}
+  color: #000; }
 
 #banner {
   background-image: url("../../graphics/cornerstone-properties.gif");
   background-repeat: no-repeat;
   background-color: #e6e6e6;
   margin: auto;
-  height: 100px;
-}
+  height: 100px; }
+
+h1 {
+  font-size: 1.5em;
+  color: #b31b1b;
+  font: "Georgia, Arial, Serif;"; }
+
+h2 {
+  font-size: 1.3em;
+  color: #b31b1b;
+  font: "Georgia, Arial, Serif;"; }
+
+h3 {
+  font-size: 1.2em;
+  color: #b31b1b;
+  font: "Georgia, Arial, Serif;"; }
 
 .topnavs {
   height: auto;
@@ -32,157 +44,122 @@ body {
   color: #000;
   border-top: solid 2px #336400;
   border-bottom: solid 2px #336400;
-  padding-top: 5px;
-}
-.topnavs a:link {
-  color: #369;
-  text-decoration: none;
-}
-.topnavs a:visited {
-  color: #369;
-  text-decoration: none;
-}
-.topnavs a:hover {
-  color: #b31b1b;
-  text-decoration: none;
-}
+  padding-top: 5px; }
+  .topnavs a:link {
+    color: #369;
+    text-decoration: none; }
+  .topnavs a:visited {
+    color: #369;
+    text-decoration: none; }
+  .topnavs a:hover {
+    color: #b31b1b;
+    text-decoration: none; }
 
 .menu {
   color: #fff;
-  background-color: #000;
-}
-.menu .active {
-  color: #fff;
-  background-color: #369;
-  padding-left: 15px;
-}
-.menu .nav-title {
-  color: #fff;
-  background-color: #b31b1b;
-  text-align: center;
-}
-.menu .horizontal {
-  margin: auto;
-  border-bottom: 2px solid #b31b1b;
-}
-.menu .vertical {
-  vertical-align: middle;
-  color: #eeeeee;
-  background-color: #b31b1b;
-  width: 200px;
-}
-.menu a {
-  text-decoration: none;
-  color: #fff;
-}
-.menu a:hover {
-  text-decoration: none;
-  background-color: #b31b1b;
-  color: #ffff99;
-}
+  background-color: #000; }
+  .menu .active {
+    color: #fff;
+    background-color: #369;
+    padding-left: 15px; }
+  .menu .nav-title {
+    color: #fff;
+    background-color: #b31b1b;
+    text-align: center; }
+  .menu .horizontal {
+    margin: auto;
+    border-bottom: 2px solid #b31b1b; }
+  .menu .vertical {
+    vertical-align: middle;
+    color: #eeeeee;
+    background-color: #b31b1b;
+    width: 200px; }
+  .menu a {
+    text-decoration: none;
+    color: #fff; }
+  .menu a:hover {
+    text-decoration: none;
+    background-color: #b31b1b;
+    color: #ffff99; }
 
 .full-width {
   width: 100%;
   background-color: #eeeeee;
   border-top: 1px solid #b31b1b;
-  border-bottom: 1px solid #b31b1b;
-}
-.full-width ul {
-  list-style-type: none;
-}
+  border-bottom: 1px solid #b31b1b; }
+  .full-width ul {
+    list-style-type: none; }
 
 .col-left {
   float: left;
-  width: 320px;
-}
+  width: 320px; }
 
 .col-right {
   float: right;
   width: 320px;
-  padding-left: 5px;
-}
+  padding-left: 5px; }
 
 .center {
-  text-align: center;
-}
+  text-align: center; }
 
 .bg-gray {
-  background-color: #8c8781;
-}
+  background-color: #8c8781; }
 
 .bg-white {
-  background-color: #fff;
-}
+  background-color: #fff; }
 
 .bg-black {
-  background-color: #000;
-}
+  background-color: #000; }
 
 .bg-yellow {
-  background-color: #ffff99;
-}
+  background-color: #ffff99; }
 
 .bg-vanilla {
-  background-color: #f3e5ab;
-}
+  background-color: #f3e5ab; }
 
 .borders-all {
-  border: 1px solid #000;
-}
+  border: 1px solid #000; }
 
 .small-black-borders-all {
-  border: 1px solid #000;
-}
+  border: 1px solid #000; }
 
 .border-top-black {
-  border-top: 1px solid #000;
-}
+  border-top: 1px solid #000; }
 
 .border-bottom-black {
-  border-top: 1px solid #000;
-}
+  border-top: 1px solid #000; }
 
 .border-top-red {
-  border-top: 2px solid #b31b1b;
-}
+  border-top: 2px solid #b31b1b; }
 
 .border-bottom-red {
-  border-bottom: 2px solid #b31b1b;
-}
+  border-bottom: 2px solid #b31b1b; }
 
 .small {
-  font-size: 0.8em;
-}
+  font-size: .8em; }
 
 p {
-  color: #000;
-}
+  color: #000; }
 
 ul {
-  color: #000;
-}
+  color: #000; }
 
 li {
-  color: #000;
-}
+  color: #000; }
 
 h3 {
   font-size: 1.3em;
-  color: #b31b1b;
-}
+  color: #b31b1b; }
 
 h4 {
   font-size: 1.1em;
-  color: #b31b1b;
-}
+  color: #b31b1b; }
 
 /****** over-ride or enhance foundation css stuff *******/
 .row {
-  color: #fff;
-}
+  color: #fff; }
 
 body {
-  background-color: #b31b1b;
-}
+  background-color: #b31b1b; }
 
 /*# sourceMappingURL=main.css.map */

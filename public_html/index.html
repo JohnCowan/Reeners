@@ -9,29 +9,43 @@ printHeaders($params);
 loghits('HOME-PAGE');
 ?>
 
+<div role="main">
+
+ <p>&nbsp;</p>
+
+	
+	<div class="row">
+		<div class="medium-12 columns center"><h1>Cortland College Housing<br />
+		    <span style="font-size: 0.8em;">Cornerstone Properties</span></h1></div>
+	</div>
 
 <div class="row">
-	<div class="medium-12 text-center columns callout alert">
+	<div class="medium-3 columns">&nbsp;</div>
+	<div class="medium-6 text-center columns callout alert">
     <p class="red"><strong>See important apartment news near the bottom of this page.</strong></p>
-	</div>	
+	</div>
+	<div class="medium-3 columns">&nbsp;</div>
 </div>
+
+<p>&nbsp;</p>
+
 	
 <div class="row">	
 	<div class="medium-8 columns">
-		<p><strong>Cornerstone Properties (CortlandCollegeHousing.com)</strong> is a family owned and operated provider of off-campus student housing in Cortland, NY. We offer a wide array of newly constructed luxury college apartments that include the most compete rental package available in the SUNY Cortland area.   Our locations include:</p>
+		<p><strong>Cornerstone Properties</strong> is a family owned and operated provider of off-campus student housing in Cortland, NY. We offer a wide array of newly constructed luxury apartments for college students wishing to live off-campus. Our apartments include the most compete rental package available in the SUNY Cortland area. Our locations include:</p>
 		<ul>
 		  <li>7 Woodruff St</li>
 		  <li>112 Groton Ave</li>
 		  <li>100 Tompkins St</li>
 		  <li>91 Lincoln Avenue</li>
 		  <li>50 and 52 Tompkins St.</li>		  
-        </ul>
+    </ul>
 		
-		<p>Each three bedroom suite comes fully furnished with a complete kitchen and a spacious open floor plan.  All of our 6 locations are a short walk to the SUNY Cortland campus and downtown.  See <a href="apartment-descriptions.html">Apartment Descriptions</a> or our <a href="floorplans.html">Floorplans</a> for additional information on our units.</p>
+		<p>Each three bedroom suite (apartment) comes fully furnished with a complete kitchen and a spacious open floor plan.  All of our 6 off-campus locations are a short walk to the SUNY Cortland campus and downtown. View <a href="apartment-descriptions.html">Apartment Descriptions</a>for additional information on our units, and checkout the <a href="floorplans.html">Floorplans</a> for each suite to see how they are laid out.</p>
   </div>
 
 	<div class="medium-4 columns">
-		<img src="graphics/250s/dining-room-with-raised-living-room.jpg" alt="dining room with raised living room" />
+		<img src="graphics/250s/dining-room-with-raised-living-room.jpg" alt="dining room with raised living room" title="off-campus student apartment dining room" />
 	</div>
 	
 </div>
@@ -85,7 +99,7 @@ loghits('HOME-PAGE');
 
 </div> <!-- end 8 columns in outer row -->
   <div class="medium-4 columns">
-	  <img src="graphics/250s/living-room-with-tv-inset.jpg" alt="living room with television inset" />
+	  <img src="graphics/250s/living-room-with-tv-inset.jpg" alt="living room with television inset" title="student housing apartment living room" />
 	</div>
 </div>
 
@@ -98,12 +112,21 @@ loghits('HOME-PAGE');
 	</div>
 </div>
 
-<div class="row"><div class="medium-12 columns text-center"><img src="https://www.rentcollegepads.com/blog/wp-content/uploads/2017/09/RCP-Top-Rated-Landlord-Badge-2-1.png" /></div>
+<!-- image is broken. need to find new image -->
+<!--
+<div class="row">
+  <div class="medium-12 columns text-center"><img src="https://www.rentcollegepads.com/blog/wp-content/uploads/2017/09/RCP-Top-Rated-Landlord-Badge-2-1.png" alt="top rated landlord badge for college rentals"/>
+  </div>
 </div>
+-->
+
+</div><!-- role="main" -->
 
 
+<!-- get any special news Mike Reeners adds to this page via the admin -->
 <?php getNews('index.html'); ?>
 
+<!-- show number of hits -->
 <?php getHits(); ?>
 
 <?php printFooter(); ?>

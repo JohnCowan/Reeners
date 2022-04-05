@@ -224,15 +224,26 @@ EOD;
 	  print "<p class='red'>Sorry, but the Security Code you entered did not match the image.  Try Again!</p>";
 }
 ?>
+
+<div role="main">
+
+    <p>&nbsp;</p>
+
+
 <div class="row">
-  <div class="medium-12 text-center columns"><h3>Application Form</h3></div>	
+  <div class="medium-12 text-center columns"><h1>Application Form</h1></div>	
 </div>
 
 <div class="row">
-	<div class="medium-12 callout alert text-center columns">
-    <p class="red"><strong>See important apartment news near the bottom of this page.</strong></p>
-	</div>	
+	<div class="medium-3">&nbsp;</div>
+	<div class="medium-6 callout alert text-center columns">
+        <p class="red"><strong>See important apartment news near the bottom of this page.</strong></p>
+    </div>
+	<div class="medium-3">&nbsp;</div>
 </div>
+
+ <p>&nbsp;</p>
+
 
 <div class="row">
 	<div class="medium-12 columns">
@@ -254,35 +265,41 @@ EOD;
 		</ul>
 	</div>
 	<div class="medium-4 columns">
-		<p><strong>100 Tompkins Str</strong> </p>
-		<ul>
-			<li>2 three-bedroom suites</li>
-		</ul>
-	</div>
-</div>
-<p>&nbsp;</p>
-<div class="row">
-	<div class="medium-4 columns">
 		<p><strong>112 Groton Ave</strong></p>
 		<ul>
 			<li>10 three-bedroom suites</li>
 		</ul>
 	</div>
+	
+</div>
+<p>&nbsp;</p>
+<div class="row">
+	<div class="medium-4 columns">
+		<p><strong>100 Tompkins Str</strong> </p>
+		<ul>
+			<li>2 three-bedroom suites</li>
+			<li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
+		</ul>
+	</div>
 	<div class="medium-4 columns">
 	  <p><strong>7 Woodruff St</strong></p>
 	  <ul>
-		  <li>A duplex with three-bedrooms in each suite</li>
-		  <li>his duplex is often leased by a group of six (6) individuals</li>
+		  <li>2 three-bedroom suites</li>
+		  <li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
 	  </ul>
 	</div>
 	<div class="medium-4 columns">
 		<p><strong>91 Lincoln Ave</strong></p>
 		<ul>
-			<li>A duplex with three-bedrooms in each suite</li>
-	        <li>This duplex is often leased by a group of six (6) individuals</li>
+			<li>2 three-bedroom suites</li>
+	        <li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
 	    </ul>	
 	</div>
 </div>
+
+
+<p>&nbsp;</p>
+
 
 <div class="row">
 	<div class="medium-12 columns">
@@ -298,130 +315,131 @@ EOD;
 </div>
 
 
-<form action="request-application.html" method="post">
+<form action="request-application.html" method="post" role="form" aria-label="Request Application">
+
 <div class="row">
 	<div class="medium-3 columns">
-    <label <?php print isset($labels['first_name'])?$labels['first_name']:''; ?>>* First Name</label>
+    <label for="first-name" <?php print isset($labels['first_name'])?$labels['first_name']:''; ?>>* First Name</label>
   </div>
 	<div class="medium-3 columns">
-		<input type="text" name="first_name" maxLength="30" size="20" value="<?php print $first_name ?>">
+		<input type="text" id="first-name" name="first_name" maxLength="30" size="20" value="<?php print $first_name ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
 	<div class="medium-3 columns">
-    <label <?php print isset($labels['mid_name'])?$labels['mid_name']:'';?>>Middle Name or Init</label>
+    <label for="mid-name" <?php print isset($labels['mid_name'])?$labels['mid_name']:'';?>>Middle Name or Init</label>
   </div>
 	<div class="medium-3 columns">
-    <input type="text" name="mid_name" maxLength="30" size="20" value="<?php print $mid_name ?>">
+    <input type="text" id="mid-name" name="mid_name" maxLength="30" size="20" value="<?php print $mid_name ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
 	<div class="medium-3 columns">
-    <label <?php print isset($labels['last_name'])?$labels['last_name']:''; ?>>* Last Name</label>
+    <label for="last-name" <?php print isset($labels['last_name'])?$labels['last_name']:''; ?>>* Last Name</label>
 	</div>
 	<div class="medium-3 columns">
-    <input type="text" name="last_name" maxLength="30" size="20" value="<?php print $last_name ?>">
+    <input type="text" id="last-name" name="last_name" maxLength="30" size="20" value="<?php print $last_name ?>">
   </div>
  <div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['addr1'])?$labels['addr1']:''; ?>>* Home Address 1</label>
+		 <label for="addr1" <?php print isset($labels['addr1'])?$labels['addr1']:''; ?>>* Home Address 1</label>
   </div>
   <div class="medium-3 columns">
-	   <input type="text" name="addr1" maxLength="30" size="20" value="<?php print $addr1 ?>">
+	   <input type="text" id="addr1" name="addr1" maxLength="30" size="20" value="<?php print $addr1 ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['addr2'])?$labels['addr2']:''; ?>>Home Address 2</label>
+		 <label for="addr2" <?php print isset($labels['addr2'])?$labels['addr2']:''; ?>>Home Address 2</label>
 	</div>
   <div class="medium-3 columns">
-	  <input type="text" name="addr2" maxLength="30" size="20" value="<?php print $addr2 ?>">
+	  <input type="text" id="addr2" name="addr2" maxLength="30" size="20" value="<?php print $addr2 ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['city'])?$labels['city']:'';?>>* City</label>
+		 <label for="city" <?php print isset($labels['city'])?$labels['city']:'';?>>* City</label>
   </div>
   <div class="medium-3 columns">
-     <input type="text" name="city" maxLength="30" size="20" value="<?php print $city ?>">
+     <input type="text" id="city" name="city" maxLength="30" size="20" value="<?php print $city ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['state'])?$labels['state']:''; ?>>* State</label>
+		 <label for="state" <?php print isset($labels['state'])?$labels['state']:''; ?>>* State</label>
 	</div>
   <div class="medium-3 columns">
-	   <input type="text" name="state" maxLength="30" size="20" value="<?php print $state ?>">
-	</div>
-	<div class="medium-6 columns">&nbsp;</div>
-</div>
-
-<div class="row">
-  <div class="medium-3 columns">
-		 <label <?php print isset($labels['zip'])?$labels['zip']:''; ?>>* Zip Code</label>
-	</div>
-  <div class="medium-3 columns">
-	   <input type="text" name="zip" maxLength="30" size="20" value="<?php print $zip ?>">
+	   <input id="state" type="text" name="state" maxLength="30" size="20" value="<?php print $state ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['country'])?$labels['country']:''; ?>>* Country</label>
+		 <label for="zip" <?php print isset($labels['zip'])?$labels['zip']:''; ?>>* Zip Code</label>
 	</div>
   <div class="medium-3 columns">
-	   <input type="text" name="country" maxLength="30" size="20" value="<?php print $country ?>">
+	   <input type="text" id="zip" name="zip" maxLength="30" size="20" value="<?php print $zip ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['home_phone'])?$labels['home_phone']:''; ?>>Home Phone</label>
+		 <label for="country" <?php print isset($labels['country'])?$labels['country']:''; ?>>* Country</label>
 	</div>
   <div class="medium-3 columns">
-     <input type="text" name="home_phone" maxLength="30" size="20" value="<?php print $home_phone ?>">
+	   <input type="text" id="country" name="country" maxLength="30" size="20" value="<?php print $country ?>">
+	</div>
+	<div class="medium-6 columns">&nbsp;</div>
+</div>
+
+<div class="row">
+  <div class="medium-3 columns">
+		 <label for="home-phone" <?php print isset($labels['home_phone'])?$labels['home_phone']:''; ?>>Home Phone</label>
+	</div>
+  <div class="medium-3 columns">
+     <input type="text" id="home-phone" name="home_phone" maxLength="30" size="20" value="<?php print $home_phone ?>">
   </div>
   <div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['cell_phone'])?$labels['cell_phone']:''; ?>>Cell Phone</label>
+		 <label for="cell" <?php print isset($labels['cell_phone'])?$labels['cell_phone']:''; ?>>Cell Phone</label>
 	</div>
   <div class="medium-3 columns">
-     <input type="text" name="cell_phone" maxLength="30" size="20" value="<?php print $cell_phone ?>"></td>
+     <input type="text" id="cell" name="cell_phone" maxLength="30" size="20" value="<?php print $cell_phone ?>"></td>
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
   <div class="medium-3 columns">
-		 <label <?php print isset($labels['email'])?$labels['email']:''; ?>>* Email</label>
+		 <label for="email" <?php print isset($labels['email'])?$labels['email']:''; ?>>* Email</label>
 	</div>
 	<div class="medium-3 columns">
-		 <input type="text" name="email" maxLength="30" size="20" value="<?php print $email ?>">
+		 <input type="text" id="email" name="email" maxLength="30" size="20" value="<?php print $email ?>">
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
 	<div class="medium-3 columns">
-		 <label <?php print isset($labels['dob'])?$labels['dob']:''; ?>>* Date of Birth</label>
+		 <label for="datepicker" <?php print isset($labels['dob'])?$labels['dob']:''; ?>>* Date of Birth</label>
 	</div>
 	<div class="medium-3 columns">
 		  <span class="red" style="font-size: .9em;">as (mm/dd/yyyy)</span>
@@ -433,29 +451,29 @@ EOD;
 
 <div class="row">
 	<div class="medium-3 columns">
-		<label <?php print isset($labels['cs_address'])?$labels['cs_address']:''; ?>>Current Cortland Address</label>
+		<label for="address" <?php print isset($labels['cs_address'])?$labels['cs_address']:''; ?>>Current Cortland Address</label>
    </div>
 	<div class="medium-3 columns">
 		 <span class="red" style="font-size: .9em;">(if current student)</span>
-		 <input type="text" name="cs_address" id="cs_address" size="30" maxlength="75" value="<?php print $cs_address; ?>" /> 		   
+		 <input type="text" id="address" name="cs_address" id="cs_address" size="30" maxlength="75" value="<?php print $cs_address; ?>" /> 		   
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
 	<div class="medium-3 columns">
-		<label <?php print isset($labels['cs_landlord'])?$labels['cs_landlord']:''; ?>>Current Landlord (if current student)</label>
+		<label for="landlord" <?php print isset($labels['cs_landlord'])?$labels['cs_landlord']:''; ?>>Current Landlord (if current student)</label>
   </div>
 	<div class="medium-4 columns">
 		 <label class="red" style="font-size: .9em;">Name and address please.</label>
-		 <input type="text" name="cs_landlord" id="cs_landlord" size="20" maxlength="75" value="<?php print !empty($cs_landlord)?$cs_landlord:''; ?>" /> 
+		 <input type="text" id="landlord" name="cs_landlord" id="cs_landlord" size="20" maxlength="75" value="<?php print !empty($cs_landlord)?$cs_landlord:''; ?>" /> 
 	</div>
 	<div class="medium-5 columns"></div>
 </div>
 
 <div class="row">
 	<div class="medium-3 columns">
-		<label <?php print isset($labels['sem_year'])?$labels['sem_year']:''; ?>>* Apartment Needed <br />
+		<label for="semyear" <?php print isset($labels['sem_year'])?$labels['sem_year']:''; ?>>* Apartment Needed <br />
     Semester/Year?</label>
   </div>
   	<?php
@@ -464,7 +482,7 @@ EOD;
 	  ?>
 	
   <div class="medium-3 columns">
-		<select name="semyear">
+		<select id="semyear" name="semyear">
 		  <option value=""></option>
 		  <?php 
 		    $curYear = date('Y',time());
@@ -482,15 +500,15 @@ EOD;
 
 <div class="row">
 	<div class="medium-3 columns">
-		<label>Location Requested</label>
+		<label for="location">Location Requested</label>
   </div>
   <div class="medium-3 columns">
-   <select name="location">
+   <select id="location" name="location">
      <option value="Groton Ave">112 Groton Ave</option>
-    <option value="50 Tompkins Ave">50 Tompkins St.</option>
-    <option value="52 Tompkins Ave">52 Tompkins St.</option>
-		<option value="7 Woodruff St">7 Woodruff St.</option>
-		<option value="91 Lincoln Ave">91 Lincoln Ave (F-2016).</option>
+     <option value="50 Tompkins Ave">50 Tompkins St.</option>
+     <option value="52 Tompkins Ave">52 Tompkins St.</option>
+	 <option value="7 Woodruff St">7 Woodruff St.</option>
+	 <option value="91 Lincoln Ave">91 Lincoln Ave (F-2016).</option>
    </select>
   </div>
   <div class="medium-6 columns">&nbsp;</div>
@@ -503,33 +521,33 @@ EOD;
 </div>
 
 <div class="row">
-	<div class="medium-3 columns"><label>2nd Tenant Name:</label></div>
-	<div class="medium-3 columns"><input type="text" name="tennant2" size="20" /></div>
+	<div class="medium-3 columns"><label for="tennant2">2nd Tenant Name:</label></div>
+	<div class="medium-3 columns"><input type="text" id="tennant2" name="tennant2" size="20" /></div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
-	<div class="medium-3 columns"><label>2nd Tenant Email:</label></div>
-	<div class="medium-3 columns"><input type="text" name="tennant2_email" size="20" /></div>
+	<div class="medium-3 columns"><label for="t-email2">2nd Tenant Email:</label></div>
+	<div class="medium-3 columns"><input type="text" id="t-email2" name="tennant2_email" size="20" /></div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
-	<div class="medium-3 columns"><label>3rd Tenant Name:</label></div>
-	<div class="medium-3 columns"><input type="text" name="tennant3" size="20" /></div>
+	<div class="medium-3 columns"><label for="tennant3">3rd Tenant Name:</label></div>
+	<div class="medium-3 columns"><input type="text" id="tennant3" name="tennant3" size="20" /></div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
-	<div class="medium-3 columns"><label>3rd Tenant Email:</label></div>
-	<div class="medium-3 columns"><input type="text" name="tennant3_email" size="20" /></div>
+	<div class="medium-3 columns"><label for="t-email3">3rd Tenant Email:</label></div>
+	<div class="medium-3 columns"><input type="text" id="t-email3" name="tennant3_email" size="20" /></div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <div class="row">
-	<div class="medium-3 columns"><label>Additional Comments</label></div>
+	<div class="medium-3 columns"><label for="comments">Additional Comments</label></div>
 	<div class="medium-3 columns">
-		<textarea name="comments" cols="40" rows="7" value="<?php print $comments ?>"></textarea>
+		<textarea name="comments" id="comments" cols="40" rows="7" value="<?php print $comments ?>"></textarea>
   </div>
   <div class="medium-6 columns">&nbsp;</div>
 </div>
@@ -544,7 +562,7 @@ EOD;
 <div class="row">
 	<div class="medium-3 columns">&nbsp;</div>
 	<div class="medium-3 columns">
-		<img src="includes/CaptchaSecurityImages.php?width=100&height=40&characters=5" />
+		<img src="includes/CaptchaSecurityImages.php?width=100&height=40&characters=5" alt="captsha image" />
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
@@ -561,6 +579,10 @@ EOD;
 </div>
 
 </form>
+
+
+</div><!-- role=main -->
+
 
  <script>
  $(document.ready(function(){

@@ -10,7 +10,7 @@ body {
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
-  background-color: $grey;
+  background-color: $white;
   border-bottom:none;
   overflow:auto;
   color: $black;
@@ -24,6 +24,23 @@ body {
   height:100px;
 }
 
+h1 {
+  font-size: 1.5em;
+  color: $red;
+  font: "Georgia, Arial, Serif;"
+}
+
+h2 {
+  font-size: 1.3em;
+  color: $red;
+  font: "Georgia, Arial, Serif;"
+}
+
+h3 {
+  font-size: 1.2em;
+  color: $red;
+  font: "Georgia, Arial, Serif;"
+}
 
 .topnavs {
 	height: auto;
