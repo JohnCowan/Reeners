@@ -16,7 +16,7 @@ printHeaders($params);
 
 <div class="row">
   <div class="medium-12 text-center columns">
-    <h1>Floor Plans</h1>
+    <h1 title="off-campus student housing cortland ny">Floor Plans</h1>
   </div>
 </div>
 
@@ -46,7 +46,7 @@ printHeaders($params);
 <div class="row">
 
   <div class="medium-4 columns">
-    <h3><label for="tompkins50">50 Tompkins Str</label></h3>
+    <label for="tompkins50"><h3 title="off-campus student housing near SUNY Cortland">50 Tompkins Str</h3></label>
     
           <select class="myimages" id="tompkins50" name="tompkins50">
            <option value=""></option>
@@ -67,7 +67,7 @@ printHeaders($params);
   
   
   <div class="medium-4 columns">
-    <h3><label for="tompkins52">52 Tompkins Str</label></h3>
+    <label for="tompkins52"><h3 title="off-campus student housing near cortand college">52 Tompkins Str</h3></label>
 
         <select class="myimages" id="tompkins52" name="tompkins52">
           <option value=""></option>
@@ -82,7 +82,7 @@ printHeaders($params);
   </div>
 
   <div class="medium-4 columns">
-     <h3><label for="tompkins100">100 Tompkins Str</label></h3>
+    <label for="tompkins100"><h3 title="off-campus housing cortland ny">100 Tompkins Str</h3></label>
        
           <select class="myimages" id="tompkins100" name="tompkins100">
             <option value=""></option>
@@ -100,7 +100,7 @@ printHeaders($params);
 <div class="row">
         
   <div class="medium-4 columns">
-     <h3><label for="groton">112 Groton Ave</label></h3>
+    <label for="groton"><h3 title="off-campus housing near suny cortland">112 Groton Ave</h3></label>
        
           <select class="myimages" id="groton" name="groton">
             <option value=""></option>
@@ -119,7 +119,7 @@ printHeaders($params);
   </div>
 
   <div class="medium-4 columns">
-    <h3><label for="woodruff7">7 Woodruff Str</label></h3>
+    <label for="woodruff7"><h3 title="off-campus housing near cortland college">7 Woodruff Str</h3></label>
      
         <select class="myimages" id="woodruff7" name="woodruff7">
           <option value=""></option>
@@ -130,7 +130,7 @@ printHeaders($params);
   </div>
 
   <div class="medium-4 columns">
-    <h3><label for="lincoln91">91 Lincoln Ave</label></h3>
+    <label for="lincoln91"><h3 title="student housing in cortland ny">91 Lincoln Ave<h3></label>
       
         <select class="myimages" id="lincoln91" name="lincoln91">
           <option value=""></option>
@@ -149,11 +149,8 @@ printHeaders($params);
 
 
 <div class="row">
-  <div class="medium-7 small-7 columns" id="fp-image">
+  <div class="medium-12 small-12 columns text-center" id="fp-image">
     <img id="fp-img" src="" alt="Cortland College Housing Floorplan" title="Cortland College Housing Floorplan" />
-  </div>
-  <div class="medium-4 small-4 columns" id="suite-image">
-    <img id="suite-img" src="" alt="Cortland College Housing Floorplan" title="Cortland College Housing Floorplan" />
   </div>
 </div>
 
@@ -188,15 +185,15 @@ function getFloorPlanImage(obj){
   var images = [];
   images['100-tompkins-street-apartment-1-first-floor-floorplan'] = '100-tompkins-street-apartment-1-kitchen-view';
   
-  $('#suite-img').attr("src", "graphics/"+images[obj.val()]+".jpg");
+  $('#suite-img').attr("src", "images/off-campus-student-housing/cortland-ny/floorplans/"+images[obj.val()]+".jpg");
   $('#suite-img').attr("alt", "floorplan of "+images[obj.val()] );
-  $('#suite-img').attr("title", "off-campus student housing cortland ny, floorplan"
+  $('#suite-img').attr("title", "off-campus student housing cortland ny, floorplan");
   $('#suite-img').show();
 }
 
 // this function changes the current image to the one selected.
 function changeImage(obj){
-  $('#fp-img').attr("src", "graphics/floorplans/"+obj.val()+".jpg");
+  $('#fp-img').attr("src", "images/off-campus-student-housing/cortland-ny/floorplans/"+obj.val()+".jpg");
   $('#fp-img').show();
 
   if( obj.val().match('groton') ){

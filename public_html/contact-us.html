@@ -2,7 +2,7 @@
 session_start();
 require_once('includes/myUtils.php');
 $params = array(
-				'title' => 'Contact Us Form for Cortland College Housing. For questions and information about our student housing apartments, send us a message using this form.',
+				'title' => 'Contact Us Form for Cornerstone Properties to request information about our off-campus student housing apartments, send us a message using this form.',
 				'description' => 'Contact us page for Cortland College Housing, Cortland NY. This page contains a form for sending an email to paradigm properties for information regarding our off-campus student housing apartments.',
 				'keywords' => 'contact, inqueries, questions, Cortland New York, Cortland NY, Cortland, SUNY Cortland, SUNY Cortland off campus housing, off-campus housing, student housing, student apartments, college housing, student rentals, tompkins Str, Groton Ave, Lincoln Ave, Woodruff St, property, properties'
 				);
@@ -61,7 +61,7 @@ if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_
 
 <div class="row">
   <div class="medium-12 text-center columns">
-    <h1>Contact Us</h1>
+    <h1 title="contact conerstone properties about student housing">Contact Us</h1>
   </div>
 </div>
 
@@ -85,7 +85,7 @@ if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_
 
 <div class="row">
   <div class="medium-12 medium-centered columns">
-    <h2>Send us a message</h2>
+    <h2 title="off-campus student housing cortland ny">Send us a message</h2>
   </div>
 </div>
 
@@ -94,24 +94,28 @@ if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_
 		<p><strong>Postal Mail:</strong><br />
 		  Cornerstone Properties<br />
 			14 Hickory Lane.<br />
-			Cortland, NY. 13045</p>
+			Cortland, NY. 13045
 		</p>
+
+		<p>&nbsp;</p>
+
+		<h2 title="student housing near SUNY Cortland">Email Us</h2>
+
+		<p><a href="mailto:info@cortlandcollegehousing.com">info@cortlandcollegehousing.com</a></p>
   </div>
 </div>
 
 <p>&nbsp;</p>
 
-<hr />
-<div class="row">
-	<div class="medium-12 columns"><label><b>Electronic Message</b></label></div>
-</div>
 
-<hr />
+<div class="row">
+	<div class="medium-12 columns"><h2 title="contact cornerstone properties">Message Form</h2></div>
+</div>
 
 
 <!---- form starts here  ---->
 
-<form name="form1" id="form1" action="contact-us.html" method="post">
+<form name="form1" id="form1" action="contact-us.html" method="post" role="message us form">
 
 <div class="row">
 	<div class="medium-3 columns"><label for="name"><b>Your Name:</b></label></div>

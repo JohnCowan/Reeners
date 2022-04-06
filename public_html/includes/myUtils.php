@@ -179,43 +179,54 @@ function printBanner(){
   <header role="banner"> <!-- aria accessibility -->
 
    <div class="row">
-	    <div class="medium-2">&nbsp;</div>
-      <div class="medium-8 medium-centered text-center columns"><img src="graphics/cornerstone-properties.gif" alt="cornerstone properties name and number" title="off campus housing cortland ny" /></div>
-      <div class="medium-2">&nbsp;</div>
+   <div class="medium-12 columns text-center" style="font-size: 3em; color: #b31b1b; font:'Georgia, Arial, Serif';">
+     CORNERSTONE PROPERTIES
+     </div>
+</div>
+
+<div class="row">
+   <div class="medium-12 columns text-center" style="font-size:2em; color:#000;">
+      Off-Campus Student Housing in Cortland, NY
    </div>
+</div>
+
+<div class="row">
+   <div class="medium-1 column">&nbsp;</div>
+   <div class="medium-5 columns text-left" style="font-size:1.5em; color:#b31b1b;">Cortland College Housing</div>
+   <div class="medium-5 columns text-right" style="font-size:1.5em; color:#b31b1b;">Call (607) 756-2921</div>
+   <div class="medium-1 column">&nbsp;</div>
+</div>
    <div class="row bg-white border-bottom-red border-top-red">
 	    <div class="medium-1">&nbsp;</div>
       <div class="medium-10 medium-centered columns">
-        <!-- <img src="<?php print $path ?>graphics/exterior-front-view-50-tompkins-street.jpg" /> -->
-
         
         <div class="single-item">
           <div class="multiple">
-  		      <img src="<?php print $path ?>graphics/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
+  		      <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
             alt="apartment 7 woodruff str cortland ny" title="off-campus student housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/100-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/100-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 100 Tompkins str cortland ny" title="off-campus student housing cortland college" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 50 Tompkins str cortland ny" title="off-campus housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
             alt="apartment 112 Groton Ave cortland ny" title="student housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/50-tompkins-street-exterior-street-view-575.jpg" 
+            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/50-tompkins-street-exterior-street-view-575.jpg" 
             alt="apartment 50 Tompkins str cortland ny" title="off-campus student housing rental cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/52-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/52-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 52 Tompkins str cortland ny" title="rentals off-campus student housing cortland ny" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>graphics/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
             alt="apartment 91 lincoln cortland ny" title="off-campus student housing cortland />
           </div>
 
@@ -327,9 +338,11 @@ function printFooter(){
 		        <p>Call us today for more information:<br />
 		        607.756.2921<br />
 		        <a href="contact-us.html">info@CortlandCollegeHousing.com</a><br /><br />
-		        <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/"><img src="graphics/facebook-f.gif" alt="facebook" />Visit our Facebook page for additional apartment photos!</a><br /><br /  
+		        <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/">
+              <img src="images/off-campus-student-housing/cortland-ny/Logos/Facebook/facebook-f.gif" alt="facebook" />Visit our Facebook page for additional apartment photos!</a><br /><br /  
 
-            <a href="https://www.instagram.com/propertiesbycornerstone/"><img src="graphics/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" />Follow Us On Instagram!</a>           
+            <a href="https://www.instagram.com/propertiesbycornerstone/">
+              <img src="images/off-campus-student-housing/cortland-ny/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" />Follow Us On Instagram!</a>           
 		    </div>        
 		  </div> <!-- row -->
 
