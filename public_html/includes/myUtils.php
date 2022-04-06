@@ -178,25 +178,26 @@ function printBanner(){
   ?>
   <header role="banner"> <!-- aria accessibility -->
 
-   <div class="row">
-   <div class="medium-12 columns text-center" style="font-size: 3em; color: #b31b1b; font:'Georgia, Arial, Serif';">
+  <!-- text at the very top of page (all pages) -->
+  <div class="row border-top-red">
+    <div class="medium-12 columns text-center" style="font-size: 3em; color: #b31b1b; font-family: Georgia, Arial, Serif;">
      CORNERSTONE PROPERTIES
      </div>
-</div>
-
-<div class="row">
-   <div class="medium-12 columns text-center" style="font-size:2em; color:#000;">
+  </div>
+  <div class="row">
+    <div class="medium-12 columns text-center" style="font-size:2em; color:#000;">
       Off-Campus Student Housing in Cortland, NY
-   </div>
-</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-1 column">&nbsp;</div>
+    <div class="medium-5 columns text-left" style="font-size:1.5em; color:#b31b1b;">All-Inclusive Luxury Apartments</div>
+    <div class="medium-5 columns text-right" style="font-size:1.5em; color:#b31b1b;">(607) 756-2921</div>
+    <div class="medium-1 column">&nbsp;</div>
+  </div>
 
-<div class="row">
-   <div class="medium-1 column">&nbsp;</div>
-   <div class="medium-5 columns text-left" style="font-size:1.5em; color:#b31b1b;">Cortland College Housing</div>
-   <div class="medium-5 columns text-right" style="font-size:1.5em; color:#b31b1b;">Call (607) 756-2921</div>
-   <div class="medium-1 column">&nbsp;</div>
-</div>
-   <div class="row bg-white border-bottom-red border-top-red">
+   <!-- the sliding images -->
+   <div class="row bg-white border-top-red">
 	    <div class="medium-1">&nbsp;</div>
       <div class="medium-10 medium-centered columns">
         
@@ -227,14 +228,27 @@ function printBanner(){
           </div>
           <div class="multiple">
             <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
-            alt="apartment 91 lincoln cortland ny" title="off-campus student housing cortland />
+            alt="apartment 91 lincoln cortland ny" title="off-campus student housing cortland" />
           </div>
+        </div> <!-- single-item -->
 
-        </div>
-
-      </div>
+      </div> <!-- medium-10 -->
       <div class="medium-1">&nbsp;</div>
-   </div>
+
+   </div> <!-- row bg-white -->
+
+   <!-- call to action row above top navs -->
+   <div class="row" style="font-size: 1.5em; color: #b31b1b; font-family: Georgia, Arial, Serif;">
+    <div class="medium-1 columns text-center">&nbsp;</div>
+    <div class="medium-4 columns text-center">
+     Reserve Your Place Today!
+     </div>
+     <div class="medium-2 columns text-center">&nbsp;</div>
+     <div class="medium-3 columns text-center">
+     Call (607) 756-2921
+     </div>
+     <div class="medium-2 columns text-center">&nbsp;</div>
+  </div>
 
   </header>
    <?php

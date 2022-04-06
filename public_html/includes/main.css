@@ -24,17 +24,17 @@ body {
 h1 {
   font-size: 1.5em;
   color: #b31b1b;
-  font: "Georgia, Arial, Serif;"; }
+  font-family: Georgia, Arial, Serif; }
 
 h2 {
   font-size: 1.3em;
   color: #b31b1b;
-  font: "Georgia, Arial, Serif;"; }
+  font-family: Georgia, Arial, Serif; }
 
 h3 {
   font-size: 1.2em;
   color: #b31b1b;
-  font: "Georgia, Arial, Serif;"; }
+  font-family: Georgia, Arial, Serif; }
 
 .topnavs {
   height: auto;
@@ -165,6 +165,6 @@ body {
 .top-banner-text {
   font-size: 4.5em;
   color: #b31b1b;
-  font: "Georgia, Arial, Serif;"; }
+  font-family: Georgia, Arial, Serif; }
 
 /*# sourceMappingURL=main.css.map */

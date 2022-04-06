@@ -5,4 +5,9 @@ public_html/documents/*
 *.docx
 *.xls*
 public_html/documents/cornerstone-lease.pdf
-**/graphics/**
+public_html/graphics/
+public_html/graphics/xcf-files/
+public_html/images/
+all-images/
+all-images/
+
