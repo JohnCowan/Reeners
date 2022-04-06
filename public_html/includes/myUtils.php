@@ -144,30 +144,28 @@ function printTopNavs(){
 	$about_active    = preg_match('/about/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$describe_active   = preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$floorplan_active   = preg_match('/floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$application_active = preg_match('/request-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
+	$floorplan_active   = preg_match('/apartment-floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
+	$application_active = preg_match('/apartment-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
   ?>
 
   <!-- accessibility role for navs -->
-  <div role="navigation" aria-label="Top row navigation" class="row full-width">
-    <div class="row">
-       <div class="medium-12 columns menu-centered full-width">
-    
-         <ul class="vertical medium-horizontal menu" style="list-style-type: none;">
-             <li class="<?php print $home_active ?>"><a href="<?php print $path ?>index.html">Home</a></li>
-             <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html">About Us</a></li>
-             <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>apartment-descriptions.html">Apartment Descriptions</a></li>
-             <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>floorplans.html">FloorPlans</a></li>
-             <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>apartment-locations.html">Locations</a></li>
-             <li class="<?php print $application_active ?>"><a href="<?php print $path ?>request-application.html">Application</a></li>
-             <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html">Important Documents</a></li>
-             <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html">Contact Us</a></li>
-          </ul>
+  <div class="row" role="navigation" aria-label="Top row navigation">
+     <div class="medium-12 columns menu-centered full-width">
+  
+       <ul class="vertical medium-horizontal menu" style="list-style-type: none;">
+           <li class="<?php print $home_active ?>"><a href="<?php print $path ?>index.html">Home</a></li>
+           <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing Cortland NY">About Us</a></li>
+           <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>apartment-descriptions.html" title="student housing near Cortland College">Apartment Descriptions</a></li>
+           <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>apartment-floorplans.html" title="off-campus student housing Cortland NY">FloorPlans</a></li>
+           <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>apartment-locations.html" title="off-campus student housing near SUNY Cortland">Locations</a></li>
+           <li class="<?php print $application_active ?>"><a href="<?php print $path ?>apartment-application.html" title="off-campus student housing near Cortland College">Application</a></li>
+           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="off-campus housing Cortland NY">Important Documents</a></li>
+           <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html" title="off-campus housing near SUNY Cortland">Contact Us</a></li>
+        </ul>
       </div>
-    </div>
   </div> <!-- role=navigation -->
 
   <?php
@@ -238,7 +236,11 @@ function printBanner(){
    </div> <!-- row bg-white -->
 
    <!-- call to action row above top navs -->
-   <div class="row" style="font-size: 1.5em; color: #b31b1b; font-family: Georgia, Arial, Serif;">
+   <div class="row full-width" style="font-size: 1.5em; 
+                           color: #fff; 
+                           background-color: #b31b1b;
+                           font-family: Georgia, Arial, Serif;
+                           margin: auto;">
     <div class="medium-1 columns text-center">&nbsp;</div>
     <div class="medium-4 columns text-center">
      Reserve Your Place Today!
