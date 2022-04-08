@@ -1,4 +1,6 @@
+/* sass files */
 @import "variables.scss";
+@import "media-queries.scss";
 
 body {
   background-color: $red;
@@ -170,6 +172,10 @@ h3 {
 
 .border-bottom-red {
   border-bottom: 2px solid $red;
+}
+
+.border-left-red {
+  border-left: solid 2px #b31b1b;
 }
 
 .small {

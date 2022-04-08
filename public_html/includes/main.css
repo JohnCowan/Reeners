@@ -1,6 +1,54 @@
+/* sass files */
 /* colors  */
 /* light yellow */
 /* background colors */
+/* these mimic Foundations media queries */
+/* Mobile - smaller phone viewpoints */
+/* */
+@media screen and (min-width: 320px) {
+  .large-screen {
+    display: none; }
+
+  .mobile-screen {
+    display: block; } }
+/* Mobile - small devices and most phones */
+/* */
+@media screen and (min-width: 480px) {
+  .large-screen {
+    display: none; }
+
+  .mobile-screen {
+    display: block; } }
+/* Most tablets */
+/* */
+@media screen and (min-width: 768px) {
+  .large-screen {
+    display: none; }
+
+  .mobile-screen {
+    display: block; } }
+/* Desktops: smaller desktop viewpoints */
+/* */
+@media screen and (min-width: 992px) {
+  .large-screen {
+    display: block; }
+
+  .mobile-screen {
+    display: none; }
+
+  .ls-border-left {
+    border-left: solid 2px #b31b1b; } }
+/* Desktops with large screens and wide screens */
+/* */
+@media screen and (min-width: 1200px) {
+  .large-screen {
+    display: block; }
+
+  .mobile-screen {
+    display: none; }
+
+  .ls-border-left {
+    border-left: solid 2px #b31b1b; } }
 body {
   background-color: #b31b1b; }
 
@@ -134,6 +182,9 @@ h3 {
 
 .border-bottom-red {
   border-bottom: 2px solid #b31b1b; }
+
+.border-left-red {
+  border-left: solid 2px #b31b1b; }
 
 .small {
   font-size: .8em; }
