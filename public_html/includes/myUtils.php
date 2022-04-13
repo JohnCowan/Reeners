@@ -56,6 +56,8 @@ mysql_select_db($db) or die ( mysql_error() );
 $path = "";
 if( preg_match( '/\/ccAdmins\//', $_SERVER['PHP_SELF']) ){
 	$path="../";
+}else if( preg_match( '/\/cortland-ny\/suny-cortland\/off-campus-student-housing\//', $_SERVER['PHP_SELF']) ){ 
+  $path="../../../";
 }else{
 	$path="";
 }
@@ -139,7 +141,7 @@ function printTopNavs(){
 	$locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$describe_active   = preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$floorplan_active   = preg_match('/apartment-floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$application_active = preg_match('/apartment-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
+	$application_active = preg_match('/apartment-rental-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
@@ -154,13 +156,13 @@ function printTopNavs(){
 
            <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing cortland">About Us</a></li>
 
-           <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>apartment-descriptions.html" title="off-campus student housing cortland">Apartment Descriptions</a></li>
+           <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Apartment Descriptions</a></li>
 
-           <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
+           <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
 
-           <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
+           <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
 
-           <li class="<?php print $application_active ?>"><a href="<?php print $path ?>apartment-application.html" title="suny off-campus housing">Application</a></li>
+           <li class="<?php print $application_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html" title="suny off-campus housing">Application</a></li>
 
            <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Important Documents</a></li>
 

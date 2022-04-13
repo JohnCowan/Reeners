@@ -1,5 +1,5 @@
 <?php
-require_once('includes/myUtils.php');
+require_once('../../../includes/myUtils.php');
 $params = array(
        'title' => 'Floor Plans of Cortland College Housing Student Apartment Rentals in Cortland NY.',
 
@@ -191,7 +191,7 @@ function getFloorPlanImage(obj){
   var images = [];
   images['100-tompkins-street-apartment-1-first-floor-floorplan'] = '100-tompkins-street-apartment-1-kitchen-view';
   
-  $('#suite-img').attr("src", "images/off-campus-student-housing/cortland-ny/floorplans/"+images[obj.val()]+".jpg");
+  $('#suite-img').attr("src", "../../../images/off-campus-student-housing/cortland-ny/floorplans/"+images[obj.val()]+".jpg");
   $('#suite-img').attr("alt", "floorplan of "+images[obj.val()] );
   $('#suite-img').attr("title", "off-campus student housing cortland ny, floorplan");
   $('#suite-img').show();
@@ -199,7 +199,7 @@ function getFloorPlanImage(obj){
 
 // this function changes the current image to the one selected.
 function changeImage(obj){
-  $('#fp-img').attr("src", "images/off-campus-student-housing/cortland-ny/floorplans/"+obj.val()+".jpg");
+  $('#fp-img').attr("src", "../../../images/off-campus-student-housing/cortland-ny/floorplans/"+obj.val()+".jpg");
   $('#fp-img').show();
 
   if( obj.val().match('groton') ){
