@@ -69,6 +69,16 @@ body {
   margin: auto;
   height: 100px; }
 
+footer {
+  width: 90%;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  border-bottom: none;
+  overflow: auto;
+  color: #000; }
+
 h1 {
   font-size: 1.5em;
   color: #b31b1b;
@@ -217,5 +227,14 @@ body {
   font-size: 4.5em;
   color: #b31b1b;
   font-family: Georgia, Arial, Serif; }
+
+/* social media share buttons */
+/* */
+#button_share img {
+  width: 36px;
+  box-shadow: 0;
+  padding: 6px;
+  display: inline;
+  border: 0; }
 
 /*# sourceMappingURL=main.css.map */

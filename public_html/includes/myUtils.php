@@ -56,6 +56,8 @@ mysql_select_db($db) or die ( mysql_error() );
 $path = "";
 if( preg_match( '/\/ccAdmins\//', $_SERVER['PHP_SELF']) ){
 	$path="../";
+}else if( preg_match( '/\/cortland-ny\/suny-cortland\/off-campus-student-housing\/apartments\//', $_SERVER['PHP_SELF']) ){ 
+  $path="../../../../";
 }else if( preg_match( '/\/cortland-ny\/suny-cortland\/off-campus-student-housing\//', $_SERVER['PHP_SELF']) ){ 
   $path="../../../";
 }else{
@@ -71,6 +73,7 @@ error_reporting(E_ALL);
 
 
 function printHeaders($params){
+  global $path;
 ?>
  
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -95,8 +98,20 @@ function printHeaders($params){
 	     <title>
 	         <?php print isset($params['pageTitle']) ? $params['pageTitle'] : "Cortland College Housing"; ?>
 	     </title>
+
+       <!-- favicon icon -->
+       <link rel="shortcut icon" type="image/jpg" href="<?= $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/favicon.ico" />
+
+       <!-- canonical tag to site home page -->
+       <link rel=“canonical” href=“https://www.cortlandcollegehousing.com/” />
+
 	     <meta name="description" content="<?php print $params['description'] ?>">
 	     <meta name="keywords" content="<?php print $params['keywords'] ?>">
+
+       <meta property="og:title" content="social media sharing buttons php onlinecode.org"/>
+       <meta property="og:image" content="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif"/>
+       <meta property="og:url" content="onlinecode.org"/>
+       <meta property="og:description" content="social media sharing buttons php onlinecode.org"/>
          
 	     <!-- css code -->
      
@@ -107,6 +122,7 @@ function printHeaders($params){
      <!-- slick banner css -->
      <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.css" />
      <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/slick-master/slick/slick-theme.css" />
+     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
      <!-- end slick css -->
      <!-- end  css code -->
 
@@ -115,6 +131,7 @@ function printHeaders($params){
      <script type="text/javascript" src="https://www.cortlandcollegehousing.com/includes/js/vendor/jquery.js"></script>
      <script type="text/javascript" src="https://www.cortlandcollegehousing.com/includes/ckeditor/ckeditor.js"></script>
      <script type="text/javascript" src="https://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.min.js"></script>
+     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
    </head>
         
@@ -136,7 +153,7 @@ function printTopNavs(){
   ### variables to help show which link is currently active
   #
 	/*  if foundation 6 gets the active class working, we are ready                 */
-	$home_active     = preg_match('/index/', $_SERVER['PHP_SELF']) ? 'active' : '';
+	$home_active     = preg_match('/^\/index/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$about_active    = preg_match('/about/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$describe_active   = preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) ? 'active' : '';
@@ -145,24 +162,27 @@ function printTopNavs(){
 	$lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $apartments_active  = preg_match('/apartments\/index\.html/', $_SERVER['PHP_SELF']) ? 'active' : '';
   ?>
 
   <!-- accessibility role for navs -->
-  <div class="row" role="navigation" aria-label="Top row navigation">
+  <div class="row" role="navigation" aria-label="Top row navigation" title="cortland properties">
      <div class="medium-12 columns menu-centered full-width">
   
        <ul class="vertical medium-horizontal menu" style="list-style-type: none;">
            <li class="<?php print $home_active ?>"><a href="<?php print $path ?>index.html">Home</a></li>
 
-           <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing cortland">About Us</a></li>
+           <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing cortland ny">About Us</a></li>
 
-           <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Apartment Descriptions</a></li>
+           <li class="<?php print $apartments_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/index.html" title="off-campus housing suny cortland">Apartments</a></li>
+
+           <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
 
            <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
 
            <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
 
-           <li class="<?php print $application_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html" title="suny off-campus housing">Application</a></li>
+           <li class="<?php print $application_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html" title="suny cortland off-campus housing">Application</a></li>
 
            <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Important Documents</a></li>
 
@@ -230,32 +250,32 @@ function printBanner(){
         
         <div class="single-item">
           <div class="multiple">
-  		      <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
-            alt="apartment 7 woodruff str cortland ny" title="off-campus student housing suny cortland" />
+  		      <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
+            alt="apartment 7 woodruff str cortland ny" title="off campus student housing suny cortland" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/100-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/100-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 100 Tompkins str cortland ny" title="student housing suny cortland" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
-            alt="apartment 50 Tompkins str cortland ny" title="suny cortland off-campus housing" />
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
+            alt="apartment 50 Tompkins str cortland ny" title="suny cortland off campus housing" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
             alt="apartment 112 Groton Ave cortland ny" title="cortland college student housing" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/50-tompkins-street-exterior-street-view-575.jpg" 
-            alt="apartment 50 Tompkins str cortland ny" title="suny cortland off-campus housing" />
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/50-tompkins-street-exterior-street-view-575.jpg" 
+            alt="apartment 50 Tompkins str cortland ny" title="suny cortland off campus properties" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/52-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/52-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 52 Tompkins str cortland ny" title="college rentals cortland" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/off-campus-student-housing/cortland-ny/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
-            alt="apartment 91 lincoln cortland ny" title="living off-campus cortland college" />
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
+            alt="apartment 91 lincoln cortland ny" title="cortland college rentals" />
           </div>
         </div> <!-- single-item -->
 
@@ -300,6 +320,65 @@ function printBanner(){
 
   </header>
    <?php
+}
+
+
+function printApartmentNavs(){
+  ?>
+   <div class="text-center" id="breadcrumbs" role="navigation" aria-label="Student Housing Navigation" title="cortland student housing">
+  <?php
+ if( preg_match('/apartments\/index\.html/', $_SERVER['PHP_SELF']) ){
+    print "Apartments Home";
+  }else{
+    print '<a href="index.html" tabindex="0" title="student apartments home page">Apartments Home</a>';
+  }
+  print " | ";
+  if( preg_match('/50-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
+    print "50 Tompkins Str";
+  }else{
+    print '<a href="50-tompkins-str.html" tabindex="0" title="suny cortland student housing">50 Tompkins Str</a>';
+  }
+  print " | ";
+
+  if( preg_match('/52-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
+    print "52 Tompkins Str";
+  }else{
+    print '<a href="52-tompkins-str.html" tabindex="0" title="cortland state student housing">52 Tompkins Str</a>';
+  }
+  print " | ";
+
+  if( preg_match('/100-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
+    print "100 Tompkins Str";
+  }else{
+    print '<a href="100-tompkins-str.html" tabindex="0" title="cortland ny student housing">100 Tompkins Str</a>';
+  }
+  print " | ";
+
+  if( preg_match('/112-groton-ave\.html/',$_SERVER['PHP_SELF'])){
+    print "112 Groton Ave";
+  }else{
+    print '<a href="112-groton-ave.html" tabindex="0" title="student rentals suny cortland">112 Goton Ave</a>';
+  }
+  print " | ";
+
+  if( preg_match('/7-woodruff-str\.html/',$_SERVER['PHP_SELF'])){
+    print "7 Woodruff Str";
+  }else{
+    print '<a href="7-woodruff-str.html" tabindex="0" title="cortland university student housing">7 Woodruff Str</a>';
+  }
+  print " | ";
+
+  if( preg_match('/91-lincoln-ave\.html/',$_SERVER['PHP_SELF'])){
+    print "91 Lincoln Ave";
+  }else{
+    print '<a href="91-lincoln-ave.html" tabindex="0" title="cortland student housing">91 Lincoln Ave</a>';
+  }
+  print " | ";
+
+  ?>
+</div>
+<?php
+
 }
 
 
@@ -385,32 +464,62 @@ function getHits(){
 
 
 function printFooter(){
+  global $path;
 ?>
+
+  </div><!-- body-container -->
+
+
+
+
   <!-- accessibility role -->
-  <footer role="contentinfo">
+  <footer>
 
     <div class="row">          
-        <div class="medium-12 columns text-center">
-          <hr style="width: 60%; color: #b31b1b;" />
-        </div>        
+      <div class="medium-12 columns text-center">
+        <hr style="height:2px; background-color: #b31b1b;" />
+      </div>        
     </div>
 
   	<div class="row">          
-		    <div class="medium-12 columns text-center bg-white"> 
-		        <p>Call us today for more information:<br />
-		        607.756.2921<br />
-		        <a href="contact-us.html">info@CortlandCollegeHousing.com</a><br /><br />
-		        <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/">
-              <img src="images/off-campus-student-housing/cortland-ny/Logos/Facebook/facebook-f.gif" alt="facebook" />Visit our Facebook page for additional apartment photos!</a><br /><br /  
+	    <div class="medium-12 columns text-center bg-white"> 
+        <p>Call us today for more information:<br />
+        607.756.2921<br />
+        <a href="<?php print $path; ?>contact-us.html">Contact Us Form</a>
+        </p>
 
-            <a href="https://www.instagram.com/propertiesbycornerstone/">
-              <img src="images/off-campus-student-housing/cortland-ny/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" />Follow Us On Instagram!</a>           
+        <!-- facebook -->
+        <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/">
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif" alt="facebook" /> Follow Us On Facebook!</a> |  
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/propertiesbycornerstone/">
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" /> Follow Us On Instagram!</a>  |  
+          <?php
+          ##### Share code found on:  https://onlinecode.org/social-media-sharing-buttons-php/  #####
+          #
+          $site_url = "https://ww.cortlandcollegehousing.com/";
+          $site_title = "CornerStone Properties";
+          ?>
+
+          <!-- Facebook Social Media -->
+        <a href="http://www.facebook.com/sharer.php?u=<?=$site_url?>" target="_blank">
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-share.png" alt="facebook" /> Share us on Facebook!
+        </a>
 		    </div>        
 		  </div> <!-- row -->
 
+      <div class="row">          
+      <div class="medium-12 columns text-center">
+        <hr style="height:2px; background-color: #b31b1b;" />
+      </div>        
+    </div>
+
+      <p>&nbsp;</p>
+
     </footer>
 
-		</div><!-- body-container -->
+	
 		
 		<!-- scripts that Foundation needs.  Must be placed here. -->
 		<!-- foundation code -->
