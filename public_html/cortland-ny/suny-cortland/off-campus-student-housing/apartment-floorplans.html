@@ -3,7 +3,7 @@ require_once('../../../includes/myUtils.php');
 $params = array(
        'title' => 'Floor Plans of Cortland College Housing Student Apartment Rentals in Cortland NY.',
 
-			 'description' => 'Images of Floor Plans for Cortland College Housings student rental apartments. Floorplans show the layout of the apartment selected | where the bedrooms, kitchen, dining room and living room are located.',
+			 'description' => 'Floorplans for Cortland College Housing student apartments show the layout of the entry, kitchen, dining room, living room, and bedrooms of each apartment.',
 
 			 'keywords' => ''
                );
@@ -16,13 +16,20 @@ printHeaders($params);
 
 <div class="row" title="off-campus housing cortland ny">
   <div class="medium-12 text-center columns">
-    <h1 title="off-campus student housing cortland ny">Floor Plans</h1>
+    <h1 title="off-campus student housing cortland ny">Student Apartments Floor Plans</h1>
   </div>
 </div>
 
 <div class="row" title="student housing off-campus cortland">
   <div class="medium-12 columns">
-    <p>Select a suite from one of the drop-down lists below.  The floor-plan of the suite you select will appear below the drop-down lists. Select another suite and the image will change to that suite's floor-plan.</p>
+   <h2 title="suny cortland student housing">Different Designs</h2>
+   <p>You want to live off campus and you want your place to be different. You don't your place to look like a SUNY Cortland dorm-room or a dorm-suite. We built our student apartments with that in mind.  While each apartment has similar features, each looks different, is layed out differently. Like a home away from home. You want to pick the apartment that looks good to you, that fits your style.  We give you a variety of designs to choose from.</p>
+  </div>
+</div>
+
+<div class="row" title="student housing off-campus cortland">
+  <div class="medium-12 columns">
+    <p>Select a suite from one of the drop-down lists below.  The floor-plan / layout will appear on the page below the drop-down lists.</p>
   </div>
 </div>
 
@@ -191,7 +198,7 @@ function getFloorPlanImage(obj){
   var images = [];
   images['100-tompkins-street-apartment-1-first-floor-floorplan'] = '100-tompkins-street-apartment-1-kitchen-view';
   
-  $('#suite-img').attr("src", "../../../images/off-campus-student-housing/cortland-ny/floorplans/"+images[obj.val()]+".jpg");
+  $('#suite-img').attr("src", "../../../images/cortland-ny/suny-cortland/off-campus-student-housing/floorplans/"+images[obj.val()]+".jpg");
   $('#suite-img').attr("alt", "floorplan of "+images[obj.val()] );
   $('#suite-img').attr("title", "off-campus student housing cortland ny, floorplan");
   $('#suite-img').show();
@@ -199,7 +206,7 @@ function getFloorPlanImage(obj){
 
 // this function changes the current image to the one selected.
 function changeImage(obj){
-  $('#fp-img').attr("src", "../../../images/off-campus-student-housing/cortland-ny/floorplans/"+obj.val()+".jpg");
+  $('#fp-img').attr("src", "../../../images/cortland-ny/suny-cortland/off-campus-student-housing/floorplans/"+obj.val()+".jpg");
   $('#fp-img').show();
 
   if( obj.val().match('groton') ){

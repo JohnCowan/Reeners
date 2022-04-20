@@ -411,10 +411,9 @@ EOD;
 
 <div class="row" title="suny cortland off-campus student housing">
 	<div class="medium-4 columns">
-		 <label for="datepicker" <?php print isset($labels['dob'])?$labels['dob']:''; ?>>* Date of Birth</label>
+		 <label for="datepicker" <?php print isset($labels['dob'])?$labels['dob']:''; ?>>* Date of Birth as (mm/dd/yyyy)</label>
 	</div>
 	<div class="medium-6 columns">
-		  <span class="red" style="font-size: .9em;">as (mm/dd/yyyy)</span>
 		  <input type="text" id="datepicker" name="dob" maxLength="30" size="20" value="<?php print $dob ?>" /> 
 		    
 	</div>
@@ -423,10 +422,9 @@ EOD;
 
 <div class="row" title="suny cortland student housing rentals">
 	<div class="medium-4 columns">
-		<label for="address" <?php print isset($labels['cs_address'])?$labels['cs_address']:''; ?>>Current Cortland Address</label>
+		<label for="address" <?php print isset($labels['cs_address'])?$labels['cs_address']:''; ?>>Current Cortland Address<br />(if current student)</label>
    </div>
 	<div class="medium-6 columns">
-		 <span class="red" style="font-size: .9em;">(if current student)</span>
 		 <input type="text" id="address" name="cs_address" id="cs_address" size="30" maxlength="75" value="<?php print $cs_address; ?>" /> 		   
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
@@ -434,7 +432,7 @@ EOD;
 
 <div class="row" title="student apartments near suny cortland">
 	<div class="medium-4 columns">
-		<label for="landlord" <?php print isset($labels['cs_landlord'])?$labels['cs_landlord']:''; ?>>Current Landlord (if current student)</label>
+		<label for="landlord" <?php print isset($labels['cs_landlord'])?$labels['cs_landlord']:''; ?>>Current Landlord<br />(if current student)</label>
   </div>
 	<div class="medium-6 columns">
 		 <label class="red" style="font-size: .9em;">Name and address please.</label>
@@ -564,7 +562,7 @@ EOD;
 	<div class="medium-12 columns text-center">
 		<h2 title="suny cortland student housing" 
 		    style="background-color: #b31b1b; color: #fff; text-decoration: underline;">Our Locations</h2>
-		    <span style="font-size: 0.9em; color: #000;">All suites have three-bedrooms</span>
+		    <span style="color: #000;">All suites have three-bedrooms</span>
     </div>
 </div>
 
@@ -611,13 +609,13 @@ EOD;
 
 
 	<p>&nbsp;</p>
-	<img src="../../../images/off-campus-student-housing/cortland-ny/apartments/student-apartment-living-room-2.jpg" alt="student apartment living room" title="off-campus student housing near suny cortland, apartment living room" />
+	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-living-room-2.jpg" alt="student apartment living room" title="off-campus student housing near suny cortland, apartment living room" />
 
 	<p>&nbsp;</p>
-	<img src="../../../images/off-campus-student-housing/cortland-ny/apartments/student-apartment-kitchen.jpg" alt="student apartment kitchen" title="student housing near suny cortland, apartment kitchen" />
+	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-kitchen.jpg" alt="student apartment kitchen" title="student housing near suny cortland, apartment kitchen" />
 
 	<p>&nbsp;</p>
-	<img src="../../../images/off-campus-student-housing/cortland-ny/apartments/student-apartment-bedroom.jpg" alt="student apartment living room" title="off-campus housing near suny cortland, apartment bedroom" />
+	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-bedroom.jpg" alt="student apartment living room" title="off-campus housing near suny cortland, apartment bedroom" />
 
 	    </div>
 	</div>
@@ -630,12 +628,14 @@ EOD;
 
 
  <script>
- $(document.ready(function(){
-   $( "#datepicker" ).fdatepicker({
-     changeMonth: true,
-     changeYear: true
-   });
- } );
+ $(document).ready(function(){
+   $( "#datepicker" ).datepicker(
+     {
+       changeMonth: true,
+       changeYear: true
+     }
+     );
+ });
  </script>
 
 <?php getNews('request-application.html') ?>

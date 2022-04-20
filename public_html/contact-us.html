@@ -2,8 +2,8 @@
 session_start();
 require_once('includes/myUtils.php');
 $params = array(
-				'title' => 'Contact Information for Cortland College Housing.',
-				'description' => 'Contact us page for Cortland College Housing. We are happy to provide you with more information regarding any of our off campus student housing apartments and/or buildings.',
+			  'title' => 'Contact Information for Cornerstone Properties (Cortland College Housing)',
+				'description' => 'Contact us for more information regarding any of our SUNY Cortland off campus student housing apartments and/or buildings.',
 				'keywords' => ''
 				);
 printHeaders($params);
@@ -115,7 +115,7 @@ if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_
 
 <!---- form starts here  ---->
 
-<form name="form1" id="form1" action="contact-us.html" method="post" role="message us form" title="student housing off-campus suny cortland">
+<form name="form1" id="form1" action="contact-us.html" method="post" role="form" aria-label="Contact information" title="student housing off-campus suny cortland">
 
 <div class="row" title="cortland college student housing free high speed internet">
 	<div class="medium-3 columns"><label for="name"><b>Your Name:</b></label></div>
