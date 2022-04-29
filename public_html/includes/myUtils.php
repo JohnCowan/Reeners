@@ -162,19 +162,36 @@ function printTopNavs(){
 	$lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
 	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
-  $apartments_active  = preg_match('/apartments\/index\.html/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $apartments_active  = preg_match('/apartments/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $tompkins_50_active  = preg_match('/apartments\/50-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $tompkins_52_active  = preg_match('/apartments\/52-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $tompkins_100_active  = preg_match('/apartments\/100-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $groton_active  = preg_match('/apartments\/112-groton-ave/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $woodruff_active  = preg_match('/apartments\/7-woodruff-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $lincoln_active  = preg_match('/apartments\/91-lincoln-ave/', $_SERVER['PHP_SELF']) ? 'active' : '';
   ?>
 
   <!-- accessibility role for navs -->
   <div class="row" role="navigation" aria-label="Top row navigation" title="cortland properties">
      <div class="medium-12 columns menu-centered full-width">
   
-       <ul class="vertical medium-horizontal menu" style="list-style-type: none;">
+       <ul class="dropdown menu" data-dropdown-menu style="list-style-type: none;">
            <li class="<?php print $home_active ?>"><a href="<?php print $path ?>index.html">Home</a></li>
 
            <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing cortland ny">About Us</a></li>
 
-           <li class="<?php print $apartments_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/index.html" title="off-campus housing suny cortland">Apartments</a></li>
+           <li class="<?php print $apartments_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/index.html" title="off-campus housing suny cortland">Apartments</a>
+
+              <ul class="data-dropdown-menu">
+                 <li class="<?php print $tompkins_50_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/50-tompkins-str.html">50 Tompkins Str</a></li>
+                 <li class="<?php print $tompkins_52_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/52-tompkins-str.html">52 Tompkins Str</a></li>
+                 <li class="<?php print $tompkins_100_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/100-tompkins-str.html">100 Tompkins Str</a></li>
+                 <li class="<?php print $groton_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/112-groton-ave.html">112 Groton Ave</a></li>
+                 <li class="<?php print $woodruff_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/7-woodruff-str.html">7 Woodruff Str</a></li>
+                 <li class="<?php print $lincoln_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/91-lincoln-ave.html">91 Lincoln Ave</a></li>
+              </ul>
+
+           </li>
 
            <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
 
@@ -259,7 +276,7 @@ function printBanner(){
           </div>
           <div class="multiple">
             <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
-            alt="apartment 50 Tompkins str cortland ny" title="suny cortland off campus housing" />
+            alt="apartment 50 Tompkins str cortland ny" title="cortland off campus housing" />
           </div>
           <div class="multiple">
             <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
@@ -275,7 +292,7 @@ function printBanner(){
           </div>
           <div class="multiple">
             <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
-            alt="apartment 91 lincoln cortland ny" title="cortland college rentals" />
+            alt="apartment 91 lincoln cortland ny" title="suny cortland college rentals" />
           </div>
         </div> <!-- single-item -->
 
@@ -336,7 +353,7 @@ function printApartmentNavs(){
   if( preg_match('/50-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
     print "50 Tompkins Str";
   }else{
-    print '<a href="50-tompkins-str.html" tabindex="0" title="suny cortland student housing">50 Tompkins Str</a>';
+    print '<a href="50-tompkins-str.html" tabindex="0" title="suny cortland off campus student housing">50 Tompkins Str</a>';
   }
   print " | ";
 
@@ -371,7 +388,7 @@ function printApartmentNavs(){
   if( preg_match('/91-lincoln-ave\.html/',$_SERVER['PHP_SELF'])){
     print "91 Lincoln Ave";
   }else{
-    print '<a href="91-lincoln-ave.html" tabindex="0" title="cortland student housing">91 Lincoln Ave</a>';
+    print '<a href="91-lincoln-ave.html" tabindex="0" title="suny cortland college housing">91 Lincoln Ave</a>';
   }
   print " | ";
 
