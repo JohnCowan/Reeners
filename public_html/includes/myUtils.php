@@ -1,8 +1,8 @@
 <?php
-	/*		Includes file for cortlandcollegehousing.com
-			writen by John Cowan
-			Date:	Sept 2012
-	*/
+  /*    Includes file for cortlandcollegehousing.com
+      writen by John Cowan
+      Date: Sept 2012
+  */
 
 
 ################################################################################
@@ -25,14 +25,14 @@ require_once 'DB.php';
 ini_set("include_path", '/home/corthou/public_html/includes/' . ':' . ini_get("include_path"));
 
 require_once 'DB.php';
-$db 		= "corthou_suites";
-$host 		= "localhost";
-$username 	= "corthou_webuser";
-$password 	= "NY's#1:-)F@n";
+$db     = "corthou_suites";
+$host     = "localhost";
+$username   = "corthou_webuser";
+$password   = "NY's#1:-)F@n";
 
   // Data Source Name: This is the universal connection string
 $dsn = "mysql://$username:$password@$host/$db";
-	
+  
   // DB::connect will return a Pear DB object on success
   // or a Pear DB Error object on error
   // You can also set to TRUE the second param
@@ -42,26 +42,26 @@ $globalMySqlConnect = DB::connect($dsn);
   // With DB::isError you can differentiate between an error or
   // a valid connection.
 if ( DB::isError( $db ) ) {
-	die ( $db->getMessage() );
+  die ( $db->getMessage() );
 }
 // alter connection to mysql
 // using above db variables.
 
-	// connect to mysql
+  // connect to mysql
 $connection = mysql_connect( $host, $username, $password ) or die ( mysql_error());
-	// connect to the database in mysql
+  // connect to the database in mysql
 mysql_select_db($db) or die ( mysql_error() );
 
 // set the path to the graphics folder when we are in the admins folder
 $path = "";
 if( preg_match( '/\/ccAdmins\//', $_SERVER['PHP_SELF']) ){
-	$path="../";
+  $path="../";
 }else if( preg_match( '/\/cortland-ny\/suny-cortland\/off-campus-student-housing\/apartments\//', $_SERVER['PHP_SELF']) ){ 
   $path="../../../../";
 }else if( preg_match( '/\/cortland-ny\/suny-cortland\/off-campus-student-housing\//', $_SERVER['PHP_SELF']) ){ 
   $path="../../../";
 }else{
-	$path="";
+  $path="";
 }
 
 ######   show some errors on the page if we can      
@@ -92,28 +92,28 @@ function printHeaders($params){
         gtag('config', 'G-0Z3CECKQV0');
       </script>
 
-     	 <meta charset="utf-8" />
-	     <!-- don't need this anymore? <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
-	     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	     <title>
-	         <?php print isset($params['pageTitle']) ? $params['pageTitle'] : "Cortland College Housing"; ?>
-	     </title>
+       <meta charset="utf-8" />
+       <!-- don't need this anymore? <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>
+           <?php print getPageTitle($params['title']); ?>
+       </title>
 
        <!-- favicon icon -->
        <link rel="shortcut icon" type="image/jpg" href="<?= $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/favicon.ico" />
 
        <!-- canonical tag to site home page -->
-       <link rel=“canonical” href=“https://www.cortlandcollegehousing.com/” />
+       <link rel=“canonical” href=“https://www.cortlandcollegehousing.com/index.html” />
 
-	     <meta name="description" content="<?php print $params['description'] ?>">
-	     <meta name="keywords" content="<?php print $params['keywords'] ?>">
+       <meta name="description" content="<?php print $params['description'] ?>">
+       <meta name="keywords" content="<?php print $params['keywords'] ?>">
 
        <meta property="og:title" content="social media sharing buttons php onlinecode.org"/>
        <meta property="og:image" content="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif"/>
        <meta property="og:url" content="onlinecode.org"/>
        <meta property="og:description" content="social media sharing buttons php onlinecode.org"/>
          
-	     <!-- css code -->
+       <!-- css code -->
      
      <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/css/foundation.css" type="text/css" />
      
@@ -145,23 +145,79 @@ function printHeaders($params){
 ?>
 
 <?php
+function getPageTitle($title) {
+  if( !empty($title) ){
+    return $title;
+  }
+  if( !empty($_SERVER['PHP_SELF']) ) {
+    # home page:
+    if( preg_match('/^\/index/', $_SERVER['PHP_SELF']) )
+      {return 'Best SUNY Cortland off campus housing in Cortland NY';}
+
+    if( preg_match('/about/', $_SERVER['PHP_SELF']) )
+      {return 'About Cornerstone Properties Off Campus Housing Rentals';}
+
+    if( preg_match('/contact-us/', $_SERVER['PHP_SELF']) )
+      {return 'Contact Information for Cornerstone Properties';}
+
+    if( preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) )
+      {return 'Student Apartment Descriptions Cortland College Housing';}
+
+    if( preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) )
+      {return 'SUNY Cortland Off Campus Student Housing Locations';}
+
+    if( preg_match('/apartment-floorplans/', $_SERVER['PHP_SELF']) )
+      {return 'Floor Plans of Student Apartments in Cortland NY';}
+
+    if( preg_match('/apartment-rental-application/', $_SERVER['PHP_SELF']) )
+      {return 'Student Apartment Rental Application for Cortland, NY';}
+
+    if( preg_match('/documents/', $_SERVER['PHP_SELF']) )
+      {return 'Lease and Student Rental Guarantee Agreement Documents';}
+
+    if( preg_match('/apartments\/index/', $_SERVER['PHP_SELF']) )
+      {return 'SUNY Cortland Student Apartment Locations';}
+
+    if( preg_match('/apartments\/50-tompkins-str/', $_SERVER['PHP_SELF']) )
+      {return '50 Tompkins Str Cortland Ny | Luxury student apartments';}
+
+    if( preg_match('/apartments\/52-tompkins-str/', $_SERVER['PHP_SELF']) )
+      {return '52 Tompkins Str Cortland NY | SUNY Cortland Housing';}
+
+    if( preg_match('/apartments\/100-tompkins-str/', $_SERVER['PHP_SELF']) )
+      {return '100 Tompkins Str Cortland NY | Student Apartments';}
+
+    if( preg_match('/apartments\/112-groton-ave/', $_SERVER['PHP_SELF']) )
+      {return '112 Groton Ave Cortland NY | Housing Near SUNY Cortland';}
+
+    if( preg_match('/apartments\/7-woodruff-str/', $_SERVER['PHP_SELF']) )
+      {return '7 Woodruff Str Cortland Ny | off campus student housing';}
+
+    if( preg_match('/apartments\/91-lincoln-ave/', $_SERVER['PHP_SELF']) )
+      {return '91 Lincoln Ave Cortland NY | College Apartments';}
+  }
+}
+
+?>
+
+<?php
   ### TOP MENU NAVS ###
   #
 function printTopNavs(){
-	global $path;
+  global $path;
 
   ### variables to help show which link is currently active
   #
-	/*  if foundation 6 gets the active class working, we are ready                 */
-	$home_active     = preg_match('/^\/index/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$about_active    = preg_match('/about/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$describe_active   = preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$floorplan_active   = preg_match('/apartment-floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$application_active = preg_match('/apartment-rental-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
-	$contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  /*  if foundation 6 gets the active class working, we are ready                 */
+  $home_active     = preg_match('/^\/index/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $about_active    = preg_match('/about/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $describe_active   = preg_match('/apartment-descriptions/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $floorplan_active   = preg_match('/apartment-floorplans/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $application_active = preg_match('/apartment-rental-application/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $apartments_active  = preg_match('/apartments/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $tompkins_50_active  = preg_match('/apartments\/50-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $tompkins_52_active  = preg_match('/apartments\/52-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
@@ -212,7 +268,7 @@ function printTopNavs(){
 }
 
 function printBanner(){
-	global $path;
+  global $path;
   ?>
   <header role="banner"> <!-- aria accessibility -->
 
@@ -262,12 +318,12 @@ function printBanner(){
 
    <!-- the sliding images -->
    <div class="row bg-white border-top-red large-screen">
-	    <div class="medium-1">&nbsp;</div>
+      <div class="medium-1">&nbsp;</div>
       <div class="medium-10 medium-centered columns">
         
         <div class="single-item">
           <div class="multiple">
-  		      <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
             alt="apartment 7 woodruff str cortland ny" title="off campus student housing suny cortland" />
           </div>
           <div class="multiple">
@@ -450,33 +506,33 @@ function logHits($item){
    $referrer = !empty($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'NONE';
    $item = !empty($item) ? $item : 'Not Sent';   
     $sql = "insert into hits 
-	              ( page_hit, referrer, date_hit )
-	          values
-	              ( ?, ?, ? )";
+                ( page_hit, referrer, date_hit )
+            values
+                ( ?, ?, ? )";
     $sqlParams = array( $item, $referrer, $today );
     $result = $globalMySqlConnect->query($sql, $sqlParams);
     if(DB::isError( $result )){
-	    die("Problem inserting into hits " .$result->toString());
+      die("Problem inserting into hits " .$result->toString());
     }
 }
 
 function getHits(){
-	global $globalMySqlConnect;
-	$sql="select count(*) as cnt_hits from hits where page_hit = upper(?)";
-	$result=$globalMySqlConnect->query($sql, array('HOME-PAGE'));
-	if(DB::isError( $result )){
+  global $globalMySqlConnect;
+  $sql="select count(*) as cnt_hits from hits where page_hit = upper(?)";
+  $result=$globalMySqlConnect->query($sql, array('HOME-PAGE'));
+  if(DB::isError( $result )){
     die("Problem inserting into hits " .$result->toString());
-		errorEmail(array($page,$result->toString(), $result->toString()));
+    errorEmail(array($page,$result->toString(), $result->toString()));
   }
-	if($data=$result->fetchRow(DB_FETCHMODE_ASSOC)){
-	  ?>
-	  <div class="row">
-	    <div class="medium-12 columns callout alert text-center">
-		  <p><?php print $data['cnt_hits'] ?> visitors to this site!</p>
-		</div>
-	  <div>
-	  <?php
-	} 
+  if($data=$result->fetchRow(DB_FETCHMODE_ASSOC)){
+    ?>
+    <div class="row">
+      <div class="medium-12 columns callout alert text-center">
+      <p><?php print $data['cnt_hits'] ?> visitors to this site!</p>
+    </div>
+    <div>
+    <?php
+  } 
 }
 
 
@@ -498,8 +554,8 @@ function printFooter(){
       </div>        
     </div>
 
-  	<div class="row">          
-	    <div class="medium-12 columns text-center bg-white"> 
+    <div class="row">          
+      <div class="medium-12 columns text-center bg-white"> 
         <p>Call us today for more information:<br />
         607.756.2921<br />
         <a href="<?php print $path; ?>contact-us.html">Contact Us Form</a>
@@ -523,8 +579,8 @@ function printFooter(){
         <a href="http://www.facebook.com/sharer.php?u=<?=$site_url?>" target="_blank">
           <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-share.png" alt="facebook" /> Share us on Facebook!
         </a>
-		    </div>        
-		  </div> <!-- row -->
+        </div>        
+      </div> <!-- row -->
 
       <div class="row">          
       <div class="medium-12 columns text-center">
@@ -536,15 +592,15 @@ function printFooter(){
 
     </footer>
 
-	
-		
-		<!-- scripts that Foundation needs.  Must be placed here. -->
-		<!-- foundation code -->
+  
+    
+    <!-- scripts that Foundation needs.  Must be placed here. -->
+    <!-- foundation code -->
     <script src="https://www.cortlandcollegehousing.com/includes/js/vendor/jquery.js"></script>
     <script src="https://www.cortlandcollegehousing.com/includes/js/vendor/what-input.js"></script>
     <script src="https://www.cortlandcollegehousing.com/includes/js/vendor/foundation.js"></script>
     <script src="https://www.cortlandcollegehousing.com/includes/js/app.js"></script>
-		<script>
+    <script>
       var $jq = jQuery.noConflict();
       $jq(document).ready( function(){
         //$jq(document).foundation();
@@ -558,9 +614,9 @@ function printFooter(){
         });
       })
     </script>
-		
-		
-	</body></html>
+    
+    
+  </body></html>
 <?php
 }
 ?>
