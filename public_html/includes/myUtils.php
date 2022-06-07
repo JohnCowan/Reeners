@@ -95,9 +95,7 @@ function printHeaders($params){
        <meta charset="utf-8" />
        <!-- don't need this anymore? <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <title>
-           <?php print getPageTitle($params['title']); ?>
-       </title>
+       <title><?php print getPageTitle($params['title']); ?></title>
 
        <!-- favicon icon -->
        <link rel="shortcut icon" type="image/jpg" href="<?= $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/favicon.ico" />
