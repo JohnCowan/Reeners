@@ -1,4 +1,6 @@
+/* sass files */
 @import "variables.scss";
+@import "media-queries.scss";
 
 body {
   background-color: $red;
@@ -10,7 +12,7 @@ body {
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
-  background-color: $grey;
+  background-color: $white;
   border-bottom:none;
   overflow:auto;
   color: $black;
@@ -24,6 +26,34 @@ body {
   height:100px;
 }
 
+footer {
+  width: 90%;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  border-bottom: none;
+  overflow: auto;
+  color: #000; }
+
+
+h1 {
+  font-size: 1.5em;
+  color: $red;
+  font-family: Georgia, Arial, Serif;
+}
+
+h2 {
+  font-size: 1.3em;
+  color: $red;
+  font-family: Georgia, Arial, Serif;
+}
+
+h3 {
+  font-size: 1.2em;
+  color: $red;
+ font-family: Georgia, Arial, Serif;
+}
 
 .topnavs {
 	height: auto;
@@ -54,8 +84,11 @@ body {
     background-color: $black;
 	.active {
         color: $white;
-		background-color: $blue;
+		    background-color: $red;
         padding-left: 15px;
+        a {
+           background-color: $red;
+        }
 	}
 	.nav-title {
         color: $white;
@@ -78,7 +111,7 @@ body {
     }
     a:hover {
 	   text-decoration: none;
-	   background-color: $red;
+	   background-color: $blue;
 	   color: $yellow;
     }
 
@@ -154,6 +187,10 @@ body {
   border-bottom: 2px solid $red;
 }
 
+.border-left-red {
+  border-left: solid 2px #b31b1b;
+}
+
 .small {
 	font-size: .8em;
 }
@@ -188,4 +225,34 @@ h4 {
 
 body {
   background-color: $red;
+}
+
+.top-banner-text {
+  font-size: 4.5em;
+  color: $red;
+  font-family: Georgia, Arial, Serif;
+}
+
+
+/* social media share buttons */
+/* */
+#button_share img {
+  width: 36px;
+  box-shadow: 0;
+  padding: 6px;
+  display: inline;
+  border: 0;
+}
+
+/******** red text for errors and warnings *******/
+.red {
+  color: $red;
+}
+
+.warning {
+  color: $red;
+}
+
+.error {
+  color: $red;
 }

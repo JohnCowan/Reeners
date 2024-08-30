@@ -1,3 +1,55 @@
+# order deny,allow
+# allow from
+# 94.130.93.30
+# 168.119.141.170
+# 168.119.99.190
+# 168.119.99.191
+# 168.119.99.192
+# 168.119.99.193
+# 168.119.99.194
+# 134.209.42.109
+# 68.183.60.34
+# 68.183.60.80
+# 68.183.54.131
+# 68.183.49.222
+# 68.183.149.30
+# 68.183.157.22
+# 68.183.149.129
+
+RewriteOptions inherit
 #php_value session.save_path /home/corthou/public_html/sessions
 #AddHandler application/x-httpd-php5 html
-AddHandler application/x-httpd-php5 .html
+#AddHandler application/x-httpd-php .html
+AddHandler application/x-httpd-ea-php56 .html
+
+#upgrade requests to https
+Header always set Content-Security-Policy: upgrade-insecure-requests
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cortlandcollegehousing\.com$
+RewriteRule ^request\-application\.html$ "https\:\/\/www\.cortlandcollegehousing\.com\/cortland\-ny\/suny\-cortland\/off\-campus\-student\-housing\/apartment\-rental\-application\.html" [R=301,L]
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cortlandcollegehousing\.com$
+RewriteRule ^apartment\-descriptions\.html$ "https\:\/\/www\.cortlandcollegehousing\.com\/cortland\-ny\/suny\-cortland\/off\-campus\-student\-housing\/apartment\-descriptions\.html" [R=301,L]
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cortlandcollegehousing\.com$
+RewriteRule ^floorplans\.html$ "https\:\/\/www\.cortlandcollegehousing\.com\/cortland\-ny\/suny\-cortland\/off\-campus\-student\-housing\/apartment\-floorplans\.html" [R=301,L]
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cortlandcollegehousing\.com$
+RewriteRule ^locations\.html$ "https\:\/\/www\.cortlandcollegehousing\.com\/cortland\-ny\/suny\-cortland\/off\-campus\-student\-housing\/apartment\-locations\.html" [R=301,L]
+RewriteCond %{HTTP_HOST} ^cornerstoneproperties\-cortland\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cornerstoneproperties\-cortland\.com$
+RewriteRule ^lease\.html$ "https\:\/\/www\.cortlandcollegehousing\.com\/documents\.html" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing.com [NC]
+RewriteRule ^(.*)$ https://www.cortlandcollegehousing.com/$1 [L,R=301,NC]
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cortlandcollegehousing\.com$
+RewriteRule ^application\-request\.html$ "https\:\/\/www\.cortlandcollegehousing\.com\/cortland\-ny\/suny\-cortland\/off\-campus\-student\-housing\/apartment\-rental\-application\.html" [R=301,L]
+RewriteCond %{HTTP_HOST} ^cortlandcollegehousing\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cortlandcollegehousing\.com$
+RewriteRule ^graphics\/350s\/apt\-pic\-149\.jpg$ "https\:\/\/www\.cortlandcollegehousing\.com\/images\/cortland\-ny\/suny\-cortland\/off\-campus\-student\-housing\/apartments\/dining\-room\-with\-raised\-living\-room\.jpg" [R=301,L]
+

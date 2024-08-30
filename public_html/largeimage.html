@@ -12,17 +12,18 @@ $params = array('title' => $image,
 printHeaders($params);
 
 ?>
+<div role="main">
 <div class="mainbody">
 	<p>
 	<a href="<?php print $sentBy ?>">Go Back to Previous Page</a>
 	</p>
 	<p>
-	<img src="<?php print $image ?>" alt="<?php print $alt ?>" align="center">
+	<img src="<?php print $image ?>" alt="<?php print $alt ?>" title="<?php print $title ?>" align="center">
 	<br clear="left">
 	<?php print $alt ?>
 	</p>
 </div>
-
+</div>
 
 <?php
 	  }else{

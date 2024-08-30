@@ -1,8 +1,12 @@
+public_html/graphics/
+public_html/graphics/xcf-files/
+public_html/images/
+all-images/
+all-images/
+.sass-cache/
 public_html/documents/*
 *.pdf
 *.txt
 *.doc
 *.docx
 *.xls*
-public_html/documents/cornerstone-lease.pdf
-graphics/
