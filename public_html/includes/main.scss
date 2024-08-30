@@ -243,3 +243,16 @@ body {
   display: inline;
   border: 0;
 }
+
+/******** red text for errors and warnings *******/
+.red {
+  color: $red;
+}
+
+.warning {
+  color: $red;
+}
+
+.error {
+  color: $red;
+}

@@ -15,162 +15,182 @@ foreach( array('first_name', 'mid_name',  'last_name', 'addr1', 'addr2', 'city',
 }
 
 
-if( isset($_REQUEST['action']) && $_REQUEST['action'] == 'Submit' && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_code']) && ($_SESSION['security_code'] == $_REQUEST['security_code'])  ) {
+$requiredErrorMsg = '';
 
-    $fields = array('first_name' => 'First Name', 
-		    'mid_name'   => 'Middle Name',
-		    'last_name'  => 'Last Name',
-		    'addr1'      => 'Street Address',
-		    'addr2'      => 'Street Address 2',
-		    'city'       => 'City',
-		    'state'      => 'State',
-		    'zip'        => 'Zip',
-		    'country'    => 'Country',
-		    'home_phone' => 'Home Phone',
-		    'cell_phone' => 'Cell Phone',
-		    'email'      => 'Email',
-		    'dob'        => 'Date of Birth',
-			'cs_address' => 'Current Cortland State Address',
-			'cs_landlord' => 'Current Cortland Landlord',
-		    'semyear'    => 'Semester / Year',
-			'tennant2'   =>  'Tennant 2 Name',
-			'tennant2_email' => 'Tennant 2 Email',
-			'tennant3'   =>  'Tennant 3 Name',
-			'tennant3_email' => 'Tennant 3 Email'
-);
+if( isset($_REQUEST['action']) && $_REQUEST['action'] == 'Submit' && 
+    !empty($_SESSION['security_code']) && !empty($_REQUEST['security_code']) && ($_SESSION['security_code'] == $_REQUEST['security_code'])  ) {
 
-	$required = array('first_name' => $first_name,
-					  'last_name'  => $last_name,
-					  'addr1'      => $addr1,
-					  'city'       => $city,
-					  'state'      => $state,
-					  'zip'        => $zip,
-					  'country'    => $country,
-					  'dob'        => $dob,
-					  'email'      => $email,
-					  'semyear'    => $semyear);
+	
 
-    $lengths = array('first_name' => 25,
-					 'mid_name'   => 25,
-					 'last_name'  => 25,
-					 'addr1'      => 50,
-					 'addr2'      => 50,
-					 'city'       => 25,
-					 'state'      => 25,
-					 'zip'        => 10,
-					 'country'    => 50,
-					 'home_phone' => 15,
-					 'cell_phone' => 15,
-					 'email'      => 50,
-					 'dob'        => 10,
-					 'cs_address' => 75,
-					 'semyear'    => 15,
-                     'tennant2'   => 50,
-                     'tennant2_email' => 50,
-                     'tennant3'   => 50,
-                     'tennant3_email' => 50,
-);
+  $fields = array(
+    'first_name' => 'First Name', 
+    'mid_name'   => 'Middle Name',
+    'last_name'  => 'Last Name',
+    'addr1'      => 'Street Address',
+    'addr2'      => 'Street Address 2',
+    'city'       => 'City',
+    'state'      => 'State',
+    'zip'        => 'Zip',
+    'country'    => 'Country',
+    'home_phone' => 'Home Phone',
+    'cell_phone' => 'Cell Phone',
+    'email'      => 'Email',
+    'dob'        => 'Date of Birth',
+		'cs_address' => 'Current Cortland State Address',
+		'cs_landlord' => 'Current Cortland Landlord',
+	  'semyear'    => 'Semester / Year',
+		'tennant2'   =>  'Tennant 2 Name',
+		'tennant2_email' => 'Tennant 2 Email',
+		'tennant3'   =>  'Tennant 3 Name',
+		'tennant3_email' => 'Tennant 3 Email'
+  );
 
-    $errors = false;
+	$required = array(
+	  'first_name' => $first_name,
+	  'last_name'  => $last_name,
+	  'addr1'      => $addr1,
+	  'city'       => $city,
+	  'state'      => $state,
+	  'zip'        => $zip,
+	  'country'    => $country,
+	  'dob'        => $dob,
+	  'email'      => $email,
+	  'semyear'    => $semyear);
 
-    $labels = array();
+  $lengths = array('first_name' => 25,
+				 'mid_name'   => 25,
+				 'last_name'  => 25,
+				 'addr1'      => 50,
+				 'addr2'      => 50,
+				 'city'       => 25,
+				 'state'      => 25,
+				 'zip'        => 10,
+				 'country'    => 50,
+				 'home_phone' => 15,
+				 'cell_phone' => 15,
+				 'email'      => 50,
+				 'dob'        => 10,
+				 'cs_address' => 75,
+				 'semyear'    => 15,
+         'tennant2'   => 50,
+         'tennant2_email' => 50,
+         'tennant3'   => 50,
+         'tennant3_email' => 50,
+  );
+
+  $errors = false;
+
+  $labels = array();
 	foreach ( $required as $key => $val ){
 		if( !$val ){
-            $errors = true;
+      $errors = true;
 			$labels[$key] = "style='color: #b31b1b;'";
-            #$requiredErrorMsg .= "<li>$fields[$key] is requried</li>";
-        }
-    }
-	$dobErrorMsg = '';
-    if( !preg_match('/\/|-/', $_REQUEST['dob']) ){
-		$errors = true;
-        $labels['dob'] = "style='color: #b31b1b;'";
-        #$dobErrorMsg = '<p style="color: b31b1b;">Your Date of Birth must be in the format of mm/dd/yyyy</p>';
+      #$requiredErrorMsg .= "<li>$fields[$key] is requried</li>";
+      print "<p>errors: in required block</p>";
     }
     
-	$length_error_message = '';
-    foreach ( $lengths as $key => $val ){
-        if( strlen($val) > $lengths[$key] ){
-			$errors = true;
-            $err_len = strlen($val);
-            $length_error_message .= "<li>$fields[$key] cannot exceed $lengths[$key] characters
-                                    in length.</li>";
-        }
+  }
+
+  $dobErrorMsg = '';
+
+  if( !preg_match('/\/|-/', $_REQUEST['dob']) ){
+	$errors = true;
+      $labels['dob'] = "style='color: #b31b1b;'";
+      #$dobErrorMsg = '<p style="color: b31b1b;">Your Date of Birth must be in the format of mm/dd/yyyy</p>';
+  }
+    
+  $length_error_message = '';
+
+  foreach ( $lengths as $key => $val ){
+    if( strlen($val) > $lengths[$key] ){
+	    $errors = true;
+      $err_len = strlen($val);
+      $length_error_message .= "<li>$fields[$key] cannot exceed $lengths[$key] characters in length.</li>";
+      print "<p>errors: in length block</p>";
     }
-    if( strlen($length_error_message) ){
-		print '<p style="color: b31b1b;">There are problems with the length of one or more of your entries.  
-                  Please correct the following:</p>
-                  <ul style="color: b31b1b;">';
-        
-        print "</ul>";
-    }
+    
+  }
+  if( strlen($length_error_message) ){
+	  print '<p style="color: #b31b1b;">There are problems with the length of one or more of your entries.  
+              Please correct the following:</p>
+              <ul style="color: #b31b1b;">';
+      
+    print "</ul>";
+  }
   
-	$successful_entry = true;
-    if( !$errors ){
-        # do an insert
-        if( $_REQUEST['dob'] ){
-            if( preg_match('/\//', $_REQUEST['dob']) ){
-				list($m,$d,$y) = explode('/',$_REQUEST['dob']);			
-            }
-            if( preg_match('/-/', $_REQUEST['dob']) ){
-				list($m,$d,$y) = explode('/-/',$_REQUEST['dob']);		
-            }
-            if( strlen($y) == 2 ){
-				$y = '19'.$y;  # make year 4 digits.
-			}
-        }
-        
-        $dob = "$y-$m-$d"; 
+  $successful_entry = true;
+  if( !$errors ){
+    # do an insert
 
-        $entry_date = date('Y-m-d',time());
-        $sql = "insert into applicants
-                     (first_name, mid_name, last_name, addr1, addr2,
-                      city, state, zip, country, home_phone, cell_phone,
-                      email, dob, cs_address, semyear, entry_date, comments,
-                      tennant2, tennant2_email, tennant3, tennant3_email,location, cs_landlord)
-                values
-                     (?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?)";
-        $myParams = array($first_name, $mid_name, $last_name, $addr1, $addr2,
-                      $city, $state, $zip, $country, $home_phone, $cell_phone,
-                      $email, $dob, $cs_address, $semyear, $entry_date, $comments,
-                      $tennant2, $tennant2_email, $tennant3, $tennant3_email, $location,$cs_landlord);
-        $results = $globalMySqlConnect->query($sql, $myParams);
-        if( DB::isError($results) ){
-			errorEmail(array('request-application.html',
-											 $results->getMessage(),
-                       $results->toString()) );
+    $dob = date('Y-m-d', strtotime($dob));
 
-            die($results->getMessage()." ".$results->toString());
-			$successful_entry = false;
-        }
-        if( $globalMySqlConnect->affectedRows()== 1 ){
-            ?>
-             <p>Thank you for your interest in The Suites for you student housing needs, and for completing our online Request an Application form.  
-             <br />Your request has been recorded and an email sent to CornerStone Properties of Cortland.</p>
-            <?php
-            $successful_entry = true;
-        }else{
-            print "<p>Sorry, we were not able to record your information. Please try again.</p>";
-            $successful_entry = false;
-        }
-    }else{
-        print "<p style class=\"red\">There were errors with your form entry.  Problem areas are marked with RED text on the form below.</p>";
-        $successful_entry = false;
-        print $dobErrorMsg;
-        print $length_error_message;
-        print $requiredErrorMsg;
+    $entry_date = date('Y-m-d',time());
+    $sql = "insert into applicants
+                 (first_name, mid_name, last_name, addr1, addr2,
+                  city, state, zip, country, home_phone, cell_phone,
+                  email, dob, cs_address, semyear, entry_date, comments,
+                  tennant2, tennant2_email, tennant3, tennant3_email,location, cs_landlord)
+            values
+                 (?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?)";
+    $myParams = array($first_name, $mid_name, $last_name, $addr1, $addr2,
+                  $city, $state, $zip, $country, $home_phone, $cell_phone,
+                  $email, $dob, $cs_address, $semyear, $entry_date, $comments,
+                  $tennant2, $tennant2_email, $tennant3, $tennant3_email, $location,$cs_landlord);
+    $results = $globalMySqlConnect->query($sql, $myParams);
+    if( DB::isError($results) ){
+	    errorEmail(array('request-application.html',
+			$results->getMessage(),
+      $results->toString()) );
+      die($results->getMessage()." ".$results->toString());
+	    $successful_entry = false;
     }
+    if( $globalMySqlConnect->affectedRows()== 1 ){
+        ?>
+        <div class="row">
+        	<div class="small-12 columns red center">
+            <p>&nbsp;</p>
+            <p class="red" style="text-align: center;">Thank you for your interest in The Suites for you student housing needs, and for completing our online Request an Application form.  
+            <br />Your request has been recorded and an email sent to CornerStone Properties of Cortland.</p>
+          </div>
+        </div>
+        <?php
+        $successful_entry = true;
+    }else{
+    ?>
+      <div class="row">
+        <div class="small-12 columns red center">
+          <p>&nbsp;</p>
+          <p class="red">Sorry, we were not able to record your information. Please try again.</p>
+        </div>
+      </div>
+    <?php
+      $successful_entry = false;
+    }
+  }else{
+  ?>
+    <div class="row">
+       <div class="small-12 columns red center">
+	      <p>&nbsp;</p>
+        <p class="red">There were errors with your form entry.  Problem areas are marked with RED text on the form below.</p>
+      </div>
+    </div>
+    <?php
+      $successful_entry = false;
+      print $dobErrorMsg;
+      print $length_error_message;
+      print $requiredErrorMsg;
+  }
 
     if( $successful_entry == true ){
 		# send email to mike and jim
-        $to      = "info@cortlandcollegehousing.com";
-        #$to = 'john@johndcowan.com';
+        # $to      = "info@cortlandcollegehousing.com";
+        $to = 'jdc44@cornell.edu';
         $from    = "info@cortlandcollegehousing.com";
-        #$cc      = "john@johndcowan.com";
+        $cc      = "jdc44@cornell.edu";
         $subject = "The Suites Online Application form";
 
         $headers  = "To: Mike Reeners: <$to>\r\n";
-        # $headers .= "CC: Webmaster: <$cc>\r\n";
+        $headers .= "CC: Webmaster: <$cc>\r\n";
 		$headers .= "From: 'Online Application Form' <$from>\r\n";
 		$headers .= "Reply-To: 'CornerStone Properties' <$from>\r\n";
 		$headers .= "Return-Path: $from\r\n";
@@ -221,8 +241,15 @@ EOD;
     }	
   unset($_SESSION['security_code']);
 } else if($submit && empty($_SESSION['security_code']) || (!empty($_REQUEST['security_code']) && ($_SESSION['security_code'] != $_REQUEST['security_code']) )  ) {
-	  print "<p class='red'>Sorry, but the Security Code you entered did not match the image.  Try Again!</p>";
-}
+  ?>
+  <div class="row">
+    <div class="small-12 columns red center">
+		  <p>&nbsp;</p>
+	    <p class="red">Sorry, but the Security Code you entered did not match the image.  Try Again!</p>
+	  </div>
+	</div>
+	<?php
+} // if action - submitted
 ?>
 
 <div role="main">
@@ -286,14 +313,14 @@ EOD;
 </div>
 
 
-<form action="request-application.html" method="post" role="form" aria-label="Request Application" title="off-campus housing suny cortland">
+<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" role="form" aria-label="Request Application" title="off-campus housing suny cortland">
 
 <div class="row" title="suny cortland off-campus apartments furnished">
 	<div class="medium-4 columns">
     <label for="first-name" <?php print isset($labels['first_name'])?$labels['first_name']:''; ?>>* First Name</label>
     </div>
 	<div class="medium-6 columns">
-		<input type="text" id="first-name" name="first_name" maxLength="30" size="20" value="<?php print $first_name ?>">
+		<input type="text" id="first-name" name="first_name" maxLength="30" size="20" value="<?php print $first_name ?>" required />
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
 	
@@ -314,7 +341,7 @@ EOD;
     <label for="last-name" <?php print isset($labels['last_name'])?$labels['last_name']:''; ?>>* Last Name</label>
 	</div>
 	<div class="medium-6 columns">
-    <input type="text" id="last-name" name="last_name" maxLength="30" size="20" value="<?php print $last_name ?>">
+    <input type="text" id="last-name" name="last_name" maxLength="30" size="20" value="<?php print $last_name ?>" required />
   </div>
  <div class="medium-2 columns">&nbsp;</div>
 </div>
@@ -324,7 +351,7 @@ EOD;
 		 <label for="addr1" <?php print isset($labels['addr1'])?$labels['addr1']:''; ?>>* Home Address 1</label>
   </div>
   <div class="medium-6 columns">
-	   <input type="text" id="addr1" name="addr1" maxLength="30" size="20" value="<?php print $addr1 ?>">
+	   <input type="text" id="addr1" name="addr1" maxLength="30" size="20" value="<?php print $addr1 ?>" required />
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
 </div>
@@ -344,7 +371,7 @@ EOD;
 		 <label for="city" <?php print isset($labels['city'])?$labels['city']:'';?>>* City</label>
   </div>
   <div class="medium-6 columns">
-     <input type="text" id="city" name="city" maxLength="30" size="20" value="<?php print $city ?>">
+     <input type="text" id="city" name="city" maxLength="30" size="20" value="<?php print $city ?>" required />
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
 </div>
@@ -354,7 +381,7 @@ EOD;
 		 <label for="state" <?php print isset($labels['state'])?$labels['state']:''; ?>>* State</label>
 	</div>
   <div class="medium-6 columns">
-	   <input id="state" type="text" name="state" maxLength="30" size="20" value="<?php print $state ?>">
+	   <input id="state" type="text" name="state" maxLength="30" size="20" value="<?php print $state ?>" required />
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
 </div>
@@ -364,7 +391,7 @@ EOD;
 		 <label for="zip" <?php print isset($labels['zip'])?$labels['zip']:''; ?>>* Zip Code</label>
 	</div>
   <div class="medium-3 columns">
-	   <input type="text" id="zip" name="zip" maxLength="30" size="20" value="<?php print $zip ?>">
+	   <input type="text" id="zip" name="zip" maxLength="30" size="20" value="<?php print $zip ?>" required />
 	</div>
 	<div class="medium-6 columns">&nbsp;</div>
 </div>
@@ -374,7 +401,7 @@ EOD;
 		 <label for="country" <?php print isset($labels['country'])?$labels['country']:''; ?>>* Country</label>
 	</div>
   <div class="medium-6 columns">
-	   <input type="text" id="country" name="country" maxLength="30" size="20" value="<?php print $country ?>">
+	   <input type="text" id="country" name="country" maxLength="30" size="20" value="<?php print $country ?>" required />
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
 </div>
@@ -404,7 +431,7 @@ EOD;
 		 <label for="email" <?php print isset($labels['email'])?$labels['email']:''; ?>>* Email</label>
 	</div>
 	<div class="medium-6 columns">
-		 <input type="text" id="email" name="email" maxLength="30" size="20" value="<?php print $email ?>">
+		 <input type="text" id="email" name="email" maxLength="30" size="20" value="<?php print $email ?>" required />
 	</div>
 	<div class="medium-2 columns">&nbsp;</div>
 </div>
@@ -414,6 +441,9 @@ EOD;
 		 <label for="datepicker" <?php print isset($labels['dob'])?$labels['dob']:''; ?>>* Date of Birth as (mm/dd/yyyy)</label>
 	</div>
 	<div class="medium-6 columns">
+		<?php
+		$dob = (isset($dob) && !empty($dob)) ? date('m/d/Y', strtotime($dob)) : date('m/d/Y');
+		?>
 		  <input type="text" id="datepicker" name="dob" maxLength="30" size="20" value="<?php print $dob ?>" /> 
 		    
 	</div>
@@ -537,7 +567,7 @@ EOD;
 
 <div class="row" title="cortland college off-campus student housing">
 	<div class="medium-4 columns"><label for="security_code">Security Code: </label></div>
-  <div class="medium-6 columns"><input id="security_code" name="security_code" type="text" /></div>
+  <div class="medium-6 columns"><input id="security_code" name="security_code" type="text"  required /></div>
   <div class="medium-2 columns">&nbsp;</div>
 </div>
 

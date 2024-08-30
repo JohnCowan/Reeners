@@ -239,4 +239,14 @@ body {
   display: inline;
   border: 0; }
 
+/******** red text for errors and warnings *******/
+.red {
+  color: #b31b1b; }
+
+.warning {
+  color: #b31b1b; }
+
+.error {
+  color: #b31b1b; }
+
 /*# sourceMappingURL=main.css.map */
