@@ -118,8 +118,10 @@ h3 {
   background-color: #000; }
   .menu .active {
     color: #fff;
-    background-color: #369;
+    background-color: #b31b1b;
     padding-left: 15px; }
+    .menu .active a {
+      background-color: #b31b1b; }
   .menu .nav-title {
     color: #fff;
     background-color: #b31b1b;
@@ -137,7 +139,7 @@ h3 {
     color: #fff; }
   .menu a:hover {
     text-decoration: none;
-    background-color: #b31b1b;
+    background-color: #369;
     color: #ffff99; }
 
 .full-width {

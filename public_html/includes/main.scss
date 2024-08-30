@@ -84,8 +84,11 @@ h3 {
     background-color: $black;
 	.active {
         color: $white;
-		background-color: $blue;
+		    background-color: $red;
         padding-left: 15px;
+        a {
+           background-color: $red;
+        }
 	}
 	.nav-title {
         color: $white;
@@ -108,7 +111,7 @@ h3 {
     }
     a:hover {
 	   text-decoration: none;
-	   background-color: $red;
+	   background-color: $blue;
 	   color: $yellow;
     }
 

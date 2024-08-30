@@ -223,6 +223,8 @@ function printTopNavs(){
   $groton_active  = preg_match('/apartments\/112-groton-ave/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $woodruff_active  = preg_match('/apartments\/7-woodruff-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $lincoln_active  = preg_match('/apartments\/91-lincoln-ave/', $_SERVER['PHP_SELF']) ? 'active' : '';
+
+  $checklist_active = preg_match('/college-apartment-checklist/', $_SERVER['PHP_SELF']) ? 'active' : '';
   ?>
 
   <!-- accessibility role for navs -->
@@ -237,6 +239,12 @@ function printTopNavs(){
            <li class="<?php print $apartments_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/index.html" title="off-campus housing suny cortland">Apartments</a>
 
               <ul class="data-dropdown-menu">
+                <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
+                
+                 <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
+
+                 <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
+
                  <li class="<?php print $tompkins_50_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/50-tompkins-str.html">50 Tompkins Str</a></li>
                  <li class="<?php print $tompkins_52_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/52-tompkins-str.html">52 Tompkins Str</a></li>
                  <li class="<?php print $tompkins_100_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/100-tompkins-str.html">100 Tompkins Str</a></li>
@@ -247,17 +255,24 @@ function printTopNavs(){
 
            </li>
 
-           <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
+           
 
-           <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
+           
 
-           <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
+           
 
-           <li class="<?php print $application_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html" title="suny cortland off-campus housing">Application</a></li>
+          
 
-           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Important Documents</a></li>
+           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Important Documents</a>
+              <ul class="data-dropdown-menu">
+                <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Documents</a></li>
+                  <li class="<?php print $application_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html" title="suny cortland off-campus housing">Application</a></li>
+              </ul>
+           </li>
 
            <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html" title="cortland college rentals">Contact Us</a></li>
+
+           <li class="<?php print $checklist_active ?>"><a href="<?php print $path ?>college-apartment-checklist.html" title="What to bring to your college apartment">College Apartment Checklist</a></li>
         </ul>
       </div>
   </div> <!-- role=navigation -->
