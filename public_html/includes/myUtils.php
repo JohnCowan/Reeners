@@ -7,52 +7,13 @@
 
 ################################################################################
 ##
-## database connection strings
-## 
-/*
-From website: http://lotsofphp.com/tutorials/pear-package-db.html
+## database connection
+require_once "database/db_connect.php";
 
-Manual Installation:
-To install the package manually, let's put the package in /includes/
-Use the following code to tell PHP where to look for our package:
 
-ini_set("include_path", '/var/www/www.example.com/includes/' . PATH_SEPARATOR . ini_get("include_path"));
-Now we have set our include_path, we can simply require our package like this:
-require_once 'DB.php';
-
-*/
-
-ini_set("include_path", '/home/corthou/public_html/includes/' . ':' . ini_get("include_path"));
-
-require_once 'DB.php';
-$db     = "corthou_suites";
-$host     = "localhost";
-$username   = "corthou_webuser";
-$password   = "NY's#1:-)F@n";
-
-  // Data Source Name: This is the universal connection string
-$dsn = "mysql://$username:$password@$host/$db";
-  
-  // DB::connect will return a Pear DB object on success
-  // or a Pear DB Error object on error
-  // You can also set to TRUE the second param
-  // if you want a persistent connection:
-  // $db = DB::connect($dsn, true);
-$globalMySqlConnect = DB::connect($dsn);
-  // With DB::isError you can differentiate between an error or
-  // a valid connection.
-if ( DB::isError( $db ) ) {
-  die ( $db->getMessage() );
-}
-// alter connection to mysql
-// using above db variables.
-
-  // connect to mysql
-$connection = mysql_connect( $host, $username, $password ) or die ( mysql_error());
-  // connect to the database in mysql
-mysql_select_db($db) or die ( mysql_error() );
 
 // set the path to the graphics folder when we are in the admins folder
+//
 $path = "";
 if( preg_match( '/\/ccAdmins\//', $_SERVER['PHP_SELF']) ){
   $path="../";
@@ -63,12 +24,6 @@ if( preg_match( '/\/ccAdmins\//', $_SERVER['PHP_SELF']) ){
 }else{
   $path="";
 }
-
-######   show some errors on the page if we can      
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
-error_reporting(E_ALL);
 
 
 
@@ -110,7 +65,13 @@ function printHeaders($params){
        <meta property="og:image" content="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif"/>
        <meta property="og:url" content="onlinecode.org"/>
        <meta property="og:description" content="social media sharing buttons php onlinecode.org"/>
-         
+      
+
+       <!-- Compressed CSS -->
+       <!--
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css" crossorigin="anonymous">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation-float.min.css" crossorigin="anonymous">
+       -->
        <!-- css code -->
      
      <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/css/foundation.css" type="text/css" />
@@ -255,14 +216,7 @@ function printTopNavs(){
 
            </li>
 
-           
-
-           
-
-           
-
           
-
            <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Important Documents</a>
               <ul class="data-dropdown-menu">
                 <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Documents</a></li>
@@ -469,38 +423,46 @@ function printApartmentNavs(){
 
 
 function getNews($page){
-  global $globalMySqlConnect;
+  global $dbh;
   ?>
   <div class="row" role="alert">
     <div class="medium-12 columns callout alert text-center">
         <h2>Apartment News!</h2>
         <?php
         $sql="select * from news";
-        $results = $globalMySqlConnect->query($sql);
-        if(DB::isError($results)){
-         die("cannot get news. ".$results->toString());
+        $sth=$dbh->prepare($sql);
+        $sth->execute();
+        if( !$sth ){
+         error_log("MYUTILS.PHP cannot get news.");
+
         }
-        while($data=$results->fetchRow(DB_FETCHMODE_ASSOC)){
+        $results = $sth->fetchAll();
+        
+        foreach( $results as $data ){
+
+          // print the news on these pages:
+          //
           if(!empty($data['home_page']) && $page=='index.html'){
-              print $data['content'];
+              print "<p>".$data['content']."</p>";
+
           }
           if(!empty($data['description_page']) && $page=='apartment-description.html'){
-              print $data['content'];
+              print "<p>".$data['content']."</p>";
           }
           if(!empty($data['floorplans_page']) && $page=='floorplans.html'){
-              print $data['content'];
+              print "<p>".$data['content']."</p>";
           }
           if(!empty($data['location_page']) && $page=='apartment-locations.html'){
-              print $data['content'];
+              print "<p>".$data['content']."</p>";
           }
           if(!empty($data['request_page']) && $page=='request-application.html'){
-              print $data['content'];
+              print "<p>".$data['content']."</p>";
           }
           if(!empty($data['lease_page']) && $page=='lease.html'){
-              print $data['content'];
+              print "<p>".$data['content']."</p>";
           }
-          if(!empty($data['contact_page']) && $page=='contact-us.html'){
-              print $data['content'];
+          if( $data['contact_page']==1 && $page=='contact-us.html'){
+              print "<p>".$data['content']."</p>";
           }
         }
         ?>
@@ -512,32 +474,34 @@ function getNews($page){
 
 // record when someone comes to the site.  Should add this to Google Analytics 
 function logHits($item){
-   global $globalMySqlConnect;
+   global $dbh;
   
    $item = strtoupper($item);
    $today = date('Y-m-d',time());
    $referrer = !empty($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'NONE';
    $item = !empty($item) ? $item : 'Not Sent';   
-    $sql = "insert into hits 
+   $sql = "insert into hits 
                 ( page_hit, referrer, date_hit )
             values
                 ( ?, ?, ? )";
     $sqlParams = array( $item, $referrer, $today );
-    $result = $globalMySqlConnect->query($sql, $sqlParams);
-    if(DB::isError( $result )){
-      die("Problem inserting into hits " .$result->toString());
+    $sth=$dbh->prepare($sql);
+    $sth->execute($sqlParams);
+    if( !$sth ){
+      error_log("######## MYUTILS.PHP cannot insert into hits");
     }
 }
 
 function getHits(){
-  global $globalMySqlConnect;
+  global $dbh;
   $sql="select count(*) as cnt_hits from hits where page_hit = upper(?)";
-  $result=$globalMySqlConnect->query($sql, array('HOME-PAGE'));
-  if(DB::isError( $result )){
-    die("Problem inserting into hits " .$result->toString());
-    errorEmail(array($page,$result->toString(), $result->toString()));
+  $sth=$dbh->prepare($sql);
+  $sth->execute( ['HOME-PAGE'] );
+  if( !$sth ){
+      error_log("######## MYUTILS.PHP problem querying hits");
   }
-  if($data=$result->fetchRow(DB_FETCHMODE_ASSOC)){
+  // single row expected, use fetch()
+  if( $data=$sth->fetch() ){
     ?>
     <div class="row">
       <div class="medium-12 columns callout alert text-center">

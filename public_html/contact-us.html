@@ -19,7 +19,11 @@ $submit = !empty($_REQUEST['submit'])?$_REQUEST['submit']:'';
 
 
 $okay_to_process = false;
-if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_code']) && ($_SESSION['security_code'] == $_REQUEST['security_code'])  ) {
+if( $submit && !empty($_SESSION['security_code']) && 
+    !empty($_REQUEST['security_code']) && 
+    ($_SESSION['security_code'] == $_REQUEST['security_code'])  )
+{
+
 	if( !empty($name) && !empty($email) && !empty($message) ){
 		if( !preg_match("/^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/", $email) ){
 			print "<p class='red'>Your email address is not in a valid format.</p>";
@@ -165,9 +169,7 @@ if( $submit && !empty($_SESSION['security_code']) && !empty($_REQUEST['security_
 
 
 <?php 
-getNews('index.html');
-?>
+getNews('contact-us.html');
 
-<?php
 printFooter();
 ?>

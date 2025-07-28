@@ -5,6 +5,7 @@ all-images/
 all-images/
 .sass-cache/
 public_html/documents/*
+public_html/includes/database/
 *.pdf
 *.txt
 *.doc

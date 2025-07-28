@@ -2,120 +2,212 @@
 session_start();
 
 require_once('../includes/myUtils.php');
-require_once('../includes/login.php');
 
 $params = array(
 				'title' => 'CornerStone Properties, The Suites, Student Housing, Cortland, NY',
 				'description' => 'Quality student housing located in Cortland, NY. Just a short walk to Cortland State College.',
 				'keywords' => 'student housing, student, housing, apartments, rentals,'
 				);
-if( $verified ){
-	$params['page'] = '';
-}
-printHeaders($params);
-?>
-<style type="text/css">
-th { text-align: left; }
-</style>
+	
 
-<div class="mainbody">
-<h3>
-Applicants Admin
-</h3>
-<p>Applicants for Rentals</p>
- 
-<?php
-// did user login?
-if( !isset( $_SESSION['verified'] ) ){
-	 _showLoginScreen();
-}
-if ( $verified ){
-  # get all applicants from the db
-  $sql = "select * from applicants order by entry_date asc";
-  $results = $globalMySqlConnect->query($sql);
+  printHeaders($params);
 
-  # get all applicants from the db
-  $sql = "select * from applicants where entry_id = ?";
-  $results = $globalMySqlConnect->query($sql, array($_REQUEST['entry_id']));
+  $entry_id = isset($_REQUEST['entry_id']) && !empty($_REQUEST['entry_id']) ? $_REQUEST['entry_id'] : '';
   ?>
-   <table class="darkblue">
-  <?php
-  if ( $app=$results->fetchRow(DB_FETCHMODE_ASSOC) ){
-	print "<tr>";
-	print "<th>Fullname</th>";
-	print "<td>$app[first_name] $app[mid_name] $app[last_name]"; # full name
-        print "</tr>";
 
-        print "<tr><th>Address</th>
-                   <td>$app[addr1]<br />
-                       $app[addr2]</td>
-               </tr>";
-        
-	print "<tr><th>City</th>
-                   <td>$app[city]</td>
-               </tr>";
+    <style type="text/css">
+    color: #000;
+  </style>
 
-	print "<tr><th>State</th>
-                   <td>$app[state]</td>
-               </tr>";
-
-	print "<tr><th>Zip</th>
-                   <td>$app[zip]</td>
-               </tr>";
-
-	print "<tr><th>Country</th>
-                   <td>$app[country]</td>
-               </tr>";
-    if( $app['dob'] ){
-		list($y,$m,$d) = explode('-',$app['dob']);
-        $dob = "$m/$d/$y";
-    }
-	print "<tr><th>Date of Birth</th>
-                   <td>$dob</td>
-               </tr>";
-
-	print "<tr><th>Home Phone</th>
-                   <td>$app[home_phone]</td>
-               </tr>";
-
-	print "<tr><th>Cell Phone</th>
-                   <td>$app[cell_phone]</td>
-               </tr>";
-
-	print "<tr><th>Email</th>
-                   <td>$app[email]</td>
-               </tr>";
-        
-	print "<tr><th>When Needed</th>
-                   <td>$app[semyear]</td>
-               </tr>";
-
-    print "<tr><th>Tennant 2 Name</th>
-               <td>$app[tennant2]</td>
-           </tr>";
-    print "<tr><th>Tennant 2 Email</th>
-               <td>$app[tennant2_email]</td>
-           </tr>";
-
-    print "<tr><th>Tennant 3 Name</th>
-               <td>$app[tennant3]</td>
-           </tr>";
-    print "<tr><th>Tennant 3 Email</th>
-               <td>$app[tennant3_email]</td>
-           </tr>";
-        
-	print "<tr><th>User Comments</th>
-                   <td>$app[comments]</td>
-               </tr>";
-        
   
-  }
-?>
-</table>
+  <div role="main" title="off-campus housing cortland college">
+    <p>&nbsp;</p>
 
-<p>&nbsp;</p>
-<?php
- } // end if
-?>
+    <div class="row">
+      <div class="small-12 columns center">
+         <h3>Applicants Admin</h3>
+      </div>
+    </div>
 
-</div>
+    <div class="row">
+      <div class="small-12 columns">
+         <p>Applicant for Rentals</p>
+      </div>
+    </div>
+    
+     
+    <?php
+    // did user login?
+    if( !isset( $_SESSION['verified'] ) ){
+      require_once('../includes/login.php');
+    	 _showLoginScreen();
+    }
+
+    if ( isset( $_SESSION['verified'] ) ){
+
+      if( !empty($entry_id) ){
+        # get applicant from the db
+        $sql = "select * from applicants where entry_id = ?";
+        $sth = $dbh->prepare($sql);
+        $sth->execute([$entry_id]);
+        if( !$sth ){
+          error_log("######## APPLICANT-DETAILS.HTML cannot query matching applicants for $entry_id");
+        }
+        // get single record, use fetch()
+        $data = $sth->fetch();
+      }
+
+//var_dump($data);
+     
+      if( is_array($data) && count($data) && $data['entry_id'] ){
+        ?>
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Fullname:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['first_name'] ?> <?= $data['last_name'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+      	<div class="row">
+          <div class="small-2 columns"><p><strong>Address:</strong></p></div>
+          <div class="small-2 columns"><p>
+            <?= $data['addr1'] ?> <?= !empty($data['addr2']) ? '<br />'.$data['addr2'] : ''; ?>
+          </p></div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>City:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['city'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+              
+        <div class="row">
+          <div class="small-2 columns"><p><strong>State:</strong><p></div>
+          <div class="small-2 columns">
+            <p><?= $data['state'] ?><p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Zip Code:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['zip'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Country:</strong></p></div>
+          <div class="small-2 columns">
+           <p> <?= $data['country'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <?php
+          if( $data['dob'] ){
+          list($y,$m,$d) = explode('-',$data['dob']);
+              $dob = "$m/$d/$y";
+          }
+        ?>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>DOB:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $dob ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Home Phone:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['home_phone'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Cell Phone:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['cell_phone'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Email:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['email'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>When Needed:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['semyear'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Tennant 2:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['tennant2'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Tennant 2 Email:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['tennant2_email'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+         
+         <div class="row">
+          <div class="small-2 columns"><p><strong>Tennant 3:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['tennant3'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        <div class="row">
+          <div class="small-2 columns"><p><strong>Tennant 3 Email:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['tennant3_email'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>
+
+        
+        <div class="row">
+          <div class="small-2 columns"><p><strong>User Comments:</strong></p></div>
+          <div class="small-2 columns">
+            <p><?= $data['comments'] ?></p>
+          </div>
+          <div class="small-8 columns">&nbsp;</div>
+        </div>  
+      	
+              
+      <?php 
+      } // end if
+      ?>
+
+      <p>&nbsp;</p>
+
+  <?php
+  } // end if $_SESSION['verified']
+  ?>
+
+</div> <!-- end role=main -->
+
+<?php printFooter(); ?>
