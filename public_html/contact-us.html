@@ -7,57 +7,78 @@ $params = array(
 				'keywords' => ''
 				);
 printHeaders($params);
-?>
 
-<?php
-$name = !empty($_REQUEST['name'])?$_REQUEST['name']:'';
-$email = !empty($_REQUEST['email'])?$_REQUEST['email']:'';
-$message = !empty($_REQUEST['message'])?$_REQUEST['message']:'';
-$security_code = !empty($_REQUEST['security_code'])?$_REQUEST['security_code']:'';
-$submit = !empty($_REQUEST['submit'])?$_REQUEST['submit']:'';
 
+
+
+// instantiate form variables
+//
+foreach( array('name',
+               'email',
+               'message',
+               'action',
+              ) as $y ){
+   $$y = !empty($_REQUEST[$y])?$_REQUEST[$y]:'';
+}
+
+// var_dump($_REQUEST);
+
+// $msg = '';  // message to user
 
 
 $okay_to_process = false;
-if( $submit && !empty($_SESSION['security_code']) && 
-    !empty($_REQUEST['security_code']) && 
-    ($_SESSION['security_code'] == $_REQUEST['security_code'])  )
+
+if( !empty($action) && $action == 'Submit Question')
 {
 
 	if( !empty($name) && !empty($email) && !empty($message) ){
-		if( !preg_match("/^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/", $email) ){
-			print "<p class='red'>Your email address is not in a valid format.</p>";
+		
+
+
+	  $to = "info@cortlandcollegehousing.com";
+		$cc = "maddiereeners@hotmail.com";
+
+	  $from     = 'noreply@cortlandcollegehousing.com';
+	  $reply_to = 'webguy@cortlandcollegehousing.com';
+
+	  $subject  = "Contact Us Web Form";
+
+	  $headers  = "From: " . strip_tags($from) . "\r\n";
+	  $headers .= "Reply-To: " . strip_tags($reply_to) . "\r\n";
+	  $headers .= "CC: Maddie Reeners: <$cc> \r\n";
+	  $headers .= "MIME-Version: 1.0\r\n";
+	  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+	  $content  = "<p>A user has submitted the Contact Us form on the website.</p>";
+	  $content .= "<p><strong>Subject:</strong> $subject</p>";
+	  $content .= "<p><strong>Email:</strong> $email</p>";
+	  $content .= "<p><strong>Message:</strong> $message</p>";
+
+	  if( mail($to, $subject, $content, $headers) ){
+
+				$msg .= "Thank you!  Your message has been sent to our office and someone will reply as soon as possible.";
+					
 		}else{
-			## send email to Reeners
-			$to = "info@cortlandcollegehousing.com";
-			$cc = "maddiereeners@hotmail.com";
-			$headers = "From: $email";
-			$headers .= "To: Cortland College Housing Info: <$to>\r\n";
-      $headers .= "CC: Maddie Reeners: <$cc>\r\n";
-			$subject = "Cortland College Housing";
-			$body = "
-			A user completed the contact us form on the website.
-			User Name: $name
-			Email Address: $email
-			Message: $message";
-			if( mail($to, $subject, $body, $headers) ){
-				print "<p class='red'>Thank you!  Your message has been sent to our office and someone will reply as soon as possible.</p>";
-				
-			}else{
-				print "<p class='red'>Well, this is embarrassing. Your email was not sent.  Please check the form and try again.</p>";
-				$name = '';
-				$email = '';
-				$message = '';
-			} 
-	  }
-	}else{
-		print "<p class='red'>Sorry, all fields in the form are required.";
-	}	
-	unset($_SESSION['security_code']);
-} else if($submit && empty($_SESSION['security_code']) || (!empty($_REQUEST['security_code']) && ($_SESSION['security_code'] != $_REQUEST['security_code']) )  ) {
-  print "<p class='red'>Sorry, but the Security Code you entered did not match the image.  Try Again!</p>";
-}
+
+			$msg .= "Well, this is embarrassing. Your email was not sent.  Please check the form and try again.";
+
+	  } // end if/else
+
+  } // end if name
+
+} // end if $action
 ?>
+
+<style>
+ .required {
+ 	 font-size: .8em;
+ 	 color: #b31b1b; /* cornell red */
+ }
+
+ .red {
+ 	color: #b31b1b; /* cornell red */
+ }
+</style>
 
 <div role="main" title="suny cortland contact form">
 
@@ -87,14 +108,29 @@ if( $submit && !empty($_SESSION['security_code']) &&
   </div>
 </div>
 
+
+<?php 
+	if( !empty($msg) ){
+	?>
+<div class="row">
+	<div class="small-12 columns center red">
+		<p class="red"><?= $msg ?></p>
+  </div>
+</div>
+<?php
+}
+?>
+
+
+
 <div class="row" title="cortland college student rentals">
-  <div class="medium-12 medium-centered columns">
+  <div class="medium-12 centered columns">
     <h2 title="off-campus student housing in cortland ny">Send us a message</h2>
   </div>
 </div>
 
-<div class="row" title="living off-campus suny cortland">
-	<div class="medium-3 columns">
+<div class="row">
+	<div class="small-12 columns">
 		<h2>Postal Mail:</h2>
 		  <p>Cornerstone Properties<br />
 			14 Hickory Lane.<br />
@@ -102,65 +138,75 @@ if( $submit && !empty($_SESSION['security_code']) &&
 		</p>
   </div>
 
-  <div class="medium-3 columns">
+  <div class="small-12 columns">
 		<h2 title="student housing near SUNY Cortland">Email Us</h2>
 		<p><a href="mailto:info@cortlandcollegehousing.com">info@cortlandcollegehousing.com</a></p>
   </div>
-  <div class="medium-6 columns">&nbsp;</div>
 </div>
 
 <p>&nbsp;</p>
 
 
-<div class="row" title="off-campus student housing suny cortland">
-	<div class="medium-12 columns"><h2 title="contact cornerstone properties">Message Form</h2></div>
+<div class="row">
+	<div class="medium-12 columns">
+		<h2 title="contact cornerstone properties">Message Form</h2>
+	  <p class="required">** = Requred</p>
+	</div>
 </div>
 
 
 <!---- form starts here  ---->
 
-<form name="form1" id="form1" action="contact-us.html" method="post" role="form" aria-label="Contact information" title="student housing off-campus suny cortland">
+<form name="contact_us_form" id="contact_us_form" action="contact-us.html" method="post" role="form" aria-label="Contact information" title="student housing off-campus suny cortland">
 
-<div class="row" title="cortland college student housing free high speed internet">
-	<div class="medium-3 columns"><label for="name"><b>Your Name:</b></label></div>
-	<div class="medium-3 columns">
-		<input type="text" name="name" id="name" value="<?php print $name ?>" size="40" />
+<div class="row">
+	<div class="small-12 medium-3 large-3 columns">
+		<label for="name"><strong><span class="required">**</span> Your Name:</strong>
+		  <input type="text" name="name" id="name" value="<?php print $name ?>" size="40" required />
+		</label>
 	</div>
-	<div class="medium-6 columns">&nbsp;</div>
 </div>
-<div class="row" title="suny cortland student housing near campus">
-	<div class="medium-3 columns"><label for="email"><b>Email Address:</b></label></div>
-  <div class="medium-3 columns">
-	  <input type="text" name="email" id="email" value="<?php print $email ?>" size="40" />
+
+<div class="row">
+	<div class="small-12 medium-3 large-3 columns">
+		<label for="email"><strong><span class="required">**</span> Email Address:</strong>
+	    <input type="email" name="email" id="email" value="<?php print $email ?>" required />
+	  </label>
+  </div>
+</div>
+
+<div class="row">
+	<div class="small-12 medium-4 large-4 columns">
+		<label for="message"><strong><span class="required">**</span> Message-Question:</strong>
+		  <textarea name="message" id="message" cols="30" rows="7" required><?php print $message ?></textarea>
+		</label>
 	</div>
-	<div class="medium-6 columns">&nbsp;</div>
 </div>
 
-<div class="row" title="cortland college student housing near campus">
-	<div class="medium-3 columns"><label for="message"><b>Message-Question:</b></label></div>
-	  <div class="medium-3 columns">
-		  <textarea name="message" id="message" cols="30" rows="7"><?php print $message ?></textarea>
-		</div>
-		<div class="medium-6 columns">&nbsp;</div>
+<div class="row">
+	<div class="medium-12 columns">
+		<label>Please enter the text seen in the image below into the Security Code text box.</label>
+	</div>
 </div>
 
-<div class="row" title="suny cortland student housing off campus">
-	<div class="medium-12 columns"><label>Please enter the code seen in the image below into the Security Code text box.</label></div>
-</div>
-<div class="row" title="student apartments near suny cortland campus">
-  <div class="medium-3 columns">&nbsp;</div>
-	<div class="medium-3 columns"><img src="includes/CaptchaSecurityImages.php?width=100&height=40&characters=5" alt="captcha security image" /></div>
-	<div class="medium-6 columns">&nbsp;</div>
+<div class="row">
+  <div class="small-12 columns">
+	 <img src="images/Captcha/campus-life.png" alt="captcha security image" />
+	</div>
 </div>
 
-<div class="row" title="student rentals near suny cortland campus">
-	<div class="medium-3 columns"><label for="security_code"><b>Security Code:</b></label></div>
-  <div class="medium-3 columns"><input id="security_code" name="security_code" type="text" /></div>
-  <div class="medium-6 columns">&nbsp;</div>
+<div class="row">
+	<div class="small-12 medium-3 large-3 columns">
+		<label for="captcha"><strong><span class="required">**</span> Security Code:</strong>
+      <input id="captcha" name="captcha" type="text" required />
+    </label>
+  </div>
 </div>
 
-<div class="row" title="student housing off-campus near suny cortland">
-	<div class="medium-12 columns left"><input type="submit" class="button" name="submit" value="Submit Question"></div>
+<div class="row">
+	<div class="small-12 columns">
+		<input type="submit" id="action" class="button" name="action" value="Submit Question">
+	</div>
 </div>
 
 </form>
@@ -173,3 +219,26 @@ getNews('contact-us.html');
 
 printFooter();
 ?>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    ////// contact-us form captcha //////
+    //
+    $('#contact_us_form').submit(function(){
+
+      var captcha = $('#captcha').val();
+
+      if( captcha.localeCompare('Campus Life') == 0 ){
+        return true;
+      } else {
+        alert("The Security Code is not correct");
+        $('#captcha').focus()
+        return false;
+      }
+      return false;
+    });
+
+  });
+
+</script>
