@@ -10,6 +10,9 @@
 ## database connection
 require_once "database/db_connect.php";
 
+// true when running on the local dev site (php -S ... see start-dev-site.sh)
+$is_dev = ( php_sapi_name() === 'cli-server' );
+
 
 
 // set the path to the graphics folder when we are in the admins folder
@@ -28,7 +31,7 @@ if( preg_match( '/\/ccAdmins\//', $_SERVER['PHP_SELF']) ){
 
 
 function printHeaders($params){
-  global $path;
+  global $path, $is_dev;
 ?>
  
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -36,6 +39,7 @@ function printHeaders($params){
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+<?php if( !$is_dev ){ /* no analytics on the local dev site */ ?>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <!-- new tag added march 22, 2022                 -->
       <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Z3CECKQV0"></script> -->
@@ -45,6 +49,7 @@ function printHeaders($params){
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
       </script>
+<?php } ?>
 
        <meta charset="utf-8" />
        <!-- don't need this anymore? <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
@@ -66,39 +71,41 @@ function printHeaders($params){
        <meta property="og:description" content="social media sharing buttons php onlinecode.org"/>
       
 
-       <!-- Compressed CSS -->
-       <!--
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css" crossorigin="anonymous">
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation-float.min.css" crossorigin="anonymous">
-       -->
-       <!-- css code -->
+        <!-- Compressed CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation-float.min.css" crossorigin="anonymous">
+      
+
+      <!-- Compressed JavaScript -->
+      <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js" crossorigin="anonymous"></script>
      
-     <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/css/foundation.css" type="text/css" />
-     
-     <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/main.css" type="text/css" />
+     <!-- ?v= changes whenever main.css changes, so browsers fetch the new copy instead of a cached one -->
+     <link rel="stylesheet" href="<?= $path ?>includes/main.css?v=<?= filemtime(__DIR__ . '/main.css') ?>" type="text/css" />
 
      <!-- slick banner css -->
-     <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.css" />
-     <link rel="stylesheet" href="https://www.cortlandcollegehousing.com/includes/slick-master/slick/slick-theme.css" />
+     <link rel="stylesheet" href="<?= $path ?>includes/slick-master/slick/slick.css" />
+     <link rel="stylesheet" href="<?= $path ?>includes/slick-master/slick/slick-theme.css" />
      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
      <!-- end slick css -->
      <!-- end  css code -->
 
-     <!-- foundation js code -->
-     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-     <script type="text/javascript" src="https://www.cortlandcollegehousing.com/includes/js/vendor/jquery.js"></script>
-     <script type="text/javascript" src="https://www.cortlandcollegehousing.com/includes/ckeditor/ckeditor.js"></script>
-     <script type="text/javascript" src="https://www.cortlandcollegehousing.com/includes/slick-master/slick/slick.min.js"></script>
+     <!-- js code: jQuery is loaded once, here.  (jquery-latest 1.11 removed; it was replaced by this one anyway) -->
+     <script type="text/javascript" src="<?= $path ?>includes/js/vendor/jquery.js"></script>
+     <script type="text/javascript" src="<?= $path ?>includes/ckeditor/ckeditor.js"></script>
+     <script type="text/javascript" src="<?= $path ?>includes/slick-master/slick/slick.min.js"></script>
      <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
    </head>
         
         <!--  bgcolor="#F9F582" -->
         <body>
+        <a class="show-on-focus skip-link" href="#body-container">Skip to main content</a>
+        <?php
+        printTopNavs();   // sticky navigation bar, very top of page
+        printBanner();    // photo slider + tagline
+        ?>
          <div id="body-container">
-        <?php       
-        printBanner();
-        printTopNavs();
+        <?php
 } # end printHeaders()
 ?>
 
@@ -166,7 +173,6 @@ function printTopNavs(){
 
   ### variables to help show which link is currently active
   #
-  /*  if foundation 6 gets the active class working, we are ready                 */
   $home_active     = preg_match('/^\/index/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $about_active    = preg_match('/about/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $locations_active = preg_match('/apartment-locations/', $_SERVER['PHP_SELF']) ? 'active' : '';
@@ -176,186 +182,133 @@ function printTopNavs(){
   $lease_active   = preg_match('/lease/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $docs_active   = preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $contact_active  = preg_match('/contact-us/', $_SERVER['PHP_SELF']) ? 'active' : '';
-  $apartments_active  = preg_match('/apartments/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  $apartments_active  = preg_match('/apartments\/|apartment-(descriptions|floorplans|locations)/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $tompkins_50_active  = preg_match('/apartments\/50-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $tompkins_52_active  = preg_match('/apartments\/52-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $tompkins_100_active  = preg_match('/apartments\/100-tompkins-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $groton_active  = preg_match('/apartments\/112-groton-ave/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $woodruff_active  = preg_match('/apartments\/7-woodruff-str/', $_SERVER['PHP_SELF']) ? 'active' : '';
   $lincoln_active  = preg_match('/apartments\/91-lincoln-ave/', $_SERVER['PHP_SELF']) ? 'active' : '';
-
   $checklist_active = preg_match('/college-apartment-checklist/', $_SERVER['PHP_SELF']) ? 'active' : '';
+  // the application page lives under "Important Documents"
+  if( $application_active ){ $docs_active = 'active'; }
+
+  $apts = $path."cortland-ny/suny-cortland/off-campus-student-housing/";
   ?>
 
-  <!-- accessibility role for navs -->
-  <div class="row" role="navigation" aria-label="Top row navigation" title="cortland properties">
-     <div class="medium-12 columns menu-centered full-width">
-  
-       <ul class="dropdown menu" data-dropdown-menu style="list-style-type: none;">
+  <!-- sticky top navigation.  Small/medium screens: "Menu" button opens an accordion.
+       Large screens (1024px+): horizontal bar with drop-downs.  Uses Foundation 6.3 (see printFooter) -->
+  <div id="site-nav" role="navigation" aria-label="Main navigation">
+
+    <!-- small + medium screens -->
+    <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="large">
+      <a class="brand" href="<?php print $path ?>index.html">CORNERSTONE PROPERTIES</a>
+      <button class="menu-toggle" type="button" data-toggle="main-menu" aria-controls="main-menu" aria-label="Menu">
+        <span class="menu-icon"></span><span class="menu-toggle-text">Menu</span>
+      </button>
+    </div>
+
+    <div class="top-bar" id="main-menu">
+      <div class="top-bar-left">
+        <a class="brand show-for-large" href="<?php print $path ?>index.html">CORNERSTONE PROPERTIES</a>
+
+        <ul class="vertical large-horizontal menu" data-responsive-menu="accordion large-dropdown">
            <li class="<?php print $home_active ?>"><a href="<?php print $path ?>index.html">Home</a></li>
 
            <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing cortland ny">About Us</a></li>
 
-           <li class="<?php print $apartments_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/index.html" title="off-campus housing suny cortland">Apartments</a>
-
-              <ul class="data-dropdown-menu">
-                <li class="<?php print $describe_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
-                
-                 <li class="<?php print $floorplan_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
-
-                 <li class="<?php print $locations_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
-
-                 <li class="<?php print $tompkins_50_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/50-tompkins-str.html">50 Tompkins Str</a></li>
-                 <li class="<?php print $tompkins_52_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/52-tompkins-str.html">52 Tompkins Str</a></li>
-                 <li class="<?php print $tompkins_100_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/100-tompkins-str.html">100 Tompkins Str</a></li>
-                 <li class="<?php print $groton_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/112-groton-ave.html">112 Groton Ave</a></li>
-                 <li class="<?php print $woodruff_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/7-woodruff-str.html">7 Woodruff Str</a></li>
-                 <li class="<?php print $lincoln_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartments/91-lincoln-ave.html">91 Lincoln Ave</a></li>
+           <li class="<?php print $apartments_active ?>"><a href="<?php print $apts ?>apartments/index.html" title="off-campus housing suny cortland">Apartments</a>
+              <ul class="vertical menu nested">
+                <li><a href="<?php print $apts ?>apartments/index.html">All Apartments</a></li>
+                <li class="<?php print $describe_active ?>"><a href="<?php print $apts ?>apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
+                <li class="<?php print $floorplan_active ?>"><a href="<?php print $apts ?>apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
+                <li class="<?php print $locations_active ?>"><a href="<?php print $apts ?>apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
+                <li class="<?php print $tompkins_50_active ?>"><a href="<?php print $apts ?>apartments/50-tompkins-str.html">50 Tompkins Str</a></li>
+                <li class="<?php print $tompkins_52_active ?>"><a href="<?php print $apts ?>apartments/52-tompkins-str.html">52 Tompkins Str</a></li>
+                <li class="<?php print $tompkins_100_active ?>"><a href="<?php print $apts ?>apartments/100-tompkins-str.html">100 Tompkins Str</a></li>
+                <li class="<?php print $groton_active ?>"><a href="<?php print $apts ?>apartments/112-groton-ave.html">112 Groton Ave</a></li>
+                <li class="<?php print $woodruff_active ?>"><a href="<?php print $apts ?>apartments/7-woodruff-str.html">7 Woodruff Str</a></li>
+                <li class="<?php print $lincoln_active ?>"><a href="<?php print $apts ?>apartments/91-lincoln-ave.html">91 Lincoln Ave</a></li>
               </ul>
-
            </li>
 
-          
-           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Important Documents</a>
-              <ul class="data-dropdown-menu">
-                <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Documents</a></li>
-                  <li class="<?php print $application_active ?>"><a href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html" title="suny cortland off-campus housing">Application</a></li>
+           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland"><span class="nav-wide">Important </span>Documents</a>
+              <ul class="vertical menu nested">
+                <li class="<?php print preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '' ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Documents</a></li>
+                <li class="<?php print $application_active ?>"><a href="<?php print $apts ?>apartment-rental-application.html" title="suny cortland off-campus housing">Application</a></li>
               </ul>
            </li>
 
            <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html" title="cortland college rentals">Contact Us</a></li>
 
-           <li class="<?php print $checklist_active ?>"><a href="<?php print $path ?>college-apartment-checklist.html" title="What to bring to your college apartment">College Apartment Checklist</a></li>
+           <li class="<?php print $checklist_active ?>"><a href="<?php print $path ?>college-apartment-checklist.html" title="What to bring to your college apartment"><span class="nav-wide">College Apartment </span>Checklist</a></li>
         </ul>
       </div>
-  </div> <!-- role=navigation -->
+
+      <div class="top-bar-right">
+        <a class="nav-phone" href="tel:+16077562921" title="Call Cornerstone Properties">&#9742; (607) 756-2921</a>
+      </div>
+    </div>
+  </div> <!-- #site-nav -->
 
   <?php
 }
 
 function printBanner(){
   global $path;
+  $img = $path."images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/";
   ?>
-  <header role="banner"> <!-- aria accessibility -->
+  <header role="banner" class="site-hero"> <!-- aria accessibility -->
 
-  <!-- text at the very top of page (all pages) -->
-  
-  <!-- mobile small screens -->
-  <div class="row border-top-red mobile-screen">
-    <div class="medium-12 small-12 columns text-center" 
-         style="font-size: 1.3em; color: 
-         #b31b1b; font-family: Georgia, Arial, Serif;">
-     CORNERSTONE PROPERTIES
-     </div>
-  </div>
-  <div class="row mobile-screen">
-    <div class="medium-12 small-12 columns text-center" style="font-size:1.1em; color:#000;">
-      Off-Campus Student Housing
-      <br />Cortland, NY
-    </div>
-  </div>
-  <div class="row mobile-screen">
-    <div class="medium-12 small-12 columns text-center" 
-         style="font-size:1.5em; color:#b31b1b;">All-Inclusive Luxury Apartments
-    </div>
-  </div>
+   <!-- the sliding images.  .hero-backdrop holds a blurred copy of the current photo
+        so the band fills the full browser width (the photos are only 1000px wide) -->
+   <div class="hero-photos">
+      <div class="hero-backdrop" aria-hidden="true"></div>
+      <div class="hero-backdrop" aria-hidden="true"></div>
 
-
-  <!-- large screens -->
-  <div class="row border-top-red large-screen">
-    <div class="medium-12 small-12 columns text-center" 
-         style="font-size: 3em; color: 
-         #b31b1b; font-family: Georgia, Arial, Serif;">
-     CORNERSTONE PROPERTIES
-     </div>
-  </div>
-  <div class="row large-screen">
-    <div class="medium-12 small-12 columns text-center" style="font-size:2em; color:#000;">
-      Off-Campus Student Housing in Cortland, NY
-    </div>
-  </div>
-  <div class="row large-screen">
-    <div class="medium-1 small-1 column">&nbsp;</div>
-    <div class="medium-5 small-5 columns text-left" 
-         style="font-size:1.5em; color:#b31b1b;">All-Inclusive Luxury Apartments</div>
-    <div class="medium-5 small-5 columns text-right" style="font-size:1.5em; color:#b31b1b;">(607) 756-2921</div>
-    <div class="medium-1 small-1 column">&nbsp;</div>
-  </div>
-
-   <!-- the sliding images -->
-   <div class="row bg-white border-top-red large-screen">
-      <div class="medium-1">&nbsp;</div>
-      <div class="medium-10 medium-centered columns">
-        
-        <div class="single-item">
+      <div class="hero-slider single-item">
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/7-woodruff-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $img ?>7-woodruff-street-exterior-front-view-575.jpg" 
             alt="apartment 7 woodruff str cortland ny" title="off campus student housing suny cortland" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/100-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $img ?>100-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 100 Tompkins str cortland ny" title="student housing suny cortland" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/50-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $img ?>50-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 50 Tompkins str cortland ny" title="cortland off campus housing" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/112-groton-ave-exterior-front-view-575.jpg" 
+            <img src="<?php print $img ?>112-groton-ave-exterior-front-view-575.jpg" 
             alt="apartment 112 Groton Ave cortland ny" title="cortland college student housing" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/50-tompkins-street-exterior-street-view-575.jpg" 
+            <img src="<?php print $img ?>50-tompkins-street-exterior-street-view-575.jpg" 
             alt="apartment 50 Tompkins str cortland ny" title="suny cortland off campus properties" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/52-tompkins-street-exterior-front-view-575.jpg" 
+            <img src="<?php print $img ?>52-tompkins-street-exterior-front-view-575.jpg" 
             alt="apartment 52 Tompkins str cortland ny" title="college rentals cortland" />
           </div>
           <div class="multiple">
-            <img src="<?php print $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/banner-images/91-lincoln-ave-exterior-front-view-575.jpg" 
+            <img src="<?php print $img ?>91-lincoln-ave-exterior-front-view-575.jpg" 
             alt="apartment 91 lincoln cortland ny" title="suny cortland college rentals" />
           </div>
-        </div> <!-- single-item -->
+      </div> <!-- hero-slider -->
+   </div> <!-- hero-photos -->
 
-      </div> <!-- medium-10 -->
-      <div class="medium-1">&nbsp;</div>
-
-   </div> <!-- row bg-white -->
-
-   <!-- call to action row above top navs -->
-
-   <!-- large screens -->
-   <div class="row full-width large-screen" style="font-size: 1.5em; 
-                           color: #fff; 
-                           background-color: #b31b1b;
-                           font-family: Georgia, Arial, Serif;">
-    <div class="medium-1 columns text-center">&nbsp;</div>
-    <div class="medium-4 columns text-center">
-     Reserve Your Place Today!
-     </div>
-     <div class="medium-2 columns text-center">&nbsp;</div>
-     <div class="medium-3 columns text-center">
-     Call (607) 756-2921
-     </div>
-     <div class="medium-2 columns text-center">&nbsp;</div>
-    </div>
-
-   <!-- mobile screens -->
-   <div class="row full-width mobile-screen" style="font-size: 1.2em; 
-                           color: #fff; 
-                           background-color: #b31b1b;
-                           font-family: Georgia, Arial, Serif;">
-    <div class="small-12 columns text-center">
-     Reserve Your Place Today!
+   <!-- tagline strip (replaces the old text rows and the "Reserve Your Place Today" row) -->
+   <div class="hero-tagline">
+     <div class="row">
+       <div class="small-12 columns">
+         <span class="tagline-where">Off-Campus Student Housing in Cortland, NY</span>
+         <span class="tagline-sep" aria-hidden="true">&#9670;</span>
+         <span class="tagline-what">All-Inclusive Luxury Apartments</span>
+         <a class="tagline-button" href="<?php print $path ?>cortland-ny/suny-cortland/off-campus-student-housing/apartment-rental-application.html">Reserve Your Place Today</a>
+       </div>
      </div>
    </div>
-    <div class="row mobile-screen">
-       <div class="medium-12 columns text-center" style="font-size: 1.2em; 
-                           color: #fff; 
-                           background-color: #b31b1b;
-                           font-family: Georgia, Arial, Serif;">Call (607) 756-2921</div>
-    </div>
 
   </header>
    <?php
@@ -423,6 +376,7 @@ function printApartmentNavs(){
 
 function getNews($page){
   global $dbh;
+  if( !$dbh ){ return; }  // no database (e.g. local dev site)
   ?>
   <div class="row" role="alert">
     <div class="medium-12 columns callout alert text-center">
@@ -473,7 +427,8 @@ function getNews($page){
 
 // record when someone comes to the site.  Should add this to Google Analytics 
 function logHits($item){
-   global $dbh;
+   global $dbh, $is_dev;
+   if( !$dbh || $is_dev ){ return; }  // don't count local dev visits
   
    $item = strtoupper($item);
    $today = date('Y-m-d',time());
@@ -493,6 +448,7 @@ function logHits($item){
 
 function getHits(){
   global $dbh;
+  if( !$dbh ){ return; }
   $sql="select count(*) as cnt_hits from hits where page_hit = upper(?)";
   $sth=$dbh->prepare($sql);
   $sth->execute( ['HOME-PAGE'] );
@@ -505,8 +461,8 @@ function getHits(){
     <div class="row">
       <div class="medium-12 columns callout alert text-center">
       <p><?php print $data['cnt_hits'] ?> visitors to this site!</p>
+      </div>
     </div>
-    <div>
     <?php
   } 
 }
@@ -522,73 +478,80 @@ function printFooter(){
 
 
   <!-- accessibility role -->
-  <footer>
+  <!-- full-width red footer (styles in main.scss: footer.site-footer) -->
+  <footer class="site-footer">
 
     <div class="row">          
-      <div class="medium-12 columns text-center">
-        <hr style="height:2px; background-color: #b31b1b;" />
-      </div>        
-    </div>
-
-    <div class="row">          
-      <div class="medium-12 columns text-center bg-white"> 
-        <p>Call us today for more information:<br />
-        607.756.2921<br />
+      <div class="medium-12 columns text-center"> 
+        <p class="footer-call">Call us today for more information:<br />
+        <a class="footer-phone" href="tel:+16077562921">607.756.2921</a><br />
         <a href="<?php print $path; ?>contact-us.html">Contact Us Form</a>
         </p>
 
+        <p class="footer-social">
         <!-- facebook -->
         <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/">
-          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif" alt="facebook" /> Follow Us On Facebook!</a> |  
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif" alt="facebook" /> Follow Us On Facebook!</a>
+        <span class="footer-sep" aria-hidden="true">|</span>
 
         <!-- Instagram -->
         <a href="https://www.instagram.com/propertiesbycornerstone/">
-          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" /> Follow Us On Instagram!</a>  |  
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" /> Follow Us On Instagram!</a>
+        <span class="footer-sep" aria-hidden="true">|</span>
           <?php
           ##### Share code found on:  https://onlinecode.org/social-media-sharing-buttons-php/  #####
           #
-          $site_url = "https://ww.cortlandcollegehousing.com/";
+          $site_url = "https://www.cortlandcollegehousing.com/";
           $site_title = "CornerStone Properties";
           ?>
 
           <!-- Facebook Social Media -->
-        <a href="http://www.facebook.com/sharer.php?u=<?=$site_url?>" target="_blank">
+        <a href="https://www.facebook.com/sharer.php?u=<?=$site_url?>" target="_blank">
           <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-share.png" alt="facebook" /> Share us on Facebook!
         </a>
-        </div>        
-      </div> <!-- row -->
-
-      <div class="row">          
-      <div class="medium-12 columns text-center">
-        <hr style="height:2px; background-color: #b31b1b;" />
+        </p>
       </div>        
-    </div>
+    </div> <!-- row -->
 
-      <p>&nbsp;</p>
-
-    </footer>
+  </footer>
 
   
     
     <!-- scripts that Foundation needs.  Must be placed here. -->
-    <!-- foundation code -->
-    <script src="https://www.cortlandcollegehousing.com/includes/js/vendor/jquery.js"></script>
-    <script src="https://www.cortlandcollegehousing.com/includes/js/vendor/what-input.js"></script>
-    <script src="https://www.cortlandcollegehousing.com/includes/js/vendor/foundation.js"></script>
-    <script src="https://www.cortlandcollegehousing.com/includes/js/app.js"></script>
+    <!-- foundation code (jQuery itself is loaded once, in the <head>) -->
+    <script src="<?php print $path; ?>includes/js/vendor/what-input.js"></script>
+    <script src="<?php print $path; ?>includes/js/vendor/foundation.js"></script>
     <script>
-      var $jq = jQuery.noConflict();
-      $jq(document).ready( function(){
-        //$jq(document).foundation();
-        $('.single-item').slick({
+      jQuery(function($){
+        // Foundation is only switched on for the top navigation,
+        // so nothing else on the pages changes behavior.
+        $('#site-nav').foundation();
+
+        // banner photos: keep the blurred backdrop in step with the slider
+        var $backdrops = $('.hero-backdrop'), showing = 0;
+        function setBackdrop(src){
+          var next = 1 - showing;
+          $backdrops.eq(next).css('background-image', 'url("' + src + '")').addClass('is-visible');
+          $backdrops.eq(showing).removeClass('is-visible');
+          showing = next;
+        }
+        var $slider = $('.single-item');
+        $slider.on('init', function(e, slick){
+          setBackdrop($(slick.$slides[0]).find('img').attr('src'));
+        });
+        $slider.on('beforeChange', function(e, slick, current, next){
+          setBackdrop($(slick.$slides[next]).find('img').attr('src'));
+        });
+        $slider.slick({
           slidesToShow: 1,
           slidesToScroll: 1,
           speed: 300,
           dots: false,
           autoplay: true,
-          infinite: true
+          infinite: true,
+          responsive: [ { breakpoint: 640, settings: { arrows: false } } ]
         });
-      })
+      });
     </script>
     
     

@@ -26,7 +26,8 @@ session_start();
 
 class CaptchaSecurityImages {
 
-	var $font = "/home/corthou/public_html/includes/monofont.ttf";
+	// font file sits next to this script (works on the server and the dev site)
+	var $font = __DIR__ . "/monofont.ttf";
 	
 	function generateCode($characters) {
 		/* list all possible characters, similar looking characters and vowels have been removed */
@@ -40,7 +41,8 @@ class CaptchaSecurityImages {
 		return $code;
 	}
 
-	function CaptchaSecurityImages($width='120',$height='40',$characters='6') {
+	// PHP 8: constructor must be named __construct (old PHP 4 style no longer runs)
+	function __construct($width='120',$height='40',$characters='6') {
 		$code = $this->generateCode($characters);
 		/* font size will be 75% of the image height */
 		$font_size = $height * 0.75;
@@ -71,9 +73,10 @@ class CaptchaSecurityImages {
 
 }
 
-$width = isset($_GET['width']) ? $_GET['width'] : '120';
-$height = isset($_GET['height']) ? $_GET['height'] : '40';
-$characters = isset($_GET['characters']) && $_GET['characters'] > 1 ? $_GET['characters'] : '6';
+// whole numbers only, kept to sensible sizes (PHP 8 errors on text like "abc")
+$width = isset($_GET['width']) ? min(max((int)$_GET['width'], 60), 300) : 120;
+$height = isset($_GET['height']) ? min(max((int)$_GET['height'], 20), 100) : 40;
+$characters = isset($_GET['characters']) ? min(max((int)$_GET['characters'], 2), 8) : 6;
 
 $captcha = new CaptchaSecurityImages($width,$height,$characters);
 

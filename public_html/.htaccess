@@ -20,10 +20,19 @@ RewriteOptions inherit
 #php_value session.save_path /home/corthou/public_html/sessions
 #AddHandler application/x-httpd-php5 html
 #AddHandler application/x-httpd-php .html
-AddHandler application/x-httpd-ea-php56 .html
+#AddHandler application/x-httpd-ea-php56 .html
+# Nov 2026: moved from PHP 5.6 to 8.3
+# .php too, so the captcha image uses the same PHP (and the same sessions) as the pages
+AddHandler application/x-httpd-ea-php83 .html .php
 
 #upgrade requests to https
 Header always set Content-Security-Policy: upgrade-insecure-requests
+
+# Nov 2026: make browsers check for a newer stylesheet / script on every visit
+# (they still keep a copy; the server answers "not modified" if nothing changed)
+<FilesMatch "\.(css|js)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
 
 RewriteEngine On
 RewriteCond %{HTTPS} off

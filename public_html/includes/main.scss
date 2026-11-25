@@ -3,13 +3,14 @@
 @import "media-queries.scss";
 
 body {
-  background-color: $red;
+  background-color: $white;   /* was $red when the page was a 90% wide box */
 }
 
 
+/* full width: the content area spans the browser; .row (below) keeps text readable */
 #body-container {
-  width:90%;
-  padding: 5px;
+  width:100%;
+  padding: 5px 0;
   margin-left: auto;
   margin-right: auto;
   background-color: $white;
@@ -27,7 +28,7 @@ body {
 }
 
 footer {
-  width: 90%;
+  width: 100%;
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
@@ -223,9 +224,7 @@ h4 {
   color: $white;
 }
 
-body {
-  background-color: $red;
-}
+
 
 .top-banner-text {
   font-size: 4.5em;
@@ -255,4 +254,274 @@ body {
 
 .error {
   color: $red;
+}
+
+/****** full-width layout + sticky navigation + photo banner (Nov 2026) *******/
+
+$nav_height: 3.5rem;
+$dark_red: #8a1414;
+
+/* Foundation's .row stops at 75rem (1200px). Let it grow a little on big monitors */
+.row {
+  max-width: 87.5rem;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  padding: .5rem 1rem;
+  background: $white;
+  color: $red;
+}
+
+/* ---------- sticky navigation bar ---------- */
+#site-nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: $red;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+
+  .brand {
+    display: inline-block;
+    color: $white;
+    font-family: Georgia, Arial, Serif;
+    font-size: 1.25rem;
+    letter-spacing: .04em;
+    line-height: $nav_height;
+    padding: 0 1rem;
+    white-space: nowrap;
+  }
+  a.brand:focus { color: $yellow; }
+  @media (hover: hover) { a.brand:hover { color: $yellow; } }
+
+  /* Foundation's clearfix ::before/::after would become extra flex items */
+  .title-bar, .top-bar {
+    &::before, &::after { display: none; }
+  }
+
+  /* small + medium screens */
+  .title-bar {
+    background-color: $red;
+    padding: 0 .5rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .brand { font-size: 1.1rem; padding-left: .75rem; }
+    @media screen and (max-width: 25em) {
+      .brand { font-size: .95rem; letter-spacing: .01em; padding-left: .6rem; padding-right: .25rem; }
+      .menu-toggle-text { display: none; }   /* icon only on very small phones */
+      .menu-toggle .menu-icon { margin-right: 0; }
+    }
+  }
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: $white;
+    font-size: 1rem;
+    padding: .5rem .75rem;
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 3px;
+    cursor: pointer;
+    .menu-icon { margin-right: .35rem; vertical-align: -1px; }
+    &:hover, &:focus { background-color: $dark_red; }
+  }
+
+  .top-bar {
+    padding: 0;
+    background-color: $red;
+    ul { background-color: transparent; }
+  }
+
+  /* override the older .menu colors (black) further up */
+  .menu {
+    background-color: transparent;
+    color: $white;
+    a {
+      color: $white;
+      padding: .85rem 1rem;
+      white-space: nowrap;
+    }
+    a:hover, a:focus {
+      background-color: $dark_red;
+      color: $white;
+    }
+    .active {
+      padding-left: 0;
+      background-color: transparent;
+      > a {
+        background-color: $dark_red;
+        box-shadow: inset 0 -3px 0 $white;
+      }
+    }
+    .is-accordion-submenu-parent > a::after,
+    .is-dropdown-submenu-parent > a::after {
+      border-color: $white transparent transparent;
+    }
+  }
+
+  /* drop-down lists (large screens) */
+  .top-bar ul.is-dropdown-submenu {
+    background-color: $white;
+    border: 1px solid #ccc;
+    border-top: 3px solid $dark_red;
+    min-width: 13rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+    a { color: #222; padding: .6rem 1rem; line-height: 1.4; }
+    a:hover, a:focus { background-color: $red; color: $white; }
+    .active > a { background-color: #f3dede; color: $red; box-shadow: none; }
+  }
+
+  .nav-phone {
+    display: inline-block;
+    color: $white;
+    font-weight: bold;
+    line-height: $nav_height;
+    padding: 0 1rem;
+    white-space: nowrap;
+    &:hover, &:focus { color: $yellow; }
+  }
+
+  /* small + medium: the opened menu stacks, and scrolls if it is taller than the screen */
+  @media screen and (max-width: 63.9375em) {
+    #main-menu {
+      display: none;                       /* Foundation shows it when "Menu" is tapped */
+      max-height: calc(100vh - #{$nav_height});
+      overflow-y: auto;
+      border-top: 1px solid rgba(255,255,255,.3);
+    }
+    .top-bar-left, .top-bar-right { width: 100%; float: none; }
+    .menu a { padding: .75rem 1rem; }
+    .menu.nested { background-color: $dark_red; margin-left: 0; width: 100%; }
+    .menu .active > a { box-shadow: inset 4px 0 0 $white; }
+    .menu.nested a { padding-left: 2rem; }
+    .nav-phone { line-height: 1; padding: 1rem; display: block; border-top: 1px solid rgba(255,255,255,.3); }
+  }
+
+  /* large: everything on one line */
+  @media screen and (min-width: 64em) {
+    .top-bar { display: flex; align-items: center; justify-content: space-between; }
+    .top-bar-left { display: flex; align-items: center; }
+    .brand { font-size: 1.3rem; padding-right: 1.25rem; }
+    .menu.large-horizontal > li > a { font-size: .95rem; padding: 0 .8rem; line-height: $nav_height; }
+    .menu.large-horizontal > li.is-dropdown-submenu-parent > a { padding-right: 1.6rem; }
+    .menu.large-horizontal > li.is-dropdown-submenu-parent > a::after { right: .5rem; }
+  }
+  @media screen and (min-width: 64em) and (max-width: 79.9375em) {
+    .brand { font-size: 1.1rem; padding-right: .5rem; }
+    .menu.large-horizontal > li > a { font-size: .875rem; padding: 0 .55rem; }
+    .menu.large-horizontal > li.is-dropdown-submenu-parent > a { padding-right: 1.4rem; }
+    .nav-wide { display: none; }     /* "Documents", "Checklist" on narrower screens */
+    .nav-phone { font-size: .875rem; padding: 0 .75rem; }
+  }
+}
+
+/* ---------- photo banner ---------- */
+.site-hero {
+  background-color: #222;
+}
+
+.hero-photos {
+  position: relative;
+  overflow: hidden;
+  background-color: #222;
+}
+
+/* blurred, darkened copy of the current photo fills the space beside the slider */
+.hero-backdrop {
+  position: absolute;
+  top: -40px; right: -40px; bottom: -40px; left: -40px;
+  background-size: cover;
+  background-position: center;
+  -webkit-filter: blur(22px) brightness(.6);
+  filter: blur(22px) brightness(.6);
+  opacity: 0;
+  transition: opacity .8s ease;
+  &.is-visible { opacity: 1; }
+}
+
+.hero-slider {
+  position: relative;          /* sits above the backdrop */
+  max-width: 860px;
+  margin: 0 auto;
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+  img { display: block; width: 100%; height: auto; }
+
+  /* slick's arrows: white, on the dark backdrop */
+  .slick-prev { left: -45px; z-index: 2; }
+  .slick-next { right: -45px; z-index: 2; }
+  .slick-prev:before, .slick-next:before { font-size: 32px; opacity: .85; }
+}
+.hero-slider.slick-slider { margin-bottom: 0; }
+
+/* before slick starts, show only the first photo */
+.hero-slider:not(.slick-initialized) .multiple + .multiple { display: none; }
+
+@media screen and (min-width: 40em) {
+  .hero-photos { padding: 1.25rem 0; }
+}
+
+/* ---------- tagline strip under the photos ---------- */
+.hero-tagline {
+  background-color: $red;
+  color: $white;
+  font-family: Georgia, Arial, Serif;
+  text-align: center;
+  padding: .75rem 0;
+  border-top: 3px solid $dark_red;
+
+  .tagline-where { font-size: 1.15rem; }
+  .tagline-sep { margin: 0 .75rem; font-size: .8rem; opacity: .7; vertical-align: 2px; }
+  .tagline-what { font-size: 1.35rem; font-weight: bold; letter-spacing: .02em; }
+
+  .tagline-button {
+    display: inline-block;
+    margin-left: 1.5rem;
+    padding: .4rem 1rem;
+    border: 2px solid $white;
+    border-radius: 3px;
+    color: $white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: .95rem;
+    vertical-align: 2px;
+    &:hover, &:focus { background-color: $white; color: $red; }
+  }
+
+  @media screen and (max-width: 63.9375em) {
+    .tagline-where, .tagline-what { display: block; }
+    .tagline-sep { display: none; }
+    .tagline-button { margin: .6rem 0 .1rem; }
+  }
+}
+
+
+/* ---------- footer: full-width red band ---------- */
+footer.site-footer {
+  width: 100%;
+  margin: 2rem 0 0;
+  padding: 1.75rem 0 1.25rem;
+  background-color: $red;
+  border-top: 4px solid $dark_red;
+  color: $white;
+  overflow: visible;
+
+  p { color: $white; margin-bottom: .75rem; }
+  .footer-call { font-size: 1.05rem; }
+  .footer-phone { font-size: 1.25rem; font-weight: bold; }
+
+  a { color: $white; text-decoration: none; }
+  a:hover, a:focus { color: $yellow; text-decoration: underline; text-underline-offset: 2px; }
+
+  .footer-social { line-height: 2.4; }
+  .footer-social img { vertical-align: middle; margin-right: .25rem; }
+  .footer-sep { margin: 0 .6rem; opacity: .6; }
+
+  @media screen and (max-width: 39.9375em) {
+    .footer-social a { display: block; }
+    .footer-sep { display: none; }
+  }
 }

@@ -10,15 +10,42 @@ $params = array(
 printHeaders($params);
 
 # instantiate request vars comming in.
-foreach( array('first_name', 'mid_name',  'last_name', 'addr1', 'addr2', 'city', 'state', 'country','zip', 'home_phone', 'cell_phone', 'email', 'dob', 'cs_address', 'cs_landlord', 'semyear', 'location','comments', 'tennant2', 'tennant3', 'tennant2_email', 'tennant3_email', 'security_code','submit')as $v){
+foreach( array('first_name', 
+               'mid_name',
+               'last_name', 
+               'addr1', 
+               'addr2', 
+               'city', 
+               'state', 
+               'country',
+               'zip', 
+               'home_phone', 
+               'cell_phone', 
+               'email', 
+               'dob', 
+               'cs_address', 
+               'cs_landlord', 
+               'semyear', 
+               'location',
+               'comments', 
+               'tennant2', 
+               'tennant3', 
+               'tennant2_email', 
+               'tennant3_email', 
+               'security_code',
+               'action') as $v){
 	$$v = !empty($_REQUEST[$v])? $_REQUEST[$v]:'';
 }
+
+# captcha codes are lower case; ignore capitals and spaces that phone keyboards add
+$security_code = strtolower(trim($security_code));
 
 
 $requiredErrorMsg = '';
 
-if( isset($_REQUEST['action']) && $_REQUEST['action'] == 'Submit' && 
-    !empty($_SESSION['security_code']) && !empty($_REQUEST['security_code']) && ($_SESSION['security_code'] == $_REQUEST['security_code'])  ) {
+if( !empty($action) && $action == 'Submit' && 
+    !empty($_SESSION['security_code']) && !empty($security_code) && ($_SESSION['security_code'] === $security_code) )
+{
 
 	
 
@@ -136,15 +163,19 @@ if( isset($_REQUEST['action']) && $_REQUEST['action'] == 'Submit' &&
                   $city, $state, $zip, $country, $home_phone, $cell_phone,
                   $email, $dob, $cs_address, $semyear, $entry_date, $comments,
                   $tennant2, $tennant2_email, $tennant3, $tennant3_email, $location,$cs_landlord);
-    $results = $globalMySqlConnect->query($sql, $myParams);
-    if( DB::isError($results) ){
-	    errorEmail(array('request-application.html',
-			$results->getMessage(),
-      $results->toString()) );
-      die($results->getMessage()." ".$results->toString());
-	    $successful_entry = false;
+    // PDO version (the old PEAR DB connection, $globalMySqlConnect, no longer exists)
+    $rows_added = 0;
+    try {
+      if( !$dbh ){ throw new Exception('no database connection'); }
+      $sth = $dbh->prepare($sql);
+      $sth->execute($myParams);
+      $rows_added = $sth->rowCount();
+    } catch (Exception $e) {
+      error_log("APARTMENT-RENTAL-APPLICATION: insert failed: " . $e->getMessage());
+      errorEmail(array('apartment-rental-application.html', $e->getMessage(), $e->getMessage()));
+      $successful_entry = false;
     }
-    if( $globalMySqlConnect->affectedRows()== 1 ){
+    if( $rows_added == 1 ){
         ?>
         <div class="row">
         	<div class="small-12 columns red center">
@@ -182,20 +213,20 @@ if( isset($_REQUEST['action']) && $_REQUEST['action'] == 'Submit' &&
   }
 
     if( $successful_entry == true ){
-		# send email to mike and jim
-        $to      = "info@cortlandcollegehousing.com";
-        # $to = 'jdc44@cornell.edu';
-        $from    = "info@cortlandcollegehousing.com";
-        $cc      = "jdc44@cornell.edu";
-        $subject = "The Suites Online Application form";
+		  # send email to mike and jim
+      $to      = "info@cortlandcollegehousing.com";
+      # $to = 'jdc44@cornell.edu';
+      $from    = "info@cortlandcollegehousing.com";
+      $cc      = "jdc44@cornell.edu";
+      $subject = "The Suites Online Application form";
 
-        $headers  = "To: Mike Reeners: <$to>\r\n";
-        $headers .= "CC: Webmaster: <$cc>\r\n";
-		$headers .= "From: 'Online Application Form' <$from>\r\n";
-		$headers .= "Reply-To: 'CornerStone Properties' <$from>\r\n";
-		$headers .= "Return-Path: $from\r\n";
+      $headers  = "To: Mike Reeners: <$to>\r\n";
+      $headers .= "CC: Webmaster: <$cc>\r\n";
+  		$headers .= "From: 'Online Application Form' <$from>\r\n";
+  		$headers .= "Reply-To: 'CornerStone Properties' <$from>\r\n";
+  		$headers .= "Return-Path: $from\r\n";
 
-		$today = date('m/d/Y', time());
+		  $today = date('m/d/Y', time());
 $message  = <<<EOD
 	 The following information was completed on the Online Application Form for The Suites Apartments.
 	 Date: $today
@@ -240,7 +271,9 @@ EOD;
       }
     }	
   unset($_SESSION['security_code']);
-} else if($submit && empty($_SESSION['security_code']) || (!empty($_REQUEST['security_code']) && ($_SESSION['security_code'] != $_REQUEST['security_code']) )  ) {
+} else if( (!empty($action) && $action=='Submit') && 
+           ( (empty($_SESSION['security_code']) || !empty($security_code)) || 
+            ($_SESSION['security_code'] != $security_code) )  ) {
   ?>
   <div class="row">
     <div class="small-12 columns red center">
@@ -252,406 +285,397 @@ EOD;
 } // if action - submitted
 ?>
 
-<div role="main">
-
-    <p>&nbsp;</p>
-
-
-<div class="row" title="off-campus student housing suny cortland">
-  <div class="medium-12 text-center columns">
-  	<h1 title="off-campus student housing near SUNY Cortland">Application Form</h1></div>	
-</div>
-
-<div class="row" title="cortland college student housing rentals">
-	<div class="medium-3 columns">&nbsp;</div>
-	<div class="medium-6 text-center columns callout alert">
-    <p class="red"><strong>See important apartment news near the bottom of this page.</strong></p>
-	</div>
-	<div class="medium-3 columns">&nbsp;</div>
-</div>
-
- <p>&nbsp;</p>
-
- <div class="row" title="student housing near cortland college campus">
-  <div class="medium-12 columns">
-	 <h2>A Suite</h2>
-	 <p>A suite is a three-bedroom apartment. Our suites are fully furnished and each consists of a kitchen/dining room, a spacious living room, three bedrooms, and a full bath. All suites in a building share a common area and a laundry facility.  Each building has ample tennant only parking.</p>
-
-	 <p>Each suite is designed for SUNY Cortland students who wish to live off-campus near the college campus and downtown Cortland. <a href="apartment-descriptions.html">See the Apartment Descriptions page</a> for more information on what is included in each suite.  To see a map of where each of our buildings is located, <a href="apartment-locations.html">Visit our Apartment Locations page.</a></p>
-
-
-	 <p><b>Please Note:</b> It is preferred to lease a suite to three people who know each other.</p>
-		<p>If you are representing a group of three students who are interested in sharing a three-bedroom student housing suit for an upcomming semester, please complete the Request an Application form below and submit it.
-	</div>
-</div>
-
-<div class="row" title="cortland college off campus apartments">
-	<div class="medium-12 columns" title="suny cortland student housing off campus">
-		<h2>Waiting List</h2>
-        <p>Completing and submitting this form will not reserve a suite in your name.  We will add your name to our list of students interested in reserving a suite and we will contact you for an appointment. </p>
-	</div>
-</div>
-
-<div class="row" title="cortland college off campus apartments">
-	<div class="medium-12 columns" title="suny cortland student housing off campus">
-		<h2>Information Privacy</h2>
-		<p>Your information will be kept private and confidential. We will never give away or sell your information to anyone at anytime.</p>
-	</div>
-</div>
 
 
 
-<!-- put the form into an 8-column cell and images into a 4-column cell -->
 
-<div class="row" title="off-campus student housing suny cortland">
-	<div class="medium-8 columns">
+<div class="grid-container full" role="main" title="Rental Application Form">
+
+  <p>&nbsp;</p>
+
+  <div class="grid-x">
+    <div class="cell small-12 center"><h1>Application Form</h1></div>	
+  </div>
+
+  <div class="grid-x">
+    <div class="cell small-3 medium-3">&nbsp;</div>
+  	<div class="cell small-6 medium-6 center callout alert">
+      <p class="red"><strong>See important apartment news near the bottom of this page.</strong></p>
+  	</div>
+    <div class="cell small-3 medium-3 center">&nbsp;</div>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12">
+  	 <h2>A Suite</h2>
+  	 <p>A suite is a three-bedroom apartment. Our suites are fully furnished and each consists of a kitchen/dining room, a spacious living room, three bedrooms, and a full bath. All suites in a building share a common area and a laundry facility.  Each building has ample tennant only parking.</p>
+
+  	 <p>Each suite is designed for SUNY Cortland students who wish to live off-campus near the college campus and downtown Cortland. <a href="apartment-descriptions.html">See the Apartment Descriptions page</a> for more information on what is included in each suite.  To see a map of where each of our buildings is located, <a href="apartment-locations.html">Visit our Apartment Locations page.</a></p>
+
+
+  	 <p><b>Please Note:</b> It is preferred to lease a suite to three people who know each other.</p>
+  		<p>If you are representing a group of three students who are interested in sharing a three-bedroom student housing suit for an upcomming semester, please complete the Request an Application form below and submit it.
+  	</div>
+  </div>
+
+  <div class="grid-x grid-padding-x">
+  	<div class="cell small-12">
+  		<h2>Waiting List</h2>
+          <p>Completing and submitting this form will not reserve a suite in your name.  We will add your name to our list of students interested in reserving a suite and we will contact you for an appointment. </p>
+  	</div>
+  </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12">
+  		<h2>Information Privacy</h2>
+  		<p>Your information will be kept private and confidential. We will never give away or sell your information to anyone at anytime.</p>
+  	</div>
+  </div>
 
 
 
-<div class="row" title="cortland off-campus student housing">
-	<div class="medium-12 columns"><p>* denotes required fields:</p></div>
-</div>
+  <!-- put the form into an 8-column cell and images into a 4-column cell -->
+
+  <div class="grid-x grid-padding-x">
+  	<div class="cell small-12 medium-5">
 
 
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" role="form" aria-label="Request Application" title="off-campus housing suny cortland">
+      <div class="grid-x grid-padding-x">
+        <div class="medium-12 columns red center">
+          <h2 title="suny cortland student housing" 
+                style="background-color: #b31b1b; 
+                       color: #fff; 
+                       text-decoration: underline;">Your Information</h2>
+        </div>
+      </div>
 
-<div class="row" title="suny cortland off-campus apartments furnished">
-	<div class="medium-4 columns">
-    <label for="first-name" <?php print isset($labels['first_name'])?$labels['first_name']:''; ?>>* First Name</label>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="medium-12 columns red"><p>** denotes required fields:</p></div>
+      </div>
+
+
+      <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" role="form" aria-label="Request Application">
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+          <label for="first-name"><strong><span class="required">**</span> First Name</strong>
+      		  <input type="text" id="first-name" name="first_name" value="<?= $first_name ?? ''; ?>" required />
+          </label>
+      	</div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+          <label for="mid-name"><strong>Middle Name or Init</strong>
+            <input type="text" id="mid-name" name="mid_name" value="<?= $mid_name ?? '' ?>">
+          </label>
+      	</div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+          <label for="last-name"><strong><span class="required">**</span> Last Name</strong>
+            <input type="text" id="last-name" name="last_name" value="<?= $last_name ?? '' ?>" required />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+      		<label for="addr1"><strong><span class="required">**</span> Street Address 1</strong>
+      	     <input type="text" id="addr1" name="addr1" value="<?= $addr1 ?? '' ?>" required />
+          </label>
+      	</div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="addr2"><strong>Street Address 2</strong>
+             <input type="text" id="addr2" name="addr2" value="<?= $addr2 ?? '' ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="city"><strong><span class="required">**</span> City</strong>
+             <input type="text" id="city" name="city" value="<?= $city ?? '' ?>" required />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="state"><strong><span class="required">**</span> State</strong>
+             <input type="text" id="state" name="state" value="<?= $state ?? '' ?>" required />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="zip"><strong><span class="required">**</span> Zip</strong>
+             <input type="text" id="zip" name="zip" value="<?= $zip ?? '' ?>" required />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="country"><strong><span class="required">**</span> Country</strong>
+             <input type="text" id="country" name="country" value="<?= $country ?? '' ?>" required />
+          </label>
+        </div>
+      </div>
+
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="home_phone"><strong>Home Phone</strong>
+             <input type="text" id="home_phone" name="home_phone" value="<?= $home_phone ?? '' ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="cell_phone"><strong>Cell Phone</strong>
+             <input type="text" id="cell_phone" name="cell_phone" value="<?= $cell_phone ?? '' ?>" />
+          </label>
+        </div>
+      </div>
+
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="email"><strong><span class="required">**</span> Email</strong>
+             <input type="email" id="email" name="email" value="<?= $email ?? '' ?>" required />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="dob"><strong><span class="required">**</span> Date of Birth (mm/dd/yyyy)</strong>
+            <?php
+            $dob = (isset($dob) && !empty($dob)) ? date('m/d/Y', strtotime($dob)) : date('m/d/Y');
+            ?>
+            <input type="text" class="datepicker" id="dob" name="dob" value="<?= $dob ?? '' ?>" />
+          </label>
+        </div>
+      </div>
+
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="cs_address"><strong>Cortland Address (if current student)</strong>
+             <input type="text" id="cs_address" name="cs_address" value="<?= $cs_address ?? '' ?>" />
+          </label>
+        </div>
+      </div>
+
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="cs_landlord"><strong>Current Landlord (name &amp; address, please)</strong>
+             <input type="text" id="cs_landlord" name="cs_landlord" value="<?= $cs_landlord ?? '' ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+      		<label for="semyear"><strong><span class="red">**</span> Semester/Year Needed</strong>
+        		<select id="semyear" name="semyear">
+        		  <option value="" disabled selected>-- Select a Term --</option>
+        		  <?php 
+        		    $curYear = date('Y',time());
+        		    for( $i=$curYear; $i<=$curYear+2; $i++ ){
+        		      ?>
+        		      <option value="fall-<?php print $i; ?>" <?= ($semyear == "fall-$i")?'selected':''; ?>>Fall <?php print $i; ?></option>
+        		       <option value="spring-<?php print $i; ?>" <?= ($semyear == "spring-$i")?'selected':''; ?>>Spring <?php print $i; ?></option>
+        		      <?php
+        		    }
+        		  ?>
+        		</select>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+      		<label for="location"><strong>Location Requested</strong>
+           <select id="location" name="location">
+            <option value="" disabled selected>-- Select a Location --</option>
+             <option value="Groton Ave">112 Groton Ave</option>
+             <option value="50 Tompkins Ave">50 Tompkins St.</option>
+             <option value="52 Tompkins Ave">52 Tompkins St.</option>
+             <option value="52 Tompkins Ave">100 Tompkins St.</option>
+        	 <option value="7 Woodruff St">7 Woodruff St.</option>
+        	 <option value="91 Lincoln Ave">91 Lincoln Ave (F-2016).</option>
+           </select>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12">
+          <p>Please list the Names and Emails of the two people who are interested in leasing an apartment with you</p>
+      	</div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+          <label for="tennant2"><strong>2nd Tenant Name:</strong>
+      	    <input type="text" id="tennant2" name="tennant2" size="20" value="<?= $tennant2 ?? ''; ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="tennant2_email"><strong>2nd Tenant Email:</strong>
+            <input type="email" id="tennant2_email" name="tennant2_email" value="<?= $tennant2_email ?? ''; ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="tennant3"><strong>3nd Tenant Name:</strong>
+            <input type="text" id="tennant3" name="tennant2" value="<?= $tennant3 ?? ''; ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="tennant3_email"><strong>3rd Tenant Email:</strong>
+            <input type="email" id="tennant3_email" name="tennant3_email" value="<?= $tennant3_email ?? ''; ?>" />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+          <label for="comments"><strong>Additional Comments</strong>
+      		  <textarea name="comments" id="comments" cols="30" rows="7"><?= $comments ?? ''; ?></textarea>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12">
+      		 <label>Please enter the code seen in the image below into the Security Code text box.</label>
+        </div>
+      </div>
+
+
+      <div class="grid-x grid-padding-x">
+      	<div class="small-6 columns">
+      		<img src="../../../includes/CaptchaSecurityImages.php?width=100&height=40&characters=5" alt="captsha image" />
+      	</div>
+      </div>
+
+      <div class="grid-x grid-padding-x">
+      	<div class="cell small-12 medium-6">
+          <label for="security_code"><strong><span class="red">**</span> Security Code:</strong> 
+            <input id="security_code" name="security_code" 
+                   type="text"
+                   autocomplete="off" 
+                   autocapitalize="off" 
+                   autocorrect="off" 
+                   spellcheck="false"
+                   required />
+          </label>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x" title="student housing off-campus cortland ny">
+      	<div class="cell small-12">
+          <input type="submit" class="button" value="Submit" name="action">
+        </div>
+      </div>
+
+      </form>
+
+
+    <!-- end 6-column cell the form is in -->
     </div>
-	<div class="medium-6 columns">
-		<input type="text" id="first-name" name="first_name" maxLength="30" size="20" value="<?php print $first_name ?>" required />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-	
-</div>
 
-<div class="row" title="furnished student apartments">
-	<div class="medium-4 columns">
-    <label for="mid-name" <?php print isset($labels['mid_name'])?$labels['mid_name']:'';?>>Middle Name or Init</label>
-  </div>
-	<div class="medium-6 columns">
-    <input type="text" id="mid-name" name="mid_name" maxLength="30" size="20" value="<?php print $mid_name ?>">
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="all inclusive student apartmets cortland">
-	<div class="medium-4 columns">
-    <label for="last-name" <?php print isset($labels['last_name'])?$labels['last_name']:''; ?>>* Last Name</label>
-	</div>
-	<div class="medium-6 columns">
-    <input type="text" id="last-name" name="last_name" maxLength="30" size="20" value="<?php print $last_name ?>" required />
-  </div>
- <div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="furnished apartments suny cortland">
-  <div class="medium-4 columns">
-		 <label for="addr1" <?php print isset($labels['addr1'])?$labels['addr1']:''; ?>>* Home Address 1</label>
-  </div>
-  <div class="medium-6 columns">
-	   <input type="text" id="addr1" name="addr1" maxLength="30" size="20" value="<?php print $addr1 ?>" required />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="off-campus living suny cortland">
-  <div class="medium-4 columns">
-		 <label for="addr2" <?php print isset($labels['addr2'])?$labels['addr2']:''; ?>>Home Address 2</label>
-	</div>
-  <div class="medium-6 columns">
-	  <input type="text" id="addr2" name="addr2" maxLength="30" size="20" value="<?php print $addr2 ?>">
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="student apartments cortland ny">
-  <div class="medium-4 columns">
-		 <label for="city" <?php print isset($labels['city'])?$labels['city']:'';?>>* City</label>
-  </div>
-  <div class="medium-6 columns">
-     <input type="text" id="city" name="city" maxLength="30" size="20" value="<?php print $city ?>" required />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="cortland college rentals">
-  <div class="medium-4 columns">
-		 <label for="state" <?php print isset($labels['state'])?$labels['state']:''; ?>>* State</label>
-	</div>
-  <div class="medium-6 columns">
-	   <input id="state" type="text" name="state" maxLength="30" size="20" value="<?php print $state ?>" required />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="furnished student apartments cortland">
-  <div class="medium-4 columns">
-		 <label for="zip" <?php print isset($labels['zip'])?$labels['zip']:''; ?>>* Zip Code</label>
-	</div>
-  <div class="medium-3 columns">
-	   <input type="text" id="zip" name="zip" maxLength="30" size="20" value="<?php print $zip ?>" required />
-	</div>
-	<div class="medium-6 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="cortland college student rentals">
-  <div class="medium-4 columns">
-		 <label for="country" <?php print isset($labels['country'])?$labels['country']:''; ?>>* Country</label>
-	</div>
-  <div class="medium-6 columns">
-	   <input type="text" id="country" name="country" maxLength="30" size="20" value="<?php print $country ?>" required />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="student rentals cortland ny free cable">
-  <div class="medium-4 columns">
-		 <label for="home-phone" <?php print isset($labels['home_phone'])?$labels['home_phone']:''; ?>>Home Phone</label>
-	</div>
-  <div class="medium-6 columns">
-     <input type="text" id="home-phone" name="home_phone" maxLength="30" size="20" value="<?php print $home_phone ?>">
-  </div>
-  <div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="student rentals cortland ny free internet">
-  <div class="medium-4 columns">
-		 <label for="cell" <?php print isset($labels['cell_phone'])?$labels['cell_phone']:''; ?>>Cell Phone</label>
-	</div>
-  <div class="medium-6 columns">
-     <input type="text" id="cell" name="cell_phone" maxLength="30" size="20" value="<?php print $cell_phone ?>"></td>
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="student rentals cortland ny free parking">
-  <div class="medium-4 columns">
-		 <label for="email" <?php print isset($labels['email'])?$labels['email']:''; ?>>* Email</label>
-	</div>
-	<div class="medium-6 columns">
-		 <input type="text" id="email" name="email" maxLength="30" size="20" value="<?php print $email ?>" required />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="suny cortland off-campus student housing">
-	<div class="medium-4 columns">
-		 <label for="datepicker" <?php print isset($labels['dob'])?$labels['dob']:''; ?>>* Date of Birth as (mm/dd/yyyy)</label>
-	</div>
-	<div class="medium-6 columns">
-		<?php
-		$dob = (isset($dob) && !empty($dob)) ? date('m/d/Y', strtotime($dob)) : date('m/d/Y');
-		?>
-		  <input type="text" id="datepicker" name="dob" maxLength="30" size="20" value="<?php print $dob ?>" /> 
-		    
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="suny cortland student housing rentals">
-	<div class="medium-4 columns">
-		<label for="address" <?php print isset($labels['cs_address'])?$labels['cs_address']:''; ?>>Current Cortland Address<br />(if current student)</label>
-   </div>
-	<div class="medium-6 columns">
-		 <input type="text" id="address" name="cs_address" id="cs_address" size="30" maxlength="75" value="<?php print $cs_address; ?>" /> 		   
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="student apartments near suny cortland">
-	<div class="medium-4 columns">
-		<label for="landlord" <?php print isset($labels['cs_landlord'])?$labels['cs_landlord']:''; ?>>Current Landlord<br />(if current student)</label>
-  </div>
-	<div class="medium-6 columns">
-		 <label class="red" style="font-size: .9em;">Name and address please.</label>
-		 <input type="text" id="landlord" name="cs_landlord" id="cs_landlord" size="20" maxlength="75" value="<?php print !empty($cs_landlord)?$cs_landlord:''; ?>" /> 
-	</div>
-	<div class="medium-2 columns"></div>
-</div>
-
-<div class="row" title="student rentals near suny cortland">
-	<div class="medium-4 columns">
-		<label for="semyear" <?php print isset($labels['sem_year'])?$labels['sem_year']:''; ?>>* 
-    Semester/Year Needed</label>
-  </div>
-
-	
-  <div class="medium-6 columns" title="suny cortland student apartments">
-		<select id="semyear" name="semyear">
-		  <option value=""></option>
-		  <?php 
-		    $curYear = date('Y',time());
-		    for( $i=$curYear; $i<=$curYear+2; $i++ ){
-		      ?>
-		      <option value="fall-<?php print $i; ?>" <?php print ($semyear == "fall-$i")?'selected="selected"':''; ?>>Fall <?php print $i; ?></option>
-		       <option value="spring-<?php print $i; ?>" <?php print ($semyear == "spring-$i")?'selected="selected"':''; ?>>Spring <?php print $i; ?></option>
-		      <?php
-		    }
-		  ?>
-		</select>
-  </div>
-  <div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="off-campus housing cortland college">
-	<div class="medium-4 columns">
-		<label for="location">Location Requested</label>
-  </div>
-  <div class="medium-6 columns">
-   <select id="location" name="location">
-     <option value="Groton Ave">112 Groton Ave</option>
-     <option value="50 Tompkins Ave">50 Tompkins St.</option>
-     <option value="52 Tompkins Ave">52 Tompkins St.</option>
-     <option value="52 Tompkins Ave">100 Tompkins St.</option>
-	 <option value="7 Woodruff St">7 Woodruff St.</option>
-	 <option value="91 Lincoln Ave">91 Lincoln Ave (F-2016).</option>
-   </select>
-  </div>
-  <div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="off-campus student housing cortland college">
-	<div class="medium-12 columns">
-    <p>Please list the Names and Emails of the two people who are interested in leasing an apartment with you</p>
-	</div>
-</div>
-
-<div class="row" title="student housing off-campus suny cortland">
-	<div class="medium-4 columns"><label for="tennant2">2nd Tenant Name:</label></div>
-	<div class="medium-6 columns"><input type="text" id="tennant2" name="tennant2" size="20" /></div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="cortland off-campus housing">
-	<div class="medium-4 columns"><label for="t-email2">2nd Tenant Email:</label></div>
-	<div class="medium-6 columns"><input type="text" id="t-email2" name="tennant2_email" size="20" /></div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="application cortland college housing">
-	<div class="medium-4 columns"><label for="tennant3">3rd Tenant Name:</label></div>
-	<div class="medium-6 columns"><input type="text" id="tennant3" name="tennant3" size="20" /></div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="suny off-campus housing cortland">
-	<div class="medium-4 columns"><label for="t-email3">3rd Tenant Email:</label></div>
-	<div class="medium-6 columns"><input type="text" id="t-email3" name="tennant3_email" size="20" /></div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="cortland college off-campus housing">
-	<div class="medium-4 columns"><label for="comments">Additional Comments</label></div>
-	<div class="medium-6 columns">
-		<textarea name="comments" id="comments" cols="40" rows="7" value="<?php print $comments ?>"></textarea>
-  </div>
-  <div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="furnished off-campus housing suny cortland">
-	<div class="medium-12 columns">
-		 <label>Please enter the code seen in the image below into the Security Code text box.</label>
-  </div>
-</div>
+  <!-- start 4-column cell to hold images -->
+  <div class="cell small-12 medium-5" style="border-left: solid 2px #b31b1b;">
 
 
-<div class="row" title="student housing near suny cortland">
-	<div class="medium-4 columns">&nbsp;</div>
-	<div class="medium-6 columns">
-		<img src="../../../includes/CaptchaSecurityImages.php?width=100&height=40&characters=5" alt="captsha image" />
-	</div>
-	<div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="cortland college off-campus student housing">
-	<div class="medium-4 columns"><label for="security_code">Security Code: </label></div>
-  <div class="medium-6 columns"><input id="security_code" name="security_code" type="text"  required /></div>
-  <div class="medium-2 columns">&nbsp;</div>
-</div>
-
-<div class="row" title="student housing off-campus cortland ny">
-	<div class="medium-3 columns"><input type="submit" class="button" value="Submit" name="action"></div>
-	<div class="medium-9 columns">&nbsp;</div>
-</div>
-
-</form>
-
-
-<!-- end 8-column cell the form is in -->
-</div>
-
-<!-- start 4-column cell to hold images -->
-<div class="medium-4 columns text-left" style="border-left: solid 2px #b31b1b;">
-
-
-
-
-<div class="row large-screen">
-	<div class="medium-12 columns text-center">
-		<h2 title="suny cortland student housing" 
-		    style="background-color: #b31b1b; color: #fff; text-decoration: underline;">Our Locations</h2>
-		    <span style="color: #000;">All suites have three-bedrooms</span>
+    <div class="grid-x grid-padding-x large-screen">
+    	<div class="medium-12 columns text-center">
+    		<h2 title="suny cortland student housing" 
+    		    style="background-color: #b31b1b; 
+                   color: #fff; 
+                   text-decoration: underline;">Our Locations</h2>
+    		    <span style="color: #000;">All suites have three-bedrooms</span>
+        </div>
     </div>
-</div>
 
-<div class="row large-screen">
-	<div class="medium-12 columns">
+    <div class="grid-x grid-padding-x large-screen">
+    	<div class="medium-12 columns">
 
-	<h3 title="cortland college off-campus apartments">50 Tompkins Str</h3>
-	<ul>
-		<li>11 suites</li>
-	</ul>
-
-
-	<h3 title="cortland college off-campus apartments">52 Tompkins Str</h3>
-	<ul>
-		<li>6 suites</li>
-	</ul>
+      	<h3 title="cortland college off-campus apartments">50 Tompkins Str</h3>
+      	<ul>
+      		<li>11 suites</li>
+      	</ul>
 
 
-	<h3 title="off-campus student housing Cortland NY">112 Groton Ave</h3>
-	<ul>
-		<li>10 suites</li>
-	</ul>
+      	<h3 title="cortland college off-campus apartments">52 Tompkins Str</h3>
+      	<ul>
+      		<li>6 suites</li>
+      	</ul>
 
 
-	<h3 title="student housing near SUNY Cortland">100 Tompkins Str</h3>
-	<ul>
-		<li>2 suites</li>
-		<li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
-	</ul>
+      	<h3 title="off-campus student housing Cortland NY">112 Groton Ave</h3>
+      	<ul>
+      		<li>10 suites</li>
+      	</ul>
 
 
-	<h3 title="off-campus housing near SUNY Cortland">7 Woodruff St</h3>
-	<ul>
-	  <li>2 suites</li>
-	  <li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
-	</ul>
+      	<h3 title="student housing near SUNY Cortland">100 Tompkins Str</h3>
+      	<ul>
+      		<li>2 suites</li>
+      		<li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
+      	</ul>
 
 
-	<h3 title="student housing near SUNY Cortland">91 Lincoln Ave</h3>
-	<ul>
-		<li>2 suites</li>
-	    <li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
-	</ul>	
+      	<h3 title="off-campus housing near SUNY Cortland">7 Woodruff St</h3>
+      	<ul>
+      	  <li>2 suites</li>
+      	  <li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
+      	</ul>
 
 
-	<p>&nbsp;</p>
-	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-living-room-2.jpg" alt="student apartment living room" title="off-campus student housing near suny cortland, apartment living room" />
-
-	<p>&nbsp;</p>
-	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-kitchen.jpg" alt="student apartment kitchen" title="student housing near suny cortland, apartment kitchen" />
-
-	<p>&nbsp;</p>
-	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-bedroom.jpg" alt="student apartment living room" title="off-campus housing near suny cortland, apartment bedroom" />
-
-	    </div>
-	</div>
+      	<h3 title="student housing near SUNY Cortland">91 Lincoln Ave</h3>
+      	<ul>
+      		<li>2 suites</li>
+      	    <li>This duplex can be leased by six(6) individuals or 2 groups of 3</li>
+      	</ul>	
 
 
-</div>
+      	<p>&nbsp;</p>
+      	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-living-room-2.jpg" alt="student apartment living room" title="off-campus student housing near suny cortland, apartment living room" />
+
+      	<p>&nbsp;</p>
+      	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-kitchen.jpg" alt="student apartment kitchen" title="student housing near suny cortland, apartment kitchen" />
+
+      	<p>&nbsp;</p>
+      	<img src="../../../images/cortland-ny/suny-cortland/off-campus-student-housing/apartments/student-apartment-bedroom.jpg" alt="student apartment living room" title="off-campus housing near suny cortland, apartment bedroom" />
+
+      </div>
+    </div>
+
+
+  </div> <!-- right-column div -->
+
 
 
 </div><!-- role=main -->
@@ -659,7 +683,7 @@ EOD;
 
  <script>
  $(document).ready(function(){
-   $( "#datepicker" ).datepicker(
+   $( ".datepicker" ).datepicker(
      {
        changeMonth: true,
        changeYear: true

@@ -1,6 +1,7 @@
 public_html/graphics/
 public_html/graphics/xcf-files/
 public_html/images/
+public_html/.htaccess
 all-images/
 all-images/
 .sass-cache/
@@ -11,3 +12,7 @@ public_html/includes/database/
 *.doc
 *.docx
 *.xls*
+Claude/*
+Claude outputs/
+dev-router.php
+start-dev-site.sh
