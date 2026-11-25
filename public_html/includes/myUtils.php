@@ -38,13 +38,12 @@ function printHeaders($params){
 
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <!-- new tag added march 22, 2022                 -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Z3CECKQV0"></script>
+      <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Z3CECKQV0"></script> -->
+      <script async src="https://www.googletagmanager.com/gtm.js?id=G-5SW8V8PJ6Z"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
-        gtag('config', 'G-0Z3CECKQV0');
       </script>
 
        <meta charset="utf-8" />
