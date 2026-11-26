@@ -60,7 +60,7 @@ function printHeaders($params){
        <link rel="shortcut icon" type="image/jpg" href="<?= $path ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/favicon.ico" />
 
        <!-- canonical tag to site home page -->
-       <link rel=“canonical” href=“https://www.cortlandcollegehousing.com/index.html” />
+       <link rel="canonical" href=“https://www.cortlandcollegehousing.com/index.html” />
 
        <meta name="description" content="<?php print $params['description'] ?>">
        <meta name="keywords" content="<?php print $params['keywords'] ?>">

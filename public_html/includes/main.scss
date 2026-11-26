@@ -256,6 +256,11 @@ h4 {
   color: $red;
 }
 
+.required {
+  font-size: .8em;
+  color: $red
+}
+
 /****** full-width layout + sticky navigation + photo banner (Nov 2026) *******/
 
 $nav_height: 3.5rem;
