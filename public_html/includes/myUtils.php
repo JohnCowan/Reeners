@@ -76,8 +76,7 @@ function printHeaders($params){
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation-float.min.css" crossorigin="anonymous">
       
 
-      <!-- Compressed JavaScript -->
-      <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+      <!-- Foundation's JavaScript is loaded at the bottom of the page (see printFooter), after jQuery -->
      
      <!-- ?v= changes whenever main.css changes, so browsers fetch the new copy instead of a cached one -->
      <link rel="stylesheet" href="<?= $path ?>includes/main.css?v=<?= filemtime(__DIR__ . '/main.css') ?>" type="text/css" />
@@ -197,7 +196,7 @@ function printTopNavs(){
   ?>
 
   <!-- sticky top navigation.  Small/medium screens: "Menu" button opens an accordion.
-       Large screens (1024px+): horizontal bar with drop-downs.  Uses Foundation 6.3 (see printFooter) -->
+       Large screens (1024px+): horizontal bar with drop-downs.  Uses Foundation 6.8 (see printFooter) -->
   <div id="site-nav" role="navigation" aria-label="Main navigation">
 
     <!-- small + medium screens -->
@@ -520,7 +519,8 @@ function printFooter(){
     <!-- scripts that Foundation needs.  Must be placed here. -->
     <!-- foundation code (jQuery itself is loaded once, in the <head>) -->
     <script src="<?php print $path; ?>includes/js/vendor/what-input.js"></script>
-    <script src="<?php print $path; ?>includes/js/vendor/foundation.js"></script>
+    <!-- same Foundation version as the CSS in the <head> -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js" crossorigin="anonymous"></script>
     <script>
       jQuery(function($){
         // Foundation is only switched on for the top navigation,

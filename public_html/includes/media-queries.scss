@@ -1,72 +1,26 @@
+/* ------------------------------------------------------------------
+   Screen-size helpers
 
-/* these mimic Foundations media queries */
+   To show or hide something by screen size, use Foundation's classes
+   (they are in the Foundation CSS loaded from the CDN):
 
+     show-for-large   only on large screens  (1024px and wider)
+     hide-for-large   everything below 1024px (phones, tablets)
+     show-for-medium  640px and wider
+     hide-for-medium  below 640px
 
-
-  /* Mobile - smaller phone viewpoints */
-  /* */
-@media screen and (min-width: 320px)  {
-    .large-screen {
-      display: none;
-    }
-    .mobile-screen {
-      display: block;
-    }
-}
-
-
-
-  /* Mobile - small devices and most phones */
-  /* */
-@media screen and (min-width: 480px)  {
-   .large-screen {
-      display: none;
-    }
-    .mobile-screen {
-      display: block;
-    }
-}
+   They only HIDE things, so they are safe on grid-x rows and cells.
+   (The old .large-screen / .mobile-screen classes were removed,
+   because they forced display:block and broke grid-x rows.)
+   ------------------------------------------------------------------ */
 
 
+/* Large screens (1024px and wider, same as Foundation's "large") */
+@media screen and (min-width: 64em) {
 
-  /* Most tablets */
-  /* */
-@media screen and (min-width: 768px)  {
-   .large-screen {
-      display: none;
-    }
-    .mobile-screen {
-      display: block;
-    }
-}
+  /* red line on the left of a column, large screens only */
+  .ls-border-left {
+    border-left: solid 2px $red;
+  }
 
-
-
-  /* Desktops: smaller desktop viewpoints */
-  /* */
-@media screen and (min-width: 992px) {
-    .large-screen {
-      display: block;
-    }
-    .mobile-screen {
-      display: none;
-    }
-    .ls-border-left {
-      border-left: solid 2px #b31b1b;
-    }
-}
-
-
-  /* Desktops with large screens and wide screens */
-  /* */
-@media screen  and (min-width: 1200px) {
-    .large-screen {
-      display: block;
-    }
-    .mobile-screen {
-      display: none;
-    }
-    .ls-border-left {
-      border-left: solid 2px #b31b1b;
-    }
 }

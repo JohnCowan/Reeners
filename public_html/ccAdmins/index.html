@@ -12,27 +12,34 @@ $params = array(
 printHeaders($params);
 
 ?>
-<div role="main" title="off-campus housing cortland college">
+<div class="grid-container full" role="main" title="Applicant Admin">
 
   <p>&nbsp;</p>
 
-	<div class="row">
-		<div class="medium-12 columns center">
-	     <h3>CornerStone Properties Admins</h3>
-	  </div>
-	</div>
+  
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12 center"><h1>Cortland College Housing Admins</h1></div>
+  </div>
+
+
+  <p>&nbsp;</p>
+
+	
 
 	<?php
 	// did user login?
 	if( !isset( $_SESSION['verified'] ) ){
+		// login.php checks a submitted password and sets $_SESSION['verified']
 		require_once('../includes/login.php');
+
+		// shows the form (and any wrong-password message) only if still not logged in
 		_showLoginScreen();
 	}
 	if ( isset($_SESSION['verified']) ){
 		?>
 
-		<div class="row">
-			<div class="small-12 columns">
+		<div class="grid-x grid-padding-x">
+			<div class="cell small-12">
 		     <p>Here are the admins that are available to you to help you with your business information.</p>
 				 <ul>
 						<li><a href="applicants.html">Applicants who have requested an Application</a></li>

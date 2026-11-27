@@ -3,78 +3,321 @@ session_start();
 
 require_once('../includes/myUtils.php');
 
+require_once('admin_navs.php');
 
 $params = array(
-				'title' => 'CornerStone Properties, The Suites, Student Housing, Cortland, NY',
-				'description' => 'Quality student housing located in Cortland, NY. Just a short walk to Cortland State College.',
-				'keywords' => 'student housing, student, housing, apartments, rentals,'
+				'title'       => 'Applicant Details Admin for Cortland College Housing',
+				'description' => 'Show information entered by a user who has completed the rental application',
+				'keywords'    => 'application, rental, rental application'
 				);
-if( $verified ){
-	$params['page'] = '';
-}
-printHeaders($params);
-?>
-<div role="main" title="off-campus housing cortland college">
+	
+
+  printHeaders($params);
+
+  // check a submitted password first, so nothing below is shown to visitors who aren't logged in
+  require_once('../includes/login.php');
+
+  $entry_id = !empty($_REQUEST['entry_id']) ? (int) ($_REQUEST['entry_id']) : null;
+
+  /// get applicants
+  //
+
+  $currentYear = date('Y');
+  $applicants  = array();
+
+  if( isset($_SESSION['verified']) ){   // only logged-in admins get the applicant list
+  try{
+
+    # get applicant from the db
+    $sth = $dbh->prepare("SELECT entry_id,
+                                 CONCAT(first_name,' ',last_name) as full_name,
+                                 DATE_FORMAT(entry_date, '%m/%d/%Y') as entry_date
+                         FROM applicants WHERE DATE_FORMAT(entry_date, '%Y') >= ?
+                         ORDER BY entry_date DESC");
+    $sth->execute( [(int)($currentYear - 2)] );
+    if( !$sth ){
+      error_log("######## APPLICANTS.HTML cannot query matching applicants for $entry_id");
+    }
+    // get single record, use fetch()
+    $applicants = $sth->fetchAll();
+
+  } catch(Exception $e) {
+
+    error_log("###### applicants: cannot select from applicants: ". $e->getMessage() );
+    $msg .= "<p class=\"red\"><strong>There was a problem selecting the applicant via the Entry ID</strong></p>";
+
+  } // end try/catch
+  } // end if verified
+
+  ?>
+
+  
+  <div class="grid-container full" role="main" title="Applicant Admin">
 
   <p>&nbsp;</p>
 
-  <h3>Applicants for Rentals</h3>
+  
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12 center"><h1>Rental Application</h1></div>
+  </div>
 
- 
-  <?php
-  // did user login?
-  if( !isset( $_SESSION['verified'] ) ){
-    require_once('../includes/login.php');
-  	 _showLoginScreen();
-  }
-  if( isset( $_SESSION['verified'] ) ){
 
-    # get all applicants from the db
-    $sql = "select * from applicants order by entry_date desc";
-    $sth=$dbh->prepare($sql);
-    $sth->execute();
-    if( !$sth ){
-      error_log("####### APPLICANTS.HTML cannot query from applicants table.");
-    }
-    $results = $sth->fetchAll();
-    ?>
-     <div class="row">
-       <div class="small-3 columns"><p><strong>Full Name</strong></p></div>
-       <div class="small-2 columns"><p><strong>Application Date</strong></p></div>
-       <div class="small-7 columns">&nbsp;</div>
-     </div>
+  <p>&nbsp;</p>
+
+
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12 center">
+      <?= admin_navs() ?>
+    </div>
+  </div>
+
+
+  <p>&nbsp;</p>
+
+
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12 medium-3 large-3 bg-light-grey">
+      <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+        <div class="grid-x">
+          <div class="cell small-12">
+            <strong><a href="#" id="view_applicants">View Applicants</a></strong>
+            <p>&nbsp;</p>
+          </div>
+        </div>
+
+        <div class="grid-x" id="applicants">
+          <div class="small-12">
+          <?php
+            if( is_array($applicants) ){
+              foreach( $applicants as $row ){
+              ?>
+              <p><a href="applicants.html?entry_id=<?= $row['entry_id'] ?>"><?= $row['full_name'].' '.$row['entry_date']; ?></a></p>
+              <?php
+              }
+            }
+          ?>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid-x grid-padding-x" id="applicants">
+    <div class="cell small-12">
+      
+    </div>
+  </div>
+
+  <p>&nbsp;</p>
+
+
+    
+     
     <?php
-    foreach( $results as $app ){
-    ?>
-      <div class="row">
-        <div class="small-3 columns"><p><strong>
-          <a href="applicant-details.html?entry_id=<?= $app['entry_id'] ?>"><?= $app['first_name'] ?> <?= $app['last_name'] ?></a>
-        </strong></p></div>
+    // did user login?
+    if( !isset( $_SESSION['verified'] ) ){
+      require_once('../includes/login.php');
+    	 _showLoginScreen();
+    }
+
+    if ( isset( $_SESSION['verified'] ) ){
+
+      if( !empty($entry_id) ){
+
+        try{
+
+          # get applicant from the db
+          $sth = $dbh->prepare("SELECT * FROM applicants WHERE entry_id = ?");
+          $sth->execute( [$entry_id] );
+          if( !$sth ){
+            error_log("######## APPLICANT-DETAILS.HTML cannot query matching applicants for $entry_id");
+          }
+          // get single record, use fetch()
+          $data = $sth->fetch();
+
+        } catch(Exception $e) {
+
+          error_log("###### applicants: cannot select from applicants: ". $e->getMessage() );
+          $msg .= "<p class=\"red\"><strong>There was a problem selecting the applicant via the Entry ID</strong></p>";
+
+        } // end try/catch
+      }
+
+
+     
+      if( is_array($data) && array_key_exists('entry_id', $data) ){
+        ?>
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>Fullname:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $data['first_name'] ?> <?= $data['last_name'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+      	<div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>Address:</strong></p></div>
+          <div class="cell small-2 bg-light-grey bg-light-grey"><p>
+            <?= $data['addr1'] ?> <?= !empty($data['addr2']) ? '<br />'.$data['addr2'] : ''; ?>
+          </p></div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>City:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $data['city'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+              
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>State:</strong><p></div>
+          <div class="cell small-2 bg-light-grey">
+            <p><?= $data['state'] ?><p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>Zip Code:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $data['zip'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>Country:</strong></p></div>
+          <div class="cell small-2 bg-light-grey">
+           <p> <?= $data['country'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <?php
+          if( $data['dob'] ){
+          list($y,$m,$d) = explode('-',$data['dob']);
+              $dob = "$m/$d/$y";
+          }
+        ?>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>DOB:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $dob ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>Home Phone:</strong></p></div>
+          <div class="cell small-2 bg-light-grey">
+            <p><?= $data['home_phone'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>Cell Phone:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $data['cell_phone'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>Email:</strong></p></div>
+          <div class="cell small-2 bg-light-grey">
+            <p><?= $data['email'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>When Needed:</strong></p></div>
+          <div class="cell small-2 bg-vanilla bg-vanilla">
+            <p><?= $data['semyear'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>Tennant 2:</strong></p></div>
+          <div class="cell small-2 bg-light-grey">
+            <p><?= $data['tennant2'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>Tennant 2 Email:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $data['tennant2_email'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+         
+         <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>Tennant 3:</strong></p></div>
+          <div class="cell small-2 bg-light-grey">
+            <p><?= $data['tennant3'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-vanilla"><p><strong>Tennant 3 Email:</strong></p></div>
+          <div class="cell small-2 bg-vanilla">
+            <p><?= $data['tennant3_email'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>
 
         
-      
-       <?php
-       if( $app['entry_date'] ){
-    		 list($y,$m,$d) = explode('-',$app['entry_date']);
-         $entry_date = "$m/$d/$y";
-       }
-       ?>
+        <div class="grid-x grid-padding-x">
+          <div class="cell small-2 bg-light-grey"><p><strong>User Comments:</strong></p></div>
+          <div class="cell small-2 bg-light-grey">
+            <p><?= $data['comments'] ?></p>
+          </div>
+          <div class="cell small-8">&nbsp;</div>
+        </div>  
+      	
+              
+      <?php 
+      } // end if
+      ?>
 
-       <div class="small-2 columns"><p><strong><?= $entry_date ?></strong></p></div>
-        <div class="small-7 columns">&nbsp;</div>
-      </div>
+      <p>&nbsp;</p>
 
-    <?php
-    }  // end foreach
+  <?php
+  } // end if $_SESSION['verified']
+  ?>
 
-  print "</table>";
-
-  }  // end if
-
-?>
-
-<p>&nbsp;</p>
-
-</div> <!-- end main -->
+</div> <!-- end role=main -->
 
 <?php printFooter(); ?>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#applicants').hide();
+    
+    $('#view_applicants').click(function(e){
+      e.preventDefault();
+
+      if( $('#applicants').is(':hidden') ){
+        $('#applicants').show();
+        $('#view_applicants').text("Hide Applicants");
+      }else if($('#applicants').is(':visible') ){
+        $('#applicants').hide();
+        $('#view_applicants').text("View Applicants");
+      }
+
+    }); // view applicants
+
+  }); // document.ready
+</script>

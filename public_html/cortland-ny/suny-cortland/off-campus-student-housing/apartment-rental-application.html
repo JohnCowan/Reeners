@@ -177,8 +177,8 @@ if( !empty($action) && $action == 'Submit' &&
     }
     if( $rows_added == 1 ){
         ?>
-        <div class="row">
-        	<div class="small-12 columns red center">
+        <div class="grid-x grid-padding-x">
+        	<div class="cell small-12 red center">
             <p>&nbsp;</p>
             <p class="red" style="text-align: center;">Thank you for your interest in The Suites for you student housing needs, and for completing our online Request an Application form.  
             <br />Your request has been recorded and an email sent to CornerStone Properties of Cortland.</p>
@@ -188,8 +188,8 @@ if( !empty($action) && $action == 'Submit' &&
         $successful_entry = true;
     }else{
     ?>
-      <div class="row">
-        <div class="small-12 columns red center">
+      <div class="grid-x grid-padding-x">
+          <div class="cell small-12 red center">
           <p>&nbsp;</p>
           <p class="red">Sorry, we were not able to record your information. Please try again.</p>
         </div>
@@ -199,8 +199,8 @@ if( !empty($action) && $action == 'Submit' &&
     }
   }else{
   ?>
-    <div class="row">
-       <div class="small-12 columns red center">
+    <div class="grid-x grid-padding-x">
+          <div class="cell small-12 red center">
 	      <p>&nbsp;</p>
         <p class="red">There were errors with your form entry.  Problem areas are marked with RED text on the form below.</p>
       </div>
@@ -275,8 +275,8 @@ EOD;
            ( (empty($_SESSION['security_code']) || !empty($security_code)) || 
             ($_SESSION['security_code'] != $security_code) )  ) {
   ?>
-  <div class="row">
-    <div class="small-12 columns red center">
+  <div class="grid-x grid-padding-x">
+          <div class="cell small-12 red center">
 		  <p>&nbsp;</p>
 	    <p class="red">Sorry, but the Security Code you entered did not match the image.  Try Again!</p>
 	  </div>
@@ -609,7 +609,7 @@ EOD;
   <div class="cell small-12 medium-5" style="border-left: solid 2px #b31b1b;">
 
 
-    <div class="grid-x grid-padding-x large-screen">
+    <div class="grid-x grid-padding-x show-for-large">
     	<div class="medium-12 columns text-center">
     		<h2 title="suny cortland student housing" 
     		    style="background-color: #b31b1b; 
@@ -619,7 +619,7 @@ EOD;
         </div>
     </div>
 
-    <div class="grid-x grid-padding-x large-screen">
+    <div class="grid-x grid-padding-x show-for-large">
     	<div class="medium-12 columns">
 
       	<h3 title="cortland college off-campus apartments">50 Tompkins Str</h3>
