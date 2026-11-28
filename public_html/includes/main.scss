@@ -540,3 +540,42 @@ footer.site-footer {
     .footer-sep { display: none; }
   }
 }
+
+
+/****** accessibility (Nov 2026) *******/
+
+/* keep keyboard-focused items from scrolling up underneath the sticky menu bar */
+html {
+  scroll-padding-top: 4.5rem;
+}
+
+/* a clear outline around whatever has keyboard focus.
+   (only for keyboard use: :focus-visible doesn't show on mouse clicks) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid $blue;
+  outline-offset: 2px;
+}
+
+/* on the red and dark areas the outline is white instead */
+#site-nav a:focus-visible,
+#site-nav button:focus-visible,
+.hero-photos button:focus-visible,
+.hero-tagline a:focus-visible,
+footer.site-footer a:focus-visible {
+  outline: 3px solid $white;
+  outline-offset: -3px;
+}
+
+/* honeypot spam-check field: off screen, so people never see it (see honeypotFields() in myUtils.php) */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

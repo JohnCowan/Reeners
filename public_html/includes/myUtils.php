@@ -34,7 +34,7 @@ function printHeaders($params){
   global $path, $is_dev;
 ?>
  
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <!DOCTYPE html>
   <html lang="en">
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -214,14 +214,14 @@ function printTopNavs(){
         <ul class="vertical large-horizontal menu" data-responsive-menu="accordion large-dropdown">
            <li class="<?php print $home_active ?>"><a href="<?php print $path ?>index.html">Home</a></li>
 
-           <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-cornerstone-properties.html" title="student housing cortland ny">About Us</a></li>
+           <li class="<?php print $about_active ?>"><a href="<?php print $path ?>about-us.html">About Us</a></li>
 
-           <li class="<?php print $apartments_active ?>"><a href="<?php print $apts ?>apartments/index.html" title="off-campus housing suny cortland">Apartments</a>
+           <li class="<?php print $apartments_active ?>"><a href="<?php print $apts ?>apartments/index.html">Apartments</a>
               <ul class="vertical menu nested">
                 <li><a href="<?php print $apts ?>apartments/index.html">All Apartments</a></li>
-                <li class="<?php print $describe_active ?>"><a href="<?php print $apts ?>apartment-descriptions.html" title="off-campus student housing cortland">Descriptions</a></li>
-                <li class="<?php print $floorplan_active ?>"><a href="<?php print $apts ?>apartment-floorplans.html" title="suny cortland student housing">FloorPlans</a></li>
-                <li class="<?php print $locations_active ?>"><a href="<?php print $apts ?>apartment-locations.html" title="cortland student housing off campus">Locations</a></li>
+                <li class="<?php print $describe_active ?>"><a href="<?php print $apts ?>apartment-descriptions.html">Descriptions</a></li>
+                <li class="<?php print $floorplan_active ?>"><a href="<?php print $apts ?>apartment-floorplans.html">FloorPlans</a></li>
+                <li class="<?php print $locations_active ?>"><a href="<?php print $apts ?>apartment-locations.html">Locations</a></li>
                 <li class="<?php print $tompkins_50_active ?>"><a href="<?php print $apts ?>apartments/50-tompkins-str.html">50 Tompkins Str</a></li>
                 <li class="<?php print $tompkins_52_active ?>"><a href="<?php print $apts ?>apartments/52-tompkins-str.html">52 Tompkins Str</a></li>
                 <li class="<?php print $tompkins_100_active ?>"><a href="<?php print $apts ?>apartments/100-tompkins-str.html">100 Tompkins Str</a></li>
@@ -231,21 +231,21 @@ function printTopNavs(){
               </ul>
            </li>
 
-           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland"><span class="nav-wide">Important </span>Documents</a>
+           <li class="<?php print $docs_active ?>"><a href="<?php print $path ?>documents.html"><span class="nav-wide">Important </span>Documents</a>
               <ul class="vertical menu nested">
-                <li class="<?php print preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '' ?>"><a href="<?php print $path ?>documents.html" title="college off-campus student housing cortland">Documents</a></li>
-                <li class="<?php print $application_active ?>"><a href="<?php print $apts ?>apartment-rental-application.html" title="suny cortland off-campus housing">Application</a></li>
+                <li class="<?php print preg_match('/documents/', $_SERVER['PHP_SELF']) ? 'active' : '' ?>"><a href="<?php print $path ?>documents.html">Documents</a></li>
+                <li class="<?php print $application_active ?>"><a href="<?php print $apts ?>apartment-rental-application.html">Application</a></li>
               </ul>
            </li>
 
-           <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html" title="cortland college rentals">Contact Us</a></li>
+           <li class="<?php print $contact_active ?>"><a href="<?php print $path ?>contact-us.html">Contact Us</a></li>
 
-           <li class="<?php print $checklist_active ?>"><a href="<?php print $path ?>college-apartment-checklist.html" title="What to bring to your college apartment"><span class="nav-wide">College Apartment </span>Checklist</a></li>
+           <li class="<?php print $checklist_active ?>"><a href="<?php print $path ?>college-apartment-checklist.html"><span class="nav-wide">College Apartment </span>Checklist</a></li>
         </ul>
       </div>
 
       <div class="top-bar-right">
-        <a class="nav-phone" href="tel:+16077562921" title="Call Cornerstone Properties">&#9742; (607) 756-2921</a>
+        <a class="nav-phone" href="tel:+16077562921">&#9742; (607) 756-2921</a>
       </div>
     </div>
   </div> <!-- #site-nav -->
@@ -268,31 +268,31 @@ function printBanner(){
       <div class="hero-slider single-item">
           <div class="multiple">
             <img src="<?php print $img ?>7-woodruff-street-exterior-front-view-575.jpg" 
-            alt="apartment 7 woodruff str cortland ny" title="off campus student housing suny cortland" />
+            alt="apartment 7 woodruff str cortland ny" />
           </div>
           <div class="multiple">
             <img src="<?php print $img ?>100-tompkins-street-exterior-front-view-575.jpg" 
-            alt="apartment 100 Tompkins str cortland ny" title="student housing suny cortland" />
+            alt="apartment 100 Tompkins str cortland ny" />
           </div>
           <div class="multiple">
             <img src="<?php print $img ?>50-tompkins-street-exterior-front-view-575.jpg" 
-            alt="apartment 50 Tompkins str cortland ny" title="cortland off campus housing" />
+            alt="apartment 50 Tompkins str cortland ny" />
           </div>
           <div class="multiple">
             <img src="<?php print $img ?>112-groton-ave-exterior-front-view-575.jpg" 
-            alt="apartment 112 Groton Ave cortland ny" title="cortland college student housing" />
+            alt="apartment 112 Groton Ave cortland ny" />
           </div>
           <div class="multiple">
             <img src="<?php print $img ?>50-tompkins-street-exterior-street-view-575.jpg" 
-            alt="apartment 50 Tompkins str cortland ny" title="suny cortland off campus properties" />
+            alt="apartment 50 Tompkins str cortland ny" />
           </div>
           <div class="multiple">
             <img src="<?php print $img ?>52-tompkins-street-exterior-front-view-575.jpg" 
-            alt="apartment 52 Tompkins str cortland ny" title="college rentals cortland" />
+            alt="apartment 52 Tompkins str cortland ny" />
           </div>
           <div class="multiple">
             <img src="<?php print $img ?>91-lincoln-ave-exterior-front-view-575.jpg" 
-            alt="apartment 91 lincoln cortland ny" title="suny cortland college rentals" />
+            alt="apartment 91 lincoln cortland ny" />
           </div>
       </div> <!-- hero-slider -->
    </div> <!-- hero-photos -->
@@ -316,53 +316,53 @@ function printBanner(){
 
 function printApartmentNavs(){
   ?>
-   <div class="text-center" id="breadcrumbs" role="navigation" aria-label="Student Housing Navigation" title="cortland student housing">
+   <div class="text-center" id="breadcrumbs" role="navigation" aria-label="Student Housing Navigation">
   <?php
  if( preg_match('/apartments\/index\.html/', $_SERVER['PHP_SELF']) ){
     print "Apartments Home";
   }else{
-    print '<a href="index.html" tabindex="0" title="student apartments home page">Apartments Home</a>';
+    print '<a href="index.html" tabindex="0">Apartments Home</a>';
   }
   print " | ";
   if( preg_match('/50-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
     print "50 Tompkins Str";
   }else{
-    print '<a href="50-tompkins-str.html" tabindex="0" title="suny cortland off campus student housing">50 Tompkins Str</a>';
+    print '<a href="50-tompkins-str.html" tabindex="0">50 Tompkins Str</a>';
   }
   print " | ";
 
   if( preg_match('/52-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
     print "52 Tompkins Str";
   }else{
-    print '<a href="52-tompkins-str.html" tabindex="0" title="cortland state student housing">52 Tompkins Str</a>';
+    print '<a href="52-tompkins-str.html" tabindex="0">52 Tompkins Str</a>';
   }
   print " | ";
 
   if( preg_match('/100-tompkins-str\.html/',$_SERVER['PHP_SELF'])){
     print "100 Tompkins Str";
   }else{
-    print '<a href="100-tompkins-str.html" tabindex="0" title="cortland ny student housing">100 Tompkins Str</a>';
+    print '<a href="100-tompkins-str.html" tabindex="0">100 Tompkins Str</a>';
   }
   print " | ";
 
   if( preg_match('/112-groton-ave\.html/',$_SERVER['PHP_SELF'])){
     print "112 Groton Ave";
   }else{
-    print '<a href="112-groton-ave.html" tabindex="0" title="student rentals suny cortland">112 Goton Ave</a>';
+    print '<a href="112-groton-ave.html" tabindex="0">112 Goton Ave</a>';
   }
   print " | ";
 
   if( preg_match('/7-woodruff-str\.html/',$_SERVER['PHP_SELF'])){
     print "7 Woodruff Str";
   }else{
-    print '<a href="7-woodruff-str.html" tabindex="0" title="cortland university student housing">7 Woodruff Str</a>';
+    print '<a href="7-woodruff-str.html" tabindex="0">7 Woodruff Str</a>';
   }
   print " | ";
 
   if( preg_match('/91-lincoln-ave\.html/',$_SERVER['PHP_SELF'])){
     print "91 Lincoln Ave";
   }else{
-    print '<a href="91-lincoln-ave.html" tabindex="0" title="suny cortland college housing">91 Lincoln Ave</a>';
+    print '<a href="91-lincoln-ave.html" tabindex="0">91 Lincoln Ave</a>';
   }
   print " | ";
 
@@ -490,12 +490,12 @@ function printFooter(){
         <p class="footer-social">
         <!-- facebook -->
         <a href="https://www.facebook.com/Cornerstone-Properties-Cortland-138759469505509/">
-          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif" alt="facebook" /> Follow Us On Facebook!</a>
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-f.gif" alt="" /> Follow Us On Facebook!</a>
         <span class="footer-sep" aria-hidden="true">|</span>
 
         <!-- Instagram -->
         <a href="https://www.instagram.com/propertiesbycornerstone/">
-          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Instagram/instagram-30x30.gif" alt="the Instagram icon" title="follow us on instagram" /> Follow Us On Instagram!</a>
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Instagram/instagram-30x30.gif" alt="" /> Follow Us On Instagram!</a>
         <span class="footer-sep" aria-hidden="true">|</span>
           <?php
           ##### Share code found on:  https://onlinecode.org/social-media-sharing-buttons-php/  #####
@@ -505,8 +505,8 @@ function printFooter(){
           ?>
 
           <!-- Facebook Social Media -->
-        <a href="https://www.facebook.com/sharer.php?u=<?=$site_url?>" target="_blank">
-          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-share.png" alt="facebook" /> Share us on Facebook!
+        <a href="https://www.facebook.com/sharer.php?u=<?=$site_url?>" target="_blank" rel="noopener">
+          <img src="<?php print $path; ?>images/cortland-ny/suny-cortland/off-campus-student-housing/Logos/Facebook/facebook-share.png" alt="" /> Share us on Facebook! <span class="show-for-sr">(opens in a new window)</span>
         </a>
         </p>
       </div>        
@@ -562,6 +562,31 @@ function printFooter(){
 
 <?php
 // Let the web guy know there was a database error 
+########  Honeypot spam check (replaces the image captchas)  ########
+# Put honeypotFields() inside a <form>.  A real visitor never sees or fills the
+# hidden field; spam bots usually do, and they usually submit within a second or two.
+function honeypotFields(){
+  $_SESSION['form_started'] = time();
+  ?>
+  <div class="hp-field" aria-hidden="true">
+    <label for="contact_by_fax">Leave this field empty</label>
+    <input type="text" id="contact_by_fax" name="contact_by_fax" value="" tabindex="-1" autocomplete="off" />
+  </div>
+  <?php
+}
+
+# true when a submission looks like a bot (hidden field filled in, or sent too fast)
+function honeypotFailed(){
+  $filled  = !empty($_POST['contact_by_fax']);
+  $started = isset($_SESSION['form_started']) ? (int) $_SESSION['form_started'] : 0;
+  $tooFast = ( $started === 0 ) || ( time() - $started < 3 );
+  if( $filled || $tooFast ){
+    error_log("HONEYPOT: blocked a form submission on " . $_SERVER['PHP_SELF'] . ($filled ? ' (hidden field filled)' : ' (too fast / no session)'));
+    return true;
+  }
+  return false;
+}
+
 function errorEmail($arrayIn){
     $to      = 'john@johndcowan.com';
     $cc      = 'mikereeners@hotmail.com';

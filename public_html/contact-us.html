@@ -27,7 +27,7 @@ foreach( array('name',
 
 // var_dump($_REQUEST);
 
-// $msg = '';  // message to user
+$msg = '';  // message to user
 
 
 $okay_to_process = false;
@@ -35,7 +35,12 @@ $okay_to_process = false;
 if( !empty($action) && $action == 'Submit Question')
 {
 
-	if( !empty($name) && !empty($email) && !empty($message) ){
+	// honeypotFailed() (in myUtils.php) catches spam bots; real visitors don't see it
+	if( honeypotFailed() ){
+
+	  $msg .= "Sorry, we could not send your message. Please wait a moment and try again, or call us at (607) 756-2921.";
+
+	} else if( !empty($name) && !empty($email) && !empty($message) ){
 		
 
 
@@ -74,7 +79,7 @@ if( !empty($action) && $action == 'Submit Question')
 ?>
 
 
-<div class="grid-container full" role="main" title="Contact Us Page for Cortland College Housing">
+<div class="grid-container full" role="main">
 
   <p>&nbsp;</p>
 
@@ -138,7 +143,7 @@ if( !empty($action) && $action == 'Submit Question')
 
 	<div class="grid-x grid-padding-x">
 		<div class="cell small-12">
-			<h2 title="contact cornerstone properties">Message Form</h2>
+			<h2>Message Form</h2>
 		  <p class="required">** = Requred</p>
 		</div>
 	</div>
@@ -172,25 +177,7 @@ if( !empty($action) && $action == 'Submit Question')
 	</div>
 </div>
 
-<div class="grid-x grid-padding-x">
-	<div class="cell small-12">
-		<label>Please enter the text seen in the image below into the Security Code text box.</label>
-	</div>
-</div>
-
-<div class="grid-x grid-padding-x">
-  <div class="cell small-12">
-	 <img src="images/Captcha/campus-life.png" alt="captcha security image" />
-	</div>
-</div>
-
-<div class="grid-x grid-padding-x">
-	<div class="cell small-12 medium-3 large-3">
-		<label for="captcha"><strong><span class="required">**</span> Security Code:</strong>
-      <input id="captcha" name="captcha" type="text" required />
-    </label>
-  </div>
-</div>
+<?php honeypotFields(); // spam check, hidden from visitors ?>
 
 <div class="grid-x grid-padding-x">
 	<div class="cell small-12">
@@ -209,25 +196,4 @@ getNews('contact-us.html');
 printFooter();
 ?>
 
-<script type="text/javascript">
-  $(document).ready(function(){
 
-    ////// contact-us form captcha //////
-    //
-    $('#contact_us_form').submit(function(){
-
-      var captcha = $('#captcha').val();
-
-      if( captcha.localeCompare('Campus Life') == 0 ){
-        return true;
-      } else {
-        alert("The Security Code is not correct");
-        $('#captcha').focus()
-        return false;
-      }
-      return false;
-    });
-
-  });
-
-</script>
